@@ -333,3 +333,7 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 	end
 
 end # Generators::DarkfishGenerator
+
+# Make an alias for Rdoc's silly generator lookup (which is probably my fault)
+Generators::DARKFISHGenerator = Generators::DarkfishGenerator
+
