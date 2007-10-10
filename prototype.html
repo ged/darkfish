@@ -1,0 +1,1332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: ThingFish::Daemon</title>
+
+	<link rel="stylesheet" href="generators/template/rdoc.css" type="text/css" 
+		media="screen" title="no title" charset="utf-8" />
+
+	<script src="generators/template/js/jquery.js" type="text/javascript" 
+		charset="utf-8"></script>
+	<script src="generators/template/js/thickbox-compressed.js" type="text/javascript" 
+		charset="utf-8"></script>
+	<script src="generators/template/js/quicksearch.js" type="text/javascript" 
+		charset="utf-8"></script>
+
+	<script type="text/javascript" charset="utf-8">
+		var timeout = null;
+	
+		function showSource( e ) {
+			var target = e.target;
+			var codeSections = $(target).
+				parents('.method-detail').
+				find('.method-source-code');
+
+			$(target).
+				parents('.method-detail').
+				find('.method-source-code').
+				slideToggle();
+		};
+
+		function hookSourceViews() {
+			$('.method-description,.method-heading').click( showSource );
+		};
+
+		function hookQuickSearch() {
+			$('.quicksearch-field').each( function() {
+				var searchElems = $(this).parents('.section').find( 'li' );
+				// console.debug( "Hooking up quicksearch for %d elements to %o", searchElems.length, this );
+				$(this).quicksearch( this, searchElems );
+			});
+		};
+
+		$(document).ready( function() {
+			hookSourceViews();
+			hookQuickSearch();
+		});
+	</script>
+
+</head>
+<body class="class">
+	
+	<div id="metadata">
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/thingfish/daemon.rb.html?TB_iframe=true&height=400&width=600"
+							class="thickbox" title="lib/thingfish/daemon.rb">lib/thingfish/daemon.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link"><a href="../Mongrel/HttpServer.html">Mongrel::HttpServer</a></p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#M000109">create_default_handler</a></li>
+					
+					<li><a href="#M000102">dispatch_to_handlers</a></li>
+					
+					<li><a href="#M000103">filter_request</a></li>
+					
+					<li><a href="#M000104">filter_response</a></li>
+					
+					<li><a href="#M000106">get_error_response_template</a></li>
+					
+					<li><a href="#M000099">new</a></li>
+					
+					<li><a href="#M000100">run</a></li>
+					
+					<li><a href="#M000107">run_handlers</a></li>
+					
+					<li><a href="#M000105">send_error_response</a></li>
+					
+					<li><a href="#M000108">send_response</a></li>
+					
+					<li><a href="#M000101">shutdown</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+			<div id="includes-section" class="section">
+				<h3 class="section-header">Included Modules</h3>
+				<ul class="link-list">
+				
+				
+					<li><a class="include" href="Constants.html">ThingFish::Constants</a></li>
+				
+				
+				
+					<li><a class="include" href="Loggable.html">ThingFish::Loggable</a></li>
+				
+				
+				
+					<li><a class="include" href="ResourceLoader.html">ThingFish::ResourceLoader</a></li>
+				
+				
+				</ul>
+			</div>
+			
+		</div>
+	
+		<div id="project-metadata">
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index</h3>
+				<ul class="link-list">
+				
+				
+					<li><a href="../ThingFish.html">ThingFish</a></li>
+				
+				
+					<li><a href="../ThingFish/AbstractClass.html">ThingFish::AbstractClass</a></li>
+				
+				
+					<li><a href="../ThingFish/AbstractClass/ClassMethods.html">ThingFish::AbstractClass::ClassMethods</a></li>
+				
+				
+					<li><a href="../ThingFish/AcceptParam.html">ThingFish::AcceptParam</a></li>
+				
+				
+					<li><a href="../ThingFish/Client.html">ThingFish::Client</a></li>
+				
+				
+					<li><a href="../ThingFish/Config.html">ThingFish::Config</a></li>
+				
+				
+					<li><a href="../ThingFish/Config/ConfigStruct.html">ThingFish::Config::ConfigStruct</a></li>
+				
+				
+					<li><a href="../ThingFish/ConfigError.html">ThingFish::ConfigError</a></li>
+				
+				
+					<li><a href="../ThingFish/Constants.html">ThingFish::Constants</a></li>
+				
+				
+					<li><a href="../ThingFish/Constants/HTTP.html">ThingFish::Constants::HTTP</a></li>
+				
+				
+					<li><a href="../ThingFish/Constants/Patterns.html">ThingFish::Constants::Patterns</a></li>
+				
+				
+					<li><a href="../ThingFish/Daemon.html">ThingFish::Daemon</a></li>
+				
+				
+					<li><a href="../ThingFish/DefaultHandler.html">ThingFish::DefaultHandler</a></li>
+				
+				
+					<li><a href="../ThingFish/Error.html">ThingFish::Error</a></li>
+				
+				
+					<li><a href="../ThingFish/FileStore.html">ThingFish::FileStore</a></li>
+				
+				
+					<li><a href="../ThingFish/FileStoreError.html">ThingFish::FileStoreError</a></li>
+				
+				
+					<li><a href="../ThingFish/FileStoreQuotaError.html">ThingFish::FileStoreQuotaError</a></li>
+				
+				
+					<li><a href="../ThingFish/Filter.html">ThingFish::Filter</a></li>
+				
+				
+					<li><a href="../ThingFish/Handler.html">ThingFish::Handler</a></li>
+				
+				
+					<li><a href="../ThingFish/Loggable.html">ThingFish::Loggable</a></li>
+				
+				
+					<li><a href="../ThingFish/MemoryFileStore.html">ThingFish::MemoryFileStore</a></li>
+				
+				
+					<li><a href="../ThingFish/MemoryMetaStore.html">ThingFish::MemoryMetaStore</a></li>
+				
+				
+					<li><a href="../ThingFish/MetaStore.html">ThingFish::MetaStore</a></li>
+				
+				
+					<li><a href="../ThingFish/MetaStore/ResourceProxy.html">ThingFish::MetaStore::ResourceProxy</a></li>
+				
+				
+					<li><a href="../ThingFish/MetadataHandler.html">ThingFish::MetadataHandler</a></li>
+				
+				
+					<li><a href="../ThingFish/MultipartMimeParser.html">ThingFish::MultipartMimeParser</a></li>
+				
+				
+					<li><a href="../ThingFish/NumericConstantMethods.html">ThingFish::NumericConstantMethods</a></li>
+				
+				
+					<li><a href="../ThingFish/NumericConstantMethods/Bytes.html">ThingFish::NumericConstantMethods::Bytes</a></li>
+				
+				
+					<li><a href="../ThingFish/NumericConstantMethods/Time.html">ThingFish::NumericConstantMethods::Time</a></li>
+				
+				
+					<li><a href="../ThingFish/PluginError.html">ThingFish::PluginError</a></li>
+				
+				
+					<li><a href="../ThingFish/Request.html">ThingFish::Request</a></li>
+				
+				
+					<li><a href="../ThingFish/RequestError.html">ThingFish::RequestError</a></li>
+				
+				
+					<li><a href="../ThingFish/Resource.html">ThingFish::Resource</a></li>
+				
+				
+					<li><a href="../ThingFish/ResourceLoader.html">ThingFish::ResourceLoader</a></li>
+				
+				
+					<li><a href="../ThingFish/Response.html">ThingFish::Response</a></li>
+				
+				
+					<li><a href="../ThingFish/ResponseError.html">ThingFish::ResponseError</a></li>
+				
+				
+					<li><a href="../ThingFish/StaticContentHandler.html">ThingFish::StaticContentHandler</a></li>
+				
+				
+					<li><a href="../ThingFish/StaticResourcesHandler.html">ThingFish::StaticResourcesHandler</a></li>
+				
+				
+					<li><a href="../ThingFish/StaticResourcesHandler/ClassMethods.html">ThingFish::StaticResourcesHandler::ClassMethods</a></li>
+				
+				
+					<li><a href="../ThingFish/Table.html">ThingFish::Table</a></li>
+				
+				
+					<li><a href="../Mongrel.html">Mongrel</a></li>
+				
+				
+					<li><a href="../Mongrel/HttpServer.html">Mongrel::HttpServer</a></li>
+				
+				
+					<li><a href="../Numeric.html">Numeric</a></li>
+				
+				
+					<li><a href="../UUID.html">UUID</a></li>
+				
+				</ul>
+				
+				<form action="#" method="get" accept-charset="utf-8">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value="" 
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div id="documentation">
+		
+		<h1 class="class">ThingFish::Daemon</h1>
+		
+
+		<div id="description">
+			<p>
+ThingFish daemon class
+</p>
+
+		</div>
+
+
+		<!-- Constants -->
+		
+		<div id="constants-list" class="section">
+			<h3 class="section-header">Constants</h3>
+			<dl>
+			
+				<dt>SVNId</dt>
+				
+				<dd class="description">The subversion ID</dd>
+				
+			
+				<dt>SVNRev</dt>
+				
+				<dd class="description">The SVN revision number</dd>
+				
+			
+				<dt>DEFAULT_HANDLER_OPTIONS</dt>
+				
+				<dd class="description">Options for the default handler</dd>
+				
+			
+				<dt>ERROR_TEMPLATE_DIR</dt>
+				
+				<dd class="description">The subdirectory to search for error templates</dd>
+				
+			
+			</dl>
+		</div>
+		
+
+		<!-- Attributes -->
+		
+		<div id="attribute-method-details" class="method-section section">
+			<h3 class="section-header">Attributes</h3>
+
+			
+			<div id="config-attribute-method" class="method-detail">
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">config</span><span 
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				The <a href="Config.html">ThingFish::Config</a> instance that contains all
+current configuration information used by the daemon.
+				
+				</div>
+			</div>
+			
+			<div id="filestore-attribute-method" class="method-detail">
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">filestore</span><span 
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				The <a href="FileStore.html">ThingFish::FileStore</a> instance that acts as
+the interface to the file storage mechanism used by the daemon.
+				
+				</div>
+			</div>
+			
+			<div id="filters-attribute-method" class="method-detail">
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">filters</span><span 
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				The Array of installed ThingFish::Filters
+				
+				</div>
+			</div>
+			
+			<div id="metastore-attribute-method" class="method-detail">
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">metastore</span><span 
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				The <a href="MetaStore.html">ThingFish::MetaStore</a> instance that acts as
+the interface to the metadata mechanism used by the daemon.
+				
+				</div>
+			</div>
+			
+		</div>
+		
+
+		<!-- Methods -->
+		
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+			
+			
+			<div id="method-M000099" class="method-detail">
+			
+				<a name="M000099"></a>
+
+				<div class="method-heading">
+					<span class="method-name">new</span><span 
+						class="method-args">( config=nil )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				</div>
+
+				<div class="method-description">
+					
+	          		<p><p>
+Create a <a href="Daemon.html#M000099">new</a> ThingFish daemon object that
+will listen on the specified <tt>ip</tt> and <tt>port</tt>.
+</p></p>
+					
+					
+					
+	          		<div class="method-source-code" id="M000099-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/thingfish/daemon.rb, line 76</span>
+ 76:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">config</span>=<span class="ruby-keyword kw">nil</span> )
+ 77:         <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">config</span> <span class="ruby-operator">||</span> <span class="ruby-constant">ThingFish</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+ 78:         <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">install</span>
+ 79: 
+ 80:         <span class="ruby-comment cmt"># Load plugins for filestore, filters, and handlers</span>
+ 81:         <span class="ruby-ivar">@filestore</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">create_configured_filestore</span>
+ 82:         <span class="ruby-ivar">@metastore</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">create_configured_metastore</span>
+ 83:         <span class="ruby-ivar">@filters</span> = []
+ 84: 
+ 85:         <span class="ruby-keyword kw">super</span>( <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">ip</span>, <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">port</span> )
+ 86:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> <span class="ruby-value str">&quot;Starting at: http://%s:%d/&quot;</span> <span class="ruby-operator">%</span> [ <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">ip</span>, <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">port</span> ]
+ 87: 
+ 88:         <span class="ruby-comment cmt"># Register all the handlers</span>
+ 89:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">register</span>( <span class="ruby-value str">&quot;/&quot;</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">create_default_handler</span>(<span class="ruby-ivar">@config</span>) )
+ 90:         <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">each_handler_uri</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">handler</span>, <span class="ruby-identifier">uri</span><span class="ruby-operator">|</span>
+ 91:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">log</span>.<span class="ruby-identifier">info</span> <span class="ruby-value str">&quot;  registering %s at %p&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">handler</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">uri</span>]
+ 92:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">register</span>( <span class="ruby-identifier">uri</span>, <span class="ruby-identifier">handler</span>, <span class="ruby-identifier">handler</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value str">'in_front'</span>] )
+ 93:         <span class="ruby-keyword kw">end</span>
+ 94:         
+ 95:         <span class="ruby-ivar">@resource_dir</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">defaulthandler</span>.<span class="ruby-identifier">resource_dir</span>
+ 96:         
+ 97:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> {
+ 98:             <span class="ruby-value str">&quot;Handler map is:\n    &quot;</span> <span class="ruby-operator">+</span> 
+ 99:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">classifier</span>.<span class="ruby-identifier">handler_map</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">uri</span>, <span class="ruby-identifier">handlers</span><span class="ruby-operator">|</span>
+100:                 <span class="ruby-value str">&quot;%s: [%s]&quot;</span> <span class="ruby-operator">%</span> [ <span class="ruby-identifier">uri</span>, <span class="ruby-identifier">handlers</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;, &quot;</span>) ]
+101:             }.<span class="ruby-identifier">join</span>( <span class="ruby-value str">&quot;\n    &quot;</span>)
+102:         }
+103:     <span class="ruby-keyword kw">end</span></pre>
+	          		</div>
+					
+				</div>
+
+				
+			</div>
+			
+		</div>
+		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+			
+			
+			<div id="method-M000100" class="method-detail">
+			
+				<a name="M000100"></a>
+
+				<div class="method-heading">
+					<span class="method-name">run</span><span 
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				</div>
+
+				<div class="method-description">
+					
+	          		<p><p>
+Perform any additional daemon actions before actually starting the <a
+href="../Mongrel.html">Mongrel</a> side of things.
+</p></p>
+					
+					
+					
+	          		<div class="method-source-code" id="M000100-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/thingfish/daemon.rb, line 127</span>
+127:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>
+128:         <span class="ruby-comment cmt"># Drop privileges if we're root, and we're configged to do so.</span>
+129:         <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Process</span>.<span class="ruby-identifier">euid</span>.<span class="ruby-identifier">zero?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span>
+130:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Dropping privileges (user: %s)&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">user</span>
+131:             <span class="ruby-constant">Process</span>.<span class="ruby-identifier">euid</span> = <span class="ruby-constant">Etc</span>.<span class="ruby-identifier">getpwnam</span>( <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">user</span> ).<span class="ruby-identifier">uid</span>
+132:         <span class="ruby-keyword kw">end</span>
+133: 
+134:         <span class="ruby-keyword kw">super</span>
+135:     <span class="ruby-keyword kw">end</span></pre>
+	          		</div>
+					
+				</div>
+
+				
+			</div>
+			
+			
+			<div id="method-M000101" class="method-detail">
+			
+				<a name="M000101"></a>
+
+				<div class="method-heading">
+					<span class="method-name">shutdown</span><span 
+						class="method-args">( reason=&quot;no reason&quot; )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				</div>
+
+				<div class="method-description">
+					
+	          		<p><p>
+Shut the server down gracefully, outputting the specified <tt>reason</tt>
+for the <a href="Daemon.html#M000101">shutdown</a> to the logs.
+</p></p>
+					
+					
+					
+	          		<div class="method-source-code" id="M000101-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/thingfish/daemon.rb, line 140</span>
+140:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">shutdown</span>( <span class="ruby-identifier">reason</span>=<span class="ruby-value str">&quot;no reason&quot;</span> )
+141:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">log</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Shutting down: #{reason}&quot;</span>
+142:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">stop</span>
+143:     <span class="ruby-keyword kw">end</span></pre>
+	          		</div>
+					
+				</div>
+
+				
+			</div>
+			
+		</div>
+		
+		<div id="protected-instance-method-details" class="method-section section">
+			<h3 class="section-header">Protected Instance Methods</h3>
+
+			
+			
+			<div id="method-M000109" class="method-detail">
+			
+				<a name="M000109"></a>
+
+				<div class="method-heading">
+					<span class="method-name">create_default_handler</span><span 
+						class="method-args">( config )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				</div>
+
+				<div class="method-description">
+					
+	          		<p><p>
+Create an instance of the default handler, with options dictated by the
+specified <tt>config</tt> object.
+</p></p>
+					
+					
+					
+	          		<div class="method-source-code" id="M000109-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/thingfish/daemon.rb, line 316</span>
+316:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_default_handler</span>( <span class="ruby-identifier">config</span> )
+317:         <span class="ruby-identifier">options</span> = <span class="ruby-constant">DEFAULT_HANDLER_OPTIONS</span>.<span class="ruby-identifier">dup</span>
+318:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">defaulthandler</span>
+319:             <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge!</span>( <span class="ruby-identifier">config</span>.<span class="ruby-identifier">defaulthandler</span> )
+320:         <span class="ruby-keyword kw">end</span>
+321:         
+322:         <span class="ruby-keyword kw">return</span> <span class="ruby-constant">ThingFish</span><span class="ruby-operator">::</span><span class="ruby-constant">Handler</span>.<span class="ruby-identifier">create</span>( <span class="ruby-value str">'default'</span>, <span class="ruby-identifier">options</span> )
+323:     <span class="ruby-keyword kw">end</span></pre>
+	          		</div>
+					
+				</div>
+
+				
+			</div>
+			
+			
+			<div id="method-M000102" class="method-detail">
+			
+				<a name="M000102"></a>
+
+				<div class="method-heading">
+					<span class="method-name">dispatch_to_handlers</span><span 
+						class="method-args">( client, handlers, mongrel_request, mongrel_response )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				</div>
+
+				<div class="method-description">
+					
+	          		<p><p>
+Override <a href="../Mongrel.html">Mongrel</a>&#8216;s handler-processing
+to incorporate filters, and our own request and response objects.
+</p></p>
+					
+					
+					
+	          		<div class="method-source-code" id="M000102-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/thingfish/daemon.rb, line 152</span>
+152:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dispatch_to_handlers</span>( <span class="ruby-identifier">client</span>, <span class="ruby-identifier">handlers</span>, <span class="ruby-identifier">mongrel_request</span>, <span class="ruby-identifier">mongrel_response</span> )
+153:         <span class="ruby-identifier">request</span>  = <span class="ruby-constant">ThingFish</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">mongrel_request</span>, <span class="ruby-ivar">@config</span> )
+154:         <span class="ruby-identifier">response</span> = <span class="ruby-constant">ThingFish</span><span class="ruby-operator">::</span><span class="ruby-constant">Response</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">mongrel_response</span> )
+155: 
+156:         <span class="ruby-keyword kw">begin</span>
+157:             <span class="ruby-comment cmt"># Let the filters manhandle the request</span>
+158:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">filter_request</span>( <span class="ruby-identifier">request</span>, <span class="ruby-identifier">response</span> )
+159: 
+160:             <span class="ruby-comment cmt"># Now execute the given handlers on the request and response</span>
+161:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">run_handlers</span>( <span class="ruby-identifier">client</span>, <span class="ruby-identifier">handlers</span>, <span class="ruby-identifier">request</span>, <span class="ruby-identifier">response</span> ) <span class="ruby-keyword kw">unless</span>
+162:                 <span class="ruby-identifier">response</span>.<span class="ruby-identifier">is_handled?</span>
+163: 
+164:             <span class="ruby-comment cmt"># Let the filters manhandle the response</span>
+165:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">filter_response</span>( <span class="ruby-identifier">response</span>, <span class="ruby-identifier">request</span> )
+166: 
+167:             <span class="ruby-comment cmt"># Handle NOT_FOUND </span>
+168:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send_error_response</span>( <span class="ruby-identifier">response</span>, <span class="ruby-identifier">request</span>, <span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">NOT_FOUND</span>, <span class="ruby-identifier">client</span> ) \
+169:                 <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">is_handled?</span>
+170: 
+171:             <span class="ruby-comment cmt"># Normal response</span>
+172:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send_response</span>( <span class="ruby-identifier">response</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">client</span>.<span class="ruby-identifier">closed?</span>
+173: 
+174:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ThingFish</span><span class="ruby-operator">::</span><span class="ruby-constant">RequestError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+175:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send_error_response</span>( <span class="ruby-identifier">response</span>, <span class="ruby-identifier">request</span>, <span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">BAD_REQUEST</span>, <span class="ruby-identifier">client</span>, <span class="ruby-identifier">err</span> )
+176: 
+177:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">StandardError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+178:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send_error_response</span>( <span class="ruby-identifier">response</span>, <span class="ruby-identifier">request</span>, <span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">SERVER_ERROR</span>, <span class="ruby-identifier">client</span>, <span class="ruby-identifier">err</span> )
+179:         <span class="ruby-keyword kw">end</span>
+180:     <span class="ruby-keyword kw">end</span></pre>
+	          		</div>
+					
+				</div>
+
+				
+			</div>
+			
+			
+			<div id="method-M000103" class="method-detail">
+			
+				<a name="M000103"></a>
+
+				<div class="method-heading">
+					<span class="method-name">filter_request</span><span 
+						class="method-args">( request, response )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				</div>
+
+				<div class="method-description">
+					
+	          		<p><p>
+<a href="Filter.html">Filter</a> and potentially modify the incoming
+request.
+</p></p>
+					
+					
+					
+	          		<div class="method-source-code" id="M000103-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/thingfish/daemon.rb, line 184</span>
+184:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_request</span>( <span class="ruby-identifier">request</span>, <span class="ruby-identifier">response</span> )
+185:         <span class="ruby-ivar">@filters</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">filter</span><span class="ruby-operator">|</span>
+186:             <span class="ruby-identifier">response</span>.<span class="ruby-identifier">filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">filter</span>
+187:             <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">handle_request</span>( <span class="ruby-identifier">request</span>, <span class="ruby-identifier">response</span> )
+188:             <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">status</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">ThingFish</span><span class="ruby-operator">::</span><span class="ruby-constant">Response</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_STATUS</span>
+189:         <span class="ruby-keyword kw">end</span>
+190:     <span class="ruby-keyword kw">end</span></pre>
+	          		</div>
+					
+				</div>
+
+				
+			</div>
+			
+			
+			<div id="method-M000104" class="method-detail">
+			
+				<a name="M000104"></a>
+
+				<div class="method-heading">
+					<span class="method-name">filter_response</span><span 
+						class="method-args">( response, request )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				</div>
+
+				<div class="method-description">
+					
+	          		<p><p>
+<a href="Filter.html">Filter</a> (and potentially modify) the outgoing
+response with the filters that were registered with it during the
+request-filtering stage
+</p></p>
+					
+					
+					
+	          		<div class="method-source-code" id="M000104-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/thingfish/daemon.rb, line 195</span>
+195:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_response</span>( <span class="ruby-identifier">response</span>, <span class="ruby-identifier">request</span> )
+196:         <span class="ruby-identifier">response</span>.<span class="ruby-identifier">filters</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">filter</span><span class="ruby-operator">|</span>
+197:             <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">handle_response</span>( <span class="ruby-identifier">response</span>, <span class="ruby-identifier">request</span> )
+198:         <span class="ruby-keyword kw">end</span>
+199:     <span class="ruby-keyword kw">end</span></pre>
+	          		</div>
+					
+				</div>
+
+				
+			</div>
+			
+			
+			<div id="method-M000106" class="method-detail">
+			
+				<a name="M000106"></a>
+
+				<div class="method-heading">
+					<span class="method-name">get_error_response_template</span><span 
+						class="method-args">( statuscode )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				</div>
+
+				<div class="method-description">
+					
+	          		<p><p>
+Look for an error response template for the given status code in a
+directory called &#8216;errors&#8217;, trying the most-specific code first,
+then one for the 100-level code, then falling back to a template called
+&#8216;generic.rhtml&#8217;.
+</p></p>
+					
+					
+					
+	          		<div class="method-source-code" id="M000106-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/thingfish/daemon.rb, line 244</span>
+244:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_error_response_template</span>( <span class="ruby-identifier">statuscode</span> )
+245:         <span class="ruby-identifier">templates</span> = [
+246:             <span class="ruby-constant">ERROR_TEMPLATE_DIR</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;%d.rhtml&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">statuscode</span>],
+247:             <span class="ruby-constant">ERROR_TEMPLATE_DIR</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;%d.rhtml&quot;</span> <span class="ruby-operator">%</span> [(<span class="ruby-identifier">statuscode</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>).<span class="ruby-identifier">ceil</span> <span class="ruby-operator">*</span> <span class="ruby-value">100</span>],
+248:             <span class="ruby-constant">ERROR_TEMPLATE_DIR</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'generic.rhtml'</span>,
+249:         ]
+250:         
+251:         <span class="ruby-identifier">templates</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tmpl</span><span class="ruby-operator">|</span>
+252:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Trying to find error template %p&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">tmpl</span>]
+253:             <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">resource_exists?</span>( <span class="ruby-identifier">tmpl</span>.<span class="ruby-identifier">to_s</span> )
+254:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_erb_resource</span>( <span class="ruby-identifier">tmpl</span>.<span class="ruby-identifier">to_s</span> )
+255:         <span class="ruby-keyword kw">end</span>
+256: 
+257:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+258:     <span class="ruby-keyword kw">end</span></pre>
+	          		</div>
+					
+				</div>
+
+				
+			</div>
+			
+			
+			<div id="method-M000107" class="method-detail">
+			
+				<a name="M000107"></a>
+
+				<div class="method-heading">
+					<span class="method-name">run_handlers</span><span 
+						class="method-args">( client, handlers, request, response )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				</div>
+
+				<div class="method-description">
+					
+	          		<p><p>
+Iterate through the handlers for this URI and execute each one. Stop
+executing handlers as soon as the response&#8216;s status changes.
+</p></p>
+					
+					
+					
+	          		<div class="method-source-code" id="M000107-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/thingfish/daemon.rb, line 263</span>
+263:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_handlers</span>( <span class="ruby-identifier">client</span>, <span class="ruby-identifier">handlers</span>, <span class="ruby-identifier">request</span>, <span class="ruby-identifier">response</span> )
+264:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Dispatching to %d handlers&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">handlers</span>.<span class="ruby-identifier">length</span>]
+265: 
+266:         <span class="ruby-comment cmt"># BRANCH: Iterate through handlers</span>
+267:         <span class="ruby-identifier">handlers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">handler</span><span class="ruby-operator">|</span>
+268:             <span class="ruby-comment cmt"># BRANCH: Adds handlers to the response as it executes them</span>
+269:             <span class="ruby-identifier">response</span>.<span class="ruby-identifier">handlers</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">handler</span>
+270:             <span class="ruby-identifier">handler</span>.<span class="ruby-identifier">process</span>( <span class="ruby-identifier">request</span>, <span class="ruby-identifier">response</span> )
+271:             <span class="ruby-comment cmt"># BRANCH: Stops running handlers on status change</span>
+272:             <span class="ruby-comment cmt"># BRANCH: Stops running handlers if client connection closes</span>
+273:             <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">status</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">ThingFish</span><span class="ruby-operator">::</span><span class="ruby-constant">Response</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_STATUS</span> <span class="ruby-operator">||</span>
+274:                 <span class="ruby-identifier">client</span>.<span class="ruby-identifier">closed?</span>
+275:         <span class="ruby-keyword kw">end</span>
+276:     <span class="ruby-keyword kw">end</span></pre>
+	          		</div>
+					
+				</div>
+
+				
+			</div>
+			
+			
+			<div id="method-M000105" class="method-detail">
+			
+				<a name="M000105"></a>
+
+				<div class="method-heading">
+					<span class="method-name">send_error_response</span><span 
+						class="method-args">( response, request, statuscode, client, err=nil )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				</div>
+
+				<div class="method-description">
+					
+	          		<p><p>
+Handle errors in a consistent fashion. Log and output to the client.
+</p></p>
+					
+					
+					
+	          		<div class="method-source-code" id="M000105-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/thingfish/daemon.rb, line 203</span>
+203:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">send_error_response</span>( <span class="ruby-identifier">response</span>, <span class="ruby-identifier">request</span>, <span class="ruby-identifier">statuscode</span>, <span class="ruby-identifier">client</span>, <span class="ruby-identifier">err</span>=<span class="ruby-keyword kw">nil</span> )
+204:         <span class="ruby-identifier">errtrace</span> = <span class="ruby-identifier">debugtrace</span> = <span class="ruby-value str">''</span>
+205: 
+206:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">err</span>
+207:             <span class="ruby-identifier">errtrace</span> = <span class="ruby-value str">&quot;Error while running %s: %s&quot;</span> <span class="ruby-operator">%</span> [
+208:                 <span class="ruby-identifier">response</span>.<span class="ruby-identifier">handlers</span>.<span class="ruby-identifier">last</span>,
+209:                 <span class="ruby-identifier">err</span>.<span class="ruby-identifier">message</span>,
+210:             ]
+211:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">log</span>.<span class="ruby-identifier">error</span>( <span class="ruby-identifier">errtrace</span> )
+212: 
+213:             <span class="ruby-identifier">debugtrace</span> = <span class="ruby-value str">&quot;Handlers were:\n  %s\nBacktrace:  %s&quot;</span> <span class="ruby-operator">%</span> [
+214:                 <span class="ruby-identifier">response</span>.<span class="ruby-identifier">handlers</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n  &quot;</span>),
+215:                 <span class="ruby-identifier">err</span>.<span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n  &quot;</span>)
+216:             ]
+217:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span>( <span class="ruby-identifier">debugtrace</span> )
+218:         <span class="ruby-keyword kw">end</span>
+219: 
+220:         <span class="ruby-identifier">response</span>.<span class="ruby-identifier">reset</span>
+221:         <span class="ruby-identifier">response</span>.<span class="ruby-identifier">status</span> = <span class="ruby-identifier">statuscode</span>
+222: 
+223:         <span class="ruby-comment cmt"># Build a pretty response if the client groks HTML</span>
+224:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">accepts?</span>( <span class="ruby-value str">'text/html'</span> )
+225:             <span class="ruby-identifier">template</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_error_response_template</span>( <span class="ruby-identifier">statuscode</span> ) <span class="ruby-keyword kw">or</span>
+226:                 <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Can't find an error template&quot;</span>
+227:             
+228:             <span class="ruby-identifier">response</span>.<span class="ruby-identifier">headers</span>[ <span class="ruby-identifier">:content_type</span> ] = <span class="ruby-value str">'text/html'</span>
+229:             <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span> = <span class="ruby-identifier">template</span>.<span class="ruby-identifier">result</span>( <span class="ruby-identifier">binding</span>() )
+230:         <span class="ruby-keyword kw">else</span>
+231:             <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span> = <span class="ruby-value str">&quot;%d (%s)&quot;</span> <span class="ruby-operator">%</span> [ <span class="ruby-identifier">statuscode</span>, <span class="ruby-constant">STATUS_NAME</span>[<span class="ruby-identifier">statuscode</span>] ]
+232:             <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> 
+233:                 <span class="ruby-identifier">errtrace</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+234:                 <span class="ruby-identifier">debugtrace</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n\n&quot;</span>
+235:         <span class="ruby-keyword kw">end</span>
+236: 
+237:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send_response</span>( <span class="ruby-identifier">response</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">client</span>.<span class="ruby-identifier">closed?</span>
+238:     <span class="ruby-keyword kw">end</span></pre>
+	          		</div>
+					
+				</div>
+
+				
+			</div>
+			
+			
+			<div id="method-M000108" class="method-detail">
+			
+				<a name="M000108"></a>
+
+				<div class="method-heading">
+					<span class="method-name">send_response</span><span 
+						class="method-args">( response )</span>
+					<span class="method-click-advice">click to toggle source</span>
+				</div>
+
+				<div class="method-description">
+					
+	          		<p><p>
+Send the response on the socket, doing a buffered send if the
+response&#8216;s body responds to :read, or just writing it to the socket
+if not.
+</p></p>
+					
+					
+					
+	          		<div class="method-source-code" id="M000108-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/thingfish/daemon.rb, line 281</span>
+281:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">send_response</span>( <span class="ruby-identifier">response</span> )
+282:         <span class="ruby-identifier">body</span> = <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>
+283: 
+284:         <span class="ruby-comment cmt"># Send the status line</span>
+285:         <span class="ruby-identifier">status_line</span> = <span class="ruby-constant">STATUS_LINE_FORMAT</span> <span class="ruby-operator">%</span>
+286:             [ <span class="ruby-identifier">response</span>.<span class="ruby-identifier">status</span>, <span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">STATUS_NAME</span>[ <span class="ruby-identifier">response</span>.<span class="ruby-identifier">status</span> ] ]
+287:         <span class="ruby-identifier">response</span>.<span class="ruby-identifier">write</span>( <span class="ruby-identifier">status_line</span> )
+288: 
+289:         <span class="ruby-comment cmt"># Send the headers</span>
+290:         <span class="ruby-identifier">response</span>.<span class="ruby-identifier">headers</span>[<span class="ruby-identifier">:content_length</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">get_content_length</span>
+291:         <span class="ruby-identifier">response</span>.<span class="ruby-identifier">headers</span>[<span class="ruby-identifier">:date</span>] = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">httpdate</span>
+292:         <span class="ruby-identifier">response</span>.<span class="ruby-identifier">write</span>( <span class="ruby-identifier">response</span>.<span class="ruby-identifier">headers</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\r\n&quot;</span> )
+293: 
+294:         <span class="ruby-comment cmt"># Send the buffered entity body</span>
+295:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">body</span>.<span class="ruby-identifier">respond_to?</span>( <span class="ruby-identifier">:read</span> )
+296:             <span class="ruby-identifier">buf</span>     = <span class="ruby-value str">''</span>
+297:             <span class="ruby-identifier">bufsize</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">bufsize</span>
+298: 
+299:             <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">body</span>.<span class="ruby-identifier">read</span>( <span class="ruby-identifier">bufsize</span>, <span class="ruby-identifier">buf</span> )
+300:                 <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">empty?</span>
+301:                     <span class="ruby-identifier">bytes</span> = <span class="ruby-identifier">response</span>.<span class="ruby-identifier">write</span>( <span class="ruby-identifier">buf</span> )
+302:                     <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">slice!</span>( <span class="ruby-value">0</span>, <span class="ruby-identifier">bytes</span> )
+303:                 <span class="ruby-keyword kw">end</span>
+304:             <span class="ruby-keyword kw">end</span>
+305:         <span class="ruby-keyword kw">else</span>
+306:             <span class="ruby-comment cmt"># Send unbuffered -- body already in memory.</span>
+307:             <span class="ruby-identifier">response</span>.<span class="ruby-identifier">write</span>( <span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_s</span> )
+308:         <span class="ruby-keyword kw">end</span>
+309:         
+310:         <span class="ruby-identifier">response</span>.<span class="ruby-identifier">done</span> = <span class="ruby-keyword kw">true</span>
+311:     <span class="ruby-keyword kw">end</span></pre>
+	          		</div>
+					
+				</div>
+
+				
+			</div>
+			
+		</div>
+		
+		
+
+	  </div>
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump">
+	
+		<div class="section">
+		<h2 class="section-header">secsequence</h2>
+	
+		<pre>--- SEC00018
+</pre>
+		</div>
+	
+		<div class="section">
+		<h2 class="section-header">seccomment</h2>
+	
+		<pre>--- &quot;&quot;
+</pre>
+		</div>
+	
+		<div class="section">
+		<h2 class="section-header">attributes</h2>
+	
+		<pre>--- 
+- name: config
+  rw: R
+  a_desc: |+
+    
+    The &lt;a href=&quot;Config.html&quot;&gt;ThingFish::Config&lt;/a&gt; instance that contains all
+    current configuration information used by the daemon.
+    
+- name: filestore
+  rw: R
+  a_desc: |+
+    
+    The &lt;a href=&quot;FileStore.html&quot;&gt;ThingFish::FileStore&lt;/a&gt; instance that acts as
+    the interface to the file storage mechanism used by the daemon.
+    
+- name: filters
+  rw: R
+  a_desc: |+
+    
+    The Array of installed ThingFish::Filters
+    
+- name: metastore
+  rw: R
+  a_desc: |+
+    
+    The &lt;a href=&quot;MetaStore.html&quot;&gt;ThingFish::MetaStore&lt;/a&gt; instance that acts as
+    the interface to the metadata mechanism used by the daemon.
+    
+</pre>
+		</div>
+	
+		<div class="section">
+		<h2 class="section-header">method_list</h2>
+	
+		<pre>--- 
+- methods: 
+  - visibility: public
+    aref: M000099
+    name: new
+    sourcecode: &quot;     &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# File lib/thingfish/daemon.rb, line 76&lt;/span&gt;\n 76:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;def&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;initialize&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;config&lt;/span&gt;=&lt;span class=\&quot;ruby-keyword kw\&quot;&gt;nil&lt;/span&gt; )\n 77:         &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt; = &lt;span class=\&quot;ruby-identifier\&quot;&gt;config&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;||&lt;/span&gt; &lt;span class=\&quot;ruby-constant\&quot;&gt;ThingFish&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;Config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;new&lt;/span&gt;\n 78:         &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;install&lt;/span&gt;\n 79: \n 80:         &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Load plugins for filestore, filters, and handlers&lt;/span&gt;\n 81:         &lt;span class=\&quot;ruby-ivar\&quot;&gt;@filestore&lt;/span&gt; = &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;create_configured_filestore&lt;/span&gt;\n 82:         &lt;span class=\&quot;ruby-ivar\&quot;&gt;@metastore&lt;/span&gt; = &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;create_configured_metastore&lt;/span&gt;\n 83:         &lt;span class=\&quot;ruby-ivar\&quot;&gt;@filters&lt;/span&gt; = []\n 84: \n 85:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;super&lt;/span&gt;( &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;ip&lt;/span&gt;, &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;port&lt;/span&gt; )\n 86:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;log&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;info&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;Starting at: http://%s:%d/&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;%&lt;/span&gt; [ &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;ip&lt;/span&gt;, &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;port&lt;/span&gt; ]\n 87: \n 88:         &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Register all the handlers&lt;/span&gt;\n 89:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;register&lt;/span&gt;( &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;/&amp;quot;&lt;/span&gt;, &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;create_default_handler&lt;/span&gt;(&lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;) )\n 90:         &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;each_handler_uri&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;do&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;&lt;span class=\&quot;ruby-identifier\&quot;&gt;handler&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;uri&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;\n 91:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;log&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;info&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;  registering %s at %p&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;%&lt;/span&gt; [&lt;span class=\&quot;ruby-identifier\&quot;&gt;handler&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;class&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;name&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;uri&lt;/span&gt;]\n 92:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;register&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;uri&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;handler&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;handler&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;options&lt;/span&gt;[&lt;span class=\&quot;ruby-value str\&quot;&gt;'in_front'&lt;/span&gt;] )\n 93:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n 94:         \n 95:         &lt;span class=\&quot;ruby-ivar\&quot;&gt;@resource_dir&lt;/span&gt; = &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;defaulthandler&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;resource_dir&lt;/span&gt;\n 96:         \n 97:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;log&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;debug&lt;/span&gt; {\n 98:             &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;Handler map is:\\n    &amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;+&lt;/span&gt; \n 99:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;classifier&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;handler_map&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;collect&lt;/span&gt; {&lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;&lt;span class=\&quot;ruby-identifier\&quot;&gt;uri&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;handlers&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;\n\
+      100:                 &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;%s: [%s]&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;%&lt;/span&gt; [ &lt;span class=\&quot;ruby-identifier\&quot;&gt;uri&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;handlers&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;collect&lt;/span&gt;{&lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;&lt;span class=\&quot;ruby-identifier\&quot;&gt;h&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;h&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;class&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;name&lt;/span&gt;}.&lt;span class=\&quot;ruby-identifier\&quot;&gt;join&lt;/span&gt;(&lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;, &amp;quot;&lt;/span&gt;) ]\n\
+      101:             }.&lt;span class=\&quot;ruby-identifier\&quot;&gt;join&lt;/span&gt;( &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;\\n    &amp;quot;&lt;/span&gt;)\n\
+      102:         }\n\
+      103:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;&quot;
+    m_desc: |-
+      &lt;p&gt;
+      Create a &lt;a href=&quot;Daemon.html#M000099&quot;&gt;new&lt;/a&gt; ThingFish daemon object that
+      will listen on the specified &lt;tt&gt;ip&lt;/tt&gt; and &lt;tt&gt;port&lt;/tt&gt;.
+      &lt;/p&gt;
+    params: ( config=nil )
+  category: Class
+  type: Public
+- methods: 
+  - visibility: public
+    aref: M000100
+    name: run
+    sourcecode: &quot;     &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# File lib/thingfish/daemon.rb, line 127&lt;/span&gt;\n\
+      127:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;def&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;run&lt;/span&gt;\n\
+      128:         &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Drop privileges if we're root, and we're configged to do so.&lt;/span&gt;\n\
+      129:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;if&lt;/span&gt; &lt;span class=\&quot;ruby-constant\&quot;&gt;Process&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;euid&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;zero?&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;and&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;!&lt;/span&gt; &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;user&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;nil?&lt;/span&gt;\n\
+      130:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;log&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;debug&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;Dropping privileges (user: %s)&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;%&lt;/span&gt; &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;user&lt;/span&gt;\n\
+      131:             &lt;span class=\&quot;ruby-constant\&quot;&gt;Process&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;euid&lt;/span&gt; = &lt;span class=\&quot;ruby-constant\&quot;&gt;Etc&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;getpwnam&lt;/span&gt;( &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;user&lt;/span&gt; ).&lt;span class=\&quot;ruby-identifier\&quot;&gt;uid&lt;/span&gt;\n\
+      132:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n\
+      133: \n\
+      134:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;super&lt;/span&gt;\n\
+      135:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;&quot;
+    m_desc: |-
+      &lt;p&gt;
+      Perform any additional daemon actions before actually starting the &lt;a
+      href=&quot;../Mongrel.html&quot;&gt;Mongrel&lt;/a&gt; side of things.
+      &lt;/p&gt;
+    params: ()
+  - visibility: public
+    aref: M000101
+    name: shutdown
+    sourcecode: &quot;     &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# File lib/thingfish/daemon.rb, line 140&lt;/span&gt;\n\
+      140:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;def&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;shutdown&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;reason&lt;/span&gt;=&lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;no reason&amp;quot;&lt;/span&gt; )\n\
+      141:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;log&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;warn&lt;/span&gt; &lt;span class=\&quot;ruby-node\&quot;&gt;&amp;quot;Shutting down: #{reason}&amp;quot;&lt;/span&gt;\n\
+      142:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;stop&lt;/span&gt;\n\
+      143:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;&quot;
+    m_desc: |-
+      &lt;p&gt;
+      Shut the server down gracefully, outputting the specified &lt;tt&gt;reason&lt;/tt&gt;
+      for the &lt;a href=&quot;Daemon.html#M000101&quot;&gt;shutdown&lt;/a&gt; to the logs.
+      &lt;/p&gt;
+    params: ( reason=&amp;quot;no reason&amp;quot; )
+  category: Instance
+  type: Public
+- methods: 
+  - visibility: protected
+    aref: M000109
+    name: create_default_handler
+    sourcecode: &quot;     &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# File lib/thingfish/daemon.rb, line 316&lt;/span&gt;\n\
+      316:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;def&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;create_default_handler&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;config&lt;/span&gt; )\n\
+      317:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;options&lt;/span&gt; = &lt;span class=\&quot;ruby-constant\&quot;&gt;DEFAULT_HANDLER_OPTIONS&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;dup&lt;/span&gt;\n\
+      318:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;if&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;defaulthandler&lt;/span&gt;\n\
+      319:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;options&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;merge!&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;defaulthandler&lt;/span&gt; )\n\
+      320:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n\
+      321:         \n\
+      322:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;return&lt;/span&gt; &lt;span class=\&quot;ruby-constant\&quot;&gt;ThingFish&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;Handler&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;create&lt;/span&gt;( &lt;span class=\&quot;ruby-value str\&quot;&gt;'default'&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;options&lt;/span&gt; )\n\
+      323:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;&quot;
+    m_desc: |-
+      &lt;p&gt;
+      Create an instance of the default handler, with options dictated by the
+      specified &lt;tt&gt;config&lt;/tt&gt; object.
+      &lt;/p&gt;
+    params: ( config )
+  - visibility: protected
+    aref: M000102
+    name: dispatch_to_handlers
+    sourcecode: &quot;     &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# File lib/thingfish/daemon.rb, line 152&lt;/span&gt;\n\
+      152:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;def&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;dispatch_to_handlers&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;client&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;handlers&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;mongrel_request&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;mongrel_response&lt;/span&gt; )\n\
+      153:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt;  = &lt;span class=\&quot;ruby-constant\&quot;&gt;ThingFish&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;Request&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;new&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;mongrel_request&lt;/span&gt;, &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt; )\n\
+      154:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt; = &lt;span class=\&quot;ruby-constant\&quot;&gt;ThingFish&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;Response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;new&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;mongrel_response&lt;/span&gt; )\n\
+      155: \n\
+      156:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;begin&lt;/span&gt;\n\
+      157:             &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Let the filters manhandle the request&lt;/span&gt;\n\
+      158:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;filter_request&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt; )\n\
+      159: \n\
+      160:             &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Now execute the given handlers on the request and response&lt;/span&gt;\n\
+      161:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;run_handlers&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;client&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;handlers&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt; ) &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;unless&lt;/span&gt;\n\
+      162:                 &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;is_handled?&lt;/span&gt;\n\
+      163: \n\
+      164:             &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Let the filters manhandle the response&lt;/span&gt;\n\
+      165:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;filter_response&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt; )\n\
+      166: \n\
+      167:             &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Handle NOT_FOUND &lt;/span&gt;\n\
+      168:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;return&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;send_error_response&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt;, &lt;span class=\&quot;ruby-constant\&quot;&gt;HTTP&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;NOT_FOUND&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;client&lt;/span&gt; ) \\\n\
+      169:                 &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;unless&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;is_handled?&lt;/span&gt;\n\
+      170: \n\
+      171:             &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Normal response&lt;/span&gt;\n\
+      172:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;send_response&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt; ) &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;unless&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;client&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;closed?&lt;/span&gt;\n\
+      173: \n\
+      174:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;rescue&lt;/span&gt; &lt;span class=\&quot;ruby-constant\&quot;&gt;ThingFish&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;RequestError&lt;/span&gt; =&lt;span class=\&quot;ruby-operator\&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;err&lt;/span&gt;\n\
+      175:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;send_error_response&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt;, &lt;span class=\&quot;ruby-constant\&quot;&gt;HTTP&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;BAD_REQUEST&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;client&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;err&lt;/span&gt; )\n\
+      176: \n\
+      177:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;rescue&lt;/span&gt; &lt;span class=\&quot;ruby-constant\&quot;&gt;StandardError&lt;/span&gt; =&lt;span class=\&quot;ruby-operator\&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;err&lt;/span&gt;\n\
+      178:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;send_error_response&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt;, &lt;span class=\&quot;ruby-constant\&quot;&gt;HTTP&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;SERVER_ERROR&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;client&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;err&lt;/span&gt; )\n\
+      179:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n\
+      180:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;&quot;
+    m_desc: |-
+      &lt;p&gt;
+      Override &lt;a href=&quot;../Mongrel.html&quot;&gt;Mongrel&lt;/a&gt;&amp;#8216;s handler-processing
+      to incorporate filters, and our own request and response objects.
+      &lt;/p&gt;
+    params: ( client, handlers, mongrel_request, mongrel_response )
+  - visibility: protected
+    aref: M000103
+    name: filter_request
+    sourcecode: &quot;     &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# File lib/thingfish/daemon.rb, line 184&lt;/span&gt;\n\
+      184:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;def&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;filter_request&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt; )\n\
+      185:         &lt;span class=\&quot;ruby-ivar\&quot;&gt;@filters&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;each&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;do&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;&lt;span class=\&quot;ruby-identifier\&quot;&gt;filter&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;\n\
+      186:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;filters&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;filter&lt;/span&gt;\n\
+      187:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;filter&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;handle_request&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt; )\n\
+      188:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;break&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;if&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;status&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;!=&lt;/span&gt; &lt;span class=\&quot;ruby-constant\&quot;&gt;ThingFish&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;Response&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;DEFAULT_STATUS&lt;/span&gt;\n\
+      189:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n\
+      190:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;&quot;
+    m_desc: |-
+      &lt;p&gt;
+      &lt;a href=&quot;Filter.html&quot;&gt;Filter&lt;/a&gt; and potentially modify the incoming
+      request.
+      &lt;/p&gt;
+    params: ( request, response )
+  - visibility: protected
+    aref: M000104
+    name: filter_response
+    sourcecode: &quot;     &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# File lib/thingfish/daemon.rb, line 195&lt;/span&gt;\n\
+      195:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;def&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;filter_response&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt; )\n\
+      196:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;filters&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;reverse&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;each&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;do&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;&lt;span class=\&quot;ruby-identifier\&quot;&gt;filter&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;\n\
+      197:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;filter&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;handle_response&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt; )\n\
+      198:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n\
+      199:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;&quot;
+    m_desc: |-
+      &lt;p&gt;
+      &lt;a href=&quot;Filter.html&quot;&gt;Filter&lt;/a&gt; (and potentially modify) the outgoing
+      response with the filters that were registered with it during the
+      request-filtering stage
+      &lt;/p&gt;
+    params: ( response, request )
+  - visibility: protected
+    aref: M000106
+    name: get_error_response_template
+    sourcecode: &quot;     &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# File lib/thingfish/daemon.rb, line 244&lt;/span&gt;\n\
+      244:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;def&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;get_error_response_template&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;statuscode&lt;/span&gt; )\n\
+      245:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;templates&lt;/span&gt; = [\n\
+      246:             &lt;span class=\&quot;ruby-constant\&quot;&gt;ERROR_TEMPLATE_DIR&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;+&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;%d.rhtml&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;%&lt;/span&gt; [&lt;span class=\&quot;ruby-identifier\&quot;&gt;statuscode&lt;/span&gt;],\n\
+      247:             &lt;span class=\&quot;ruby-constant\&quot;&gt;ERROR_TEMPLATE_DIR&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;+&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;%d.rhtml&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;%&lt;/span&gt; [(&lt;span class=\&quot;ruby-identifier\&quot;&gt;statuscode&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;/&lt;/span&gt; &lt;span class=\&quot;ruby-value\&quot;&gt;100&lt;/span&gt;).&lt;span class=\&quot;ruby-identifier\&quot;&gt;ceil&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;*&lt;/span&gt; &lt;span class=\&quot;ruby-value\&quot;&gt;100&lt;/span&gt;],\n\
+      248:             &lt;span class=\&quot;ruby-constant\&quot;&gt;ERROR_TEMPLATE_DIR&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;+&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;'generic.rhtml'&lt;/span&gt;,\n\
+      249:         ]\n\
+      250:         \n\
+      251:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;templates&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;each&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;do&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;&lt;span class=\&quot;ruby-identifier\&quot;&gt;tmpl&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;\n\
+      252:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;log&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;debug&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;Trying to find error template %p&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;%&lt;/span&gt; [&lt;span class=\&quot;ruby-identifier\&quot;&gt;tmpl&lt;/span&gt;]\n\
+      253:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;next&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;unless&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;resource_exists?&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;tmpl&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;to_s&lt;/span&gt; )\n\
+      254:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;return&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;get_erb_resource&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;tmpl&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;to_s&lt;/span&gt; )\n\
+      255:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n\
+      256: \n\
+      257:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;return&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;nil&lt;/span&gt;\n\
+      258:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;&quot;
+    m_desc: |-
+      &lt;p&gt;
+      Look for an error response template for the given status code in a
+      directory called &amp;#8216;errors&amp;#8217;, trying the most-specific code first,
+      then one for the 100-level code, then falling back to a template called
+      &amp;#8216;generic.rhtml&amp;#8217;.
+      &lt;/p&gt;
+    params: ( statuscode )
+  - visibility: protected
+    aref: M000107
+    name: run_handlers
+    sourcecode: &quot;     &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# File lib/thingfish/daemon.rb, line 263&lt;/span&gt;\n\
+      263:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;def&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;run_handlers&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;client&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;handlers&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt; )\n\
+      264:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;log&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;debug&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;Dispatching to %d handlers&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;%&lt;/span&gt; [&lt;span class=\&quot;ruby-identifier\&quot;&gt;handlers&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;length&lt;/span&gt;]\n\
+      265: \n\
+      266:         &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# BRANCH: Iterate through handlers&lt;/span&gt;\n\
+      267:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;handlers&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;each&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;do&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;&lt;span class=\&quot;ruby-identifier\&quot;&gt;handler&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;\n\
+      268:             &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# BRANCH: Adds handlers to the response as it executes them&lt;/span&gt;\n\
+      269:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;handlers&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;handler&lt;/span&gt;\n\
+      270:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;handler&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;process&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt; )\n\
+      271:             &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# BRANCH: Stops running handlers on status change&lt;/span&gt;\n\
+      272:             &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# BRANCH: Stops running handlers if client connection closes&lt;/span&gt;\n\
+      273:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;break&lt;/span&gt; &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;if&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;status&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;!=&lt;/span&gt; &lt;span class=\&quot;ruby-constant\&quot;&gt;ThingFish&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;Response&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;DEFAULT_STATUS&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;||&lt;/span&gt;\n\
+      274:                 &lt;span class=\&quot;ruby-identifier\&quot;&gt;client&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;closed?&lt;/span&gt;\n\
+      275:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n\
+      276:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;&quot;
+    m_desc: |-
+      &lt;p&gt;
+      Iterate through the handlers for this URI and execute each one. Stop
+      executing handlers as soon as the response&amp;#8216;s status changes.
+      &lt;/p&gt;
+    params: ( client, handlers, request, response )
+  - visibility: protected
+    aref: M000105
+    name: send_error_response
+    sourcecode: &quot;     &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# File lib/thingfish/daemon.rb, line 203&lt;/span&gt;\n\
+      203:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;def&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;send_error_response&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;statuscode&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;client&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;err&lt;/span&gt;=&lt;span class=\&quot;ruby-keyword kw\&quot;&gt;nil&lt;/span&gt; )\n\
+      204:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;errtrace&lt;/span&gt; = &lt;span class=\&quot;ruby-identifier\&quot;&gt;debugtrace&lt;/span&gt; = &lt;span class=\&quot;ruby-value str\&quot;&gt;''&lt;/span&gt;\n\
+      205: \n\
+      206:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;if&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;err&lt;/span&gt;\n\
+      207:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;errtrace&lt;/span&gt; = &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;Error while running %s: %s&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;%&lt;/span&gt; [\n\
+      208:                 &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;handlers&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;last&lt;/span&gt;,\n\
+      209:                 &lt;span class=\&quot;ruby-identifier\&quot;&gt;err&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;message&lt;/span&gt;,\n\
+      210:             ]\n\
+      211:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;log&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;error&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;errtrace&lt;/span&gt; )\n\
+      212: \n\
+      213:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;debugtrace&lt;/span&gt; = &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;Handlers were:\\n  %s\\nBacktrace:  %s&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;%&lt;/span&gt; [\n\
+      214:                 &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;handlers&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;collect&lt;/span&gt; {&lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt;&lt;span class=\&quot;ruby-identifier\&quot;&gt;h&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;|&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;h&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;class&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;name&lt;/span&gt; }.&lt;span class=\&quot;ruby-identifier\&quot;&gt;join&lt;/span&gt;(&lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;\\n  &amp;quot;&lt;/span&gt;),\n\
+      215:                 &lt;span class=\&quot;ruby-identifier\&quot;&gt;err&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;backtrace&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;join&lt;/span&gt;(&lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;\\n  &amp;quot;&lt;/span&gt;)\n\
+      216:             ]\n\
+      217:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;log&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;debug&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;debugtrace&lt;/span&gt; )\n\
+      218:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n\
+      219: \n\
+      220:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;reset&lt;/span&gt;\n\
+      221:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;status&lt;/span&gt; = &lt;span class=\&quot;ruby-identifier\&quot;&gt;statuscode&lt;/span&gt;\n\
+      222: \n\
+      223:         &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Build a pretty response if the client groks HTML&lt;/span&gt;\n\
+      224:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;if&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;request&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;accepts?&lt;/span&gt;( &lt;span class=\&quot;ruby-value str\&quot;&gt;'text/html'&lt;/span&gt; )\n\
+      225:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;template&lt;/span&gt; = &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;get_error_response_template&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;statuscode&lt;/span&gt; ) &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;or&lt;/span&gt;\n\
+      226:                 &lt;span class=\&quot;ruby-identifier\&quot;&gt;raise&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;Can't find an error template&amp;quot;&lt;/span&gt;\n\
+      227:             \n\
+      228:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;headers&lt;/span&gt;[ &lt;span class=\&quot;ruby-identifier\&quot;&gt;:content_type&lt;/span&gt; ] = &lt;span class=\&quot;ruby-value str\&quot;&gt;'text/html'&lt;/span&gt;\n\
+      229:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;body&lt;/span&gt; = &lt;span class=\&quot;ruby-identifier\&quot;&gt;template&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;result&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;binding&lt;/span&gt;() )\n\
+      230:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;else&lt;/span&gt;\n\
+      231:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;body&lt;/span&gt; = &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;%d (%s)&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;%&lt;/span&gt; [ &lt;span class=\&quot;ruby-identifier\&quot;&gt;statuscode&lt;/span&gt;, &lt;span class=\&quot;ruby-constant\&quot;&gt;STATUS_NAME&lt;/span&gt;[&lt;span class=\&quot;ruby-identifier\&quot;&gt;statuscode&lt;/span&gt;] ]\n\
+      232:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;body&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;\\n\\n&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; \n\
+      233:                 &lt;span class=\&quot;ruby-identifier\&quot;&gt;errtrace&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;\\n\\n&amp;quot;&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;\n\
+      234:                 &lt;span class=\&quot;ruby-identifier\&quot;&gt;debugtrace&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;\\n\\n&amp;quot;&lt;/span&gt;\n\
+      235:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n\
+      236: \n\
+      237:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;self&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;send_response&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt; ) &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;unless&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;client&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;closed?&lt;/span&gt;\n\
+      238:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;&quot;
+    m_desc: |-
+      &lt;p&gt;
+      Handle errors in a consistent fashion. Log and output to the client.
+      &lt;/p&gt;
+    params: ( response, request, statuscode, client, err=nil )
+  - visibility: protected
+    aref: M000108
+    name: send_response
+    sourcecode: &quot;     &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# File lib/thingfish/daemon.rb, line 281&lt;/span&gt;\n\
+      281:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;def&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;send_response&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt; )\n\
+      282:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;body&lt;/span&gt; = &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;body&lt;/span&gt;\n\
+      283: \n\
+      284:         &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Send the status line&lt;/span&gt;\n\
+      285:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;status_line&lt;/span&gt; = &lt;span class=\&quot;ruby-constant\&quot;&gt;STATUS_LINE_FORMAT&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;%&lt;/span&gt;\n\
+      286:             [ &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;status&lt;/span&gt;, &lt;span class=\&quot;ruby-constant\&quot;&gt;HTTP&lt;/span&gt;&lt;span class=\&quot;ruby-operator\&quot;&gt;::&lt;/span&gt;&lt;span class=\&quot;ruby-constant\&quot;&gt;STATUS_NAME&lt;/span&gt;[ &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;status&lt;/span&gt; ] ]\n\
+      287:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;write&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;status_line&lt;/span&gt; )\n\
+      288: \n\
+      289:         &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Send the headers&lt;/span&gt;\n\
+      290:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;headers&lt;/span&gt;[&lt;span class=\&quot;ruby-identifier\&quot;&gt;:content_length&lt;/span&gt;] &lt;span class=\&quot;ruby-operator\&quot;&gt;||=&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;get_content_length&lt;/span&gt;\n\
+      291:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;headers&lt;/span&gt;[&lt;span class=\&quot;ruby-identifier\&quot;&gt;:date&lt;/span&gt;] = &lt;span class=\&quot;ruby-constant\&quot;&gt;Time&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;now&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;httpdate&lt;/span&gt;\n\
+      292:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;write&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;headers&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;to_s&lt;/span&gt; &lt;span class=\&quot;ruby-operator\&quot;&gt;+&lt;/span&gt; &lt;span class=\&quot;ruby-value str\&quot;&gt;&amp;quot;\\r\\n&amp;quot;&lt;/span&gt; )\n\
+      293: \n\
+      294:         &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Send the buffered entity body&lt;/span&gt;\n\
+      295:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;if&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;body&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;respond_to?&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;:read&lt;/span&gt; )\n\
+      296:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;buf&lt;/span&gt;     = &lt;span class=\&quot;ruby-value str\&quot;&gt;''&lt;/span&gt;\n\
+      297:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;bufsize&lt;/span&gt; = &lt;span class=\&quot;ruby-ivar\&quot;&gt;@config&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;bufsize&lt;/span&gt;\n\
+      298: \n\
+      299:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;while&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;body&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;read&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;bufsize&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;buf&lt;/span&gt; )\n\
+      300:                 &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;until&lt;/span&gt; &lt;span class=\&quot;ruby-identifier\&quot;&gt;buf&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;empty?&lt;/span&gt;\n\
+      301:                     &lt;span class=\&quot;ruby-identifier\&quot;&gt;bytes&lt;/span&gt; = &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;write&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;buf&lt;/span&gt; )\n\
+      302:                     &lt;span class=\&quot;ruby-identifier\&quot;&gt;buf&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;slice!&lt;/span&gt;( &lt;span class=\&quot;ruby-value\&quot;&gt;0&lt;/span&gt;, &lt;span class=\&quot;ruby-identifier\&quot;&gt;bytes&lt;/span&gt; )\n\
+      303:                 &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n\
+      304:             &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n\
+      305:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;else&lt;/span&gt;\n\
+      306:             &lt;span class=\&quot;ruby-comment cmt\&quot;&gt;# Send unbuffered -- body already in memory.&lt;/span&gt;\n\
+      307:             &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;write&lt;/span&gt;( &lt;span class=\&quot;ruby-identifier\&quot;&gt;body&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;to_s&lt;/span&gt; )\n\
+      308:         &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;\n\
+      309:         \n\
+      310:         &lt;span class=\&quot;ruby-identifier\&quot;&gt;response&lt;/span&gt;.&lt;span class=\&quot;ruby-identifier\&quot;&gt;done&lt;/span&gt; = &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;true&lt;/span&gt;\n\
+      311:     &lt;span class=\&quot;ruby-keyword kw\&quot;&gt;end&lt;/span&gt;&quot;
+    m_desc: |-
+      &lt;p&gt;
+      Send the response on the socket, doing a buffered send if the
+      response&amp;#8216;s body responds to :read, or just writing it to the socket
+      if not.
+      &lt;/p&gt;
+    params: ( response )
+  category: Instance
+  type: Protected
+</pre>
+		</div>
+	
+		<div class="section">
+		<h2 class="section-header">sectitle</h2>
+	
+		<pre>--- 
+</pre>
+		</div>
+	
+		<div class="section">
+		<h2 class="section-header">constants</h2>
+	
+		<pre>--- 
+- name: SVNId
+  desc: |+
+    
+    The subversion ID
+    
+  value: &quot;%q$Id$&quot;
+- name: SVNRev
+  desc: |+
+    
+    The SVN revision number
+    
+  value: &quot;%q$Rev$&quot;
+- name: DEFAULT_HANDLER_OPTIONS
+  desc: |+
+    
+    Options for the default handler
+    
+  value: &quot;{}&quot;
+- name: ERROR_TEMPLATE_DIR
+  desc: |+
+    
+    The subdirectory to search for error templates
+    
+  value: Pathname.new( 'errors' )
+</pre>
+		</div>
+	
+	</div>
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
+

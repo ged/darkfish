@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>ThingFish</title>
+
+	<link type="text/css" media="screen" href="rdoc.css" rel="stylesheet" />
+
+	<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/thickbox.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript" charset="utf-8">
+	</script>
+
+</head>
+<body class="indexpage">
+
+	<h1>ThingFish</h1>
+	
+	<p>ThingFish is a highly-accessible network store for cataloging large files and their
+	associated metadata.</p>
+	
+	<ul>
+		<li class="module"><a href="ThingFish.html">ThingFish</a> &mdash; Toplevel namespace module</li>
+		<li class="module"><a href="ThingFish/AbstractClass.html">ThingFish::AbstractClass</a> &mdash; Adds abstract class helpers to a class.</li>
+		<li class="module"><a href="ThingFish/AbstractClass/ClassMethods.html">ThingFish::AbstractClass::ClassMethods</a> &mdash; Methods to be added to including classes</li>
+		<li class="class"><a href="ThingFish/Client.html">ThingFish::Client</a> &mdash; The thingfish client library</li>
+		<li class="class"><a href="ThingFish/Config.html">ThingFish::Config</a> &mdash; The configuration reader/writer class for <a
+		href="Daemon.html">ThingFish::Daemon</a>.</li>
+		<li class="class"><a href="ThingFish/Config/ConfigStruct.html">ThingFish::Config::ConfigStruct</a> &mdash; Hash-wrapper that allows struct-like accessor calls on nested hashes.</li>
+		<li class="class"><a href="ThingFish/ConfigError.html">ThingFish::ConfigError</a> &mdash; <a href="Error.html">Error</a> in configuration file</li>
+		<li class="module"><a href="ThingFish/Constants.html">ThingFish::Constants</a> &mdash; (no description)</li>
+		<li class="module"><a href="ThingFish/Constants/HTTP.html">ThingFish::Constants::HTTP</a> &mdash; <a href="HTTP.html">HTTP</a> status and result constants</li>
+		<li class="module"><a href="ThingFish/Constants/Patterns.html">ThingFish::Constants::Patterns</a> &mdash; (no description)</li>
+		<li class="class"><a href="ThingFish/Daemon.html">ThingFish::Daemon</a> &mdash; ThingFish daemon class</li>
+		<li class="class"><a href="ThingFish/DefaultHandler.html">ThingFish::DefaultHandler</a> &mdash; The default top-level handler for the thingfish daemon</li>
+		<li class="class"><a href="ThingFish/Error.html">ThingFish::Error</a> &mdash; General ThingFish exception class</li>
+		<li class="class"><a href="ThingFish/FileStore.html">ThingFish::FileStore</a> &mdash; Base class for ThingFish <a href="FileStore.html">FileStore</a> plugins</li>
+		<li class="class"><a href="ThingFish/FileStoreError.html">ThingFish::FileStoreError</a> &mdash; <a href="Error.html">Error</a> in a filestore plugin</li>
+		<li class="class"><a href="ThingFish/FileStoreQuotaError.html">ThingFish::FileStoreQuotaError</a> &mdash; Some action could not be completed because it would make the filestore
+		exceed its allotted quota.</li>
+		<li class="class"><a href="ThingFish/Filter.html">ThingFish::Filter</a> &mdash; Base class for ThingFish <a href="Filter.html">Filter</a> plugins</li>
+		<li class="class"><a href="ThingFish/Handler.html">ThingFish::Handler</a> &mdash; Base class for ThingFish <a href="Handler.html">Handler</a> plugins</li>
+		<li class="module"><a href="ThingFish/Loggable.html">ThingFish::Loggable</a> &mdash; Add logging to a ThingFish class</li>
+		<li class="class"><a href="ThingFish/MemoryFileStore.html">ThingFish::MemoryFileStore</a> &mdash; An in-memory filestore plugin for ThingFish</li>
+		<li class="class"><a href="ThingFish/MemoryMetaStore.html">ThingFish::MemoryMetaStore</a> &mdash; In-memory metadata store</li>
+		<li class="class"><a href="ThingFish/MetaStore.html">ThingFish::MetaStore</a> &mdash; Base class for ThingFish <a href="MetaStore.html">MetaStore</a> plugins</li>
+		<li class="class"><a href="ThingFish/MetaStore/ResourceProxy.html">ThingFish::MetaStore::ResourceProxy</a> &mdash; Proxy class for metadata operations for a given resource.</li>
+		<li class="class"><a href="ThingFish/MetadataHandler.html">ThingFish::MetadataHandler</a> &mdash; The default top-level handler for the thingfish daemon</li>
+		<li class="class"><a href="ThingFish/MultipartMimeParser.html">ThingFish::MultipartMimeParser</a> &mdash; A class for parsing multipart mime documents from a stream.</li>
+		<li class="module"><a href="ThingFish/NumericConstantMethods.html">ThingFish::NumericConstantMethods</a> &mdash; A collection of methods to add to <a href="../Numeric.html">Numeric</a> for
+		convenience (stolen from ActiveSupport)</li>
+		<li class="module"><a href="ThingFish/NumericConstantMethods/Bytes.html">ThingFish::NumericConstantMethods::Bytes</a> &mdash; Byte constants</li>
+		<li class="module"><a href="ThingFish/NumericConstantMethods/Time.html">ThingFish::NumericConstantMethods::Time</a> &mdash; <a href="Time.html">Time</a> constants</li>
+		<li class="class"><a href="ThingFish/PluginError.html">ThingFish::PluginError</a> &mdash; <a href="Error.html">Error</a> in a plugin</li>
+		<li class="class"><a href="ThingFish/Request.html">ThingFish::Request</a> &mdash; <a href="Request.html">Request</a> wrapper class</li>
+		<li class="class"><a href="ThingFish/Request/AcceptParam.html">ThingFish::Request::AcceptParam</a> &mdash; A parsed Accept-header parameter</li>
+		<li class="class"><a href="ThingFish/RequestError.html">ThingFish::RequestError</a> &mdash; Something was wrong with a request</li>
+		<li class="class"><a href="ThingFish/Resource.html">ThingFish::Resource</a> &mdash; <a href="Resource.html">Resource</a> wrapper class</li>
+		<li class="module"><a href="ThingFish/ResourceLoader.html">ThingFish::ResourceLoader</a> &mdash; Adds some methods that can be used to load content from files in a
+		resources directory.</li>
+		<li class="class"><a href="ThingFish/Response.html">ThingFish::Response</a> &mdash; <a href="Response.html">Response</a> wrapper class</li>
+		<li class="module"><a href="ThingFish/StaticResourcesHandler.html">ThingFish::StaticResourcesHandler</a> &mdash; Add the ability to service static content from a <a
+		href="Handler.html">ThingFish::Handler</a>&#8216;s resource directory</li>
+		<li class="module"><a href="ThingFish/StaticResourcesHandler/ClassMethods.html">ThingFish::StaticResourcesHandler::ClassMethods</a> &mdash; Methods installed in including classes</li>
+		<li class="class"><a href="ThingFish/Table.html">ThingFish::Table</a> &mdash; A case-insensitive multivalue hash that allows access via Symbol or String.</li>
+		<li class="module"><a href="Mongrel.html">Mongrel</a> &mdash; (no description)</li>
+		<li class="class"><a href="Mongrel/HttpServer.html">Mongrel::HttpServer</a> &mdash; This is a patch to <a href="../Mongrel.html">Mongrel</a>&#8216;s HTTP
+		server class to break out the dispatch of handlers from the main <a
+		href="HttpServer.html#M000214">#process_client</a> method, allowing
+		subclasses to override just the dispatcher part instead of the whole thing.
+		We&#8216;ve submitted a (badly-formatted &#8212; sorry Zed!) patch back to
+		<a href="../Mongrel.html">Mongrel</a>.</li>
+		<li class="class"><a href="Numeric.html">Numeric</a> &mdash; Add convenience methods to Numerics</li>
+		<li class="class"><a href="UUID.html">UUID</a> &mdash; Define an #== if none exists</li>
+	</ul>
+	
+</body>
+</html>
