@@ -132,6 +132,7 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 		files = gen_into( @files )
 		classes = gen_into( @classes )
 
+		# Make a hash of class info keyed by class name
 		classes_by_classname = classes.inject({}) {|hash, classinfo|
 			hash[ classinfo['full_name'] ] = classinfo
 			hash[ classinfo['full_name'] ][:outfile] =
@@ -139,6 +140,7 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 			hash
 		}
 
+		# Make a hash of 
 		files_by_path = files.inject({}) {|hash, fileinfo|
 			hash[ fileinfo['full_path'] ] = fileinfo
 			hash[ fileinfo['full_path'] ][:outfile] = 

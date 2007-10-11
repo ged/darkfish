@@ -1,3 +1,5 @@
+/* @override http://localhost:3474/api/rdoc.css */
+
 /*
  * "Darkfish" Rdoc CSS
  * $Id$
@@ -155,12 +157,7 @@ body.indexpage {
 
 dl.svninfo {
 	color: #666;
-}
-dl.svninfo dt {
-	font-weight: bold;
-}
-dl.svninfo dd + dt {
-	margin-top: 0.5em;
+	margin: 0;
 }
 
 /* @end */
@@ -205,10 +202,28 @@ dl.svninfo dd + dt {
 
 /* @group Documentation Section */
 #description {
-	font-size: 125%;
+	font-size: 115%;
 	color: #333;
-	line-height: 1.75em;
 }
+
+#description dl {
+	margin: 8px 1.5em;
+	border: 1px solid #ccc;
+	font-size: 14px;
+}
+
+#description dt {
+	padding: 2px 4px;
+	font-weight: bold;
+	background: #ddd;
+}
+#description dd {
+	padding: 2px 12px;
+}
+#description dd + dt {
+	margin-top: 0.7em;
+}
+
 
 #documentation .section {
 	font-size: 90%;
