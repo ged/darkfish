@@ -41,6 +41,19 @@ a:hover {
  	border-bottom: 1px dotted #6C8C22;
 }
 
+p {
+	margin: 0.5em 0;
+}
+
+dt {
+	font-weight: bold;
+}
+dd + dt {
+	margin-top: 0.7em;
+}
+
+
+
 /* @group Generic Classes */
 
 .quicksearch-field {
@@ -214,14 +227,10 @@ dl.svninfo {
 
 #description dt {
 	padding: 2px 4px;
-	font-weight: bold;
 	background: #ddd;
 }
 #description dd {
 	padding: 2px 12px;
-}
-#description dd + dt {
-	margin-top: 0.7em;
 }
 
 

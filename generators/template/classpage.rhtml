@@ -232,11 +232,20 @@
 			<% end %>
 				<a name="<%= methodinfo['aref'] %>"></a>
 
-				<div class="method-heading">
+				<% if methodinfo['name'] %>
+				<!-- Named method -->
+				<div class="method-heading named-method-heading">
 					<span class="method-name"><%= methodinfo['name'] %></span><span 
 						class="method-args"><%= methodinfo['params'] %></span>
 					<span class="method-click-advice">click to toggle source</span>
 				</div>
+				<% else %>
+				<!-- Call-seq style method -->
+				<div class="method-heading callseq-method-heading">
+					<span class="method-call-seq"><%= methodinfo['callseq'] %></span>
+					<span class="method-click-advice">click to toggle source</span>
+				</div>
+				<% end %>
 
 				<div class="method-description">
 					<% if methodinfo['m_desc'] %>
