@@ -35,10 +35,7 @@
 		<% modsort.each do |classname| %>
 		<% classdata = classes[classname] %>
 		<li class="<%= classdata['classmod'].downcase %>"><a 
-			href="<%= classdata['full_name'].gsub( /::/, '/' ) + '.html' %>"><%= classdata['full_name'] %></a>
-			&mdash; <%= classdata['description'] ?
-				classdata['description'].gsub( %r{^<p>|</p>$}, '' ).strip :
-				"(no description)" %></li>
+			href="<%= classdata['full_name'].gsub( /::/, '/' ) + '.html' %>"><%= classdata['full_name'] %></a></li>
 		<% end %>
 	</ul>
 
