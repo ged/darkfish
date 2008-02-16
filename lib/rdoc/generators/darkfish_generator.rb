@@ -7,7 +7,7 @@
 #  
 #  == License
 #  
-#  Copyright (c) 2007, The FaerieMUD Consortium
+#  Copyright (c) 2007, 2008, The FaerieMUD Consortium
 #  All rights reserved.
 #  
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,97 +34,12 @@ require 'pp'
 require 'pathname'
 require 'fileutils'
 require 'erb'
+require 'yaml'
 
 require 'rdoc/options'
 require 'rdoc/markup/simple_markup'
 require 'rdoc/markup/simple_markup/to_html'
 require 'rdoc/generators/xml_generator'
-
-
-### Time constants
-module TimeConstantMethods
-	
-	### Number of seconds (returns receiver unmodified)
-	def seconds
-		return self
-	end
-	alias_method :second, :seconds
-
-	### Returns number of seconds in <receiver> minutes
-	def minutes
-		return self * 60
-	end
-	alias_method :minute, :minutes  
-
-	### Returns the number of seconds in <receiver> hours
-	def hours
-		return self * 60.minutes
-	end
-	alias_method :hour, :hours
-
-	### Returns the number of seconds in <receiver> days
-	def days
-		return self * 24.hours
-	end
-	alias_method :day, :days
-
-	### Return the number of seconds in <receiver> weeks
-	def weeks
-		return self * 7.days
-	end
-	alias_method :week, :weeks
-
-	### Returns the number of seconds in <receiver> fortnights
-	def fortnights
-		return self * 2.weeks
-	end
-	alias_method :fortnight, :fortnights
-
-	### Returns the number of seconds in <receiver> months (approximate)
-	def months
-		return self * 30.days
-	end
-	alias_method :month, :months
-
-	### Returns the number of seconds in <receiver> years (approximate)
-	def years
-		return (self * 365.25.days).to_i
-	end
-	alias_method :year, :years
-
-
-	### Returns the Time <receiver> number of seconds before the 
-	### specified +time+. E.g., 2.hours.before( header.expiration )
-	def before( time )
-		return time - self
-	end
-	
-
-	### Returns the Time <receiver> number of seconds ago. (e.g., 
-	### expiration > 2.hours.ago )
-	def ago
-		return self.before( ::Time.now )
-	end
-
-
-	### Returns the Time <receiver> number of seconds after the given +time+.
-	### E.g., 10.minutes.after( header.expiration )
-	def after( time )
-		return time + self
-	end
-
-	# Reads best without arguments:  10.minutes.from_now
-	def from_now
-		return self.after( ::Time.now )
-	end
-end # module TimeConstantMethods
-
-
-# Extend Numeric with time constants
-class Numeric
-	include TimeConstantMethods
-end
-
 
 ### A erb-based RDoc HTML generator
 class Generators::DarkfishGenerator < Generators::XMLGenerator
@@ -434,4 +349,92 @@ end # Generators::DarkfishGenerator
 
 # Make an alias for Rdoc's silly generator lookup (which is probably my fault)
 Generators::DARKFISHGenerator = Generators::DarkfishGenerator
+
+
+# :stopdoc:
+
+### Time constants
+module TimeConstantMethods # :nodoc:
+	
+	### Number of seconds (returns receiver unmodified)
+	def seconds
+		return self
+	end
+	alias_method :second, :seconds
+
+	### Returns number of seconds in <receiver> minutes
+	def minutes
+		return self * 60
+	end
+	alias_method :minute, :minutes  
+
+	### Returns the number of seconds in <receiver> hours
+	def hours
+		return self * 60.minutes
+	end
+	alias_method :hour, :hours
+
+	### Returns the number of seconds in <receiver> days
+	def days
+		return self * 24.hours
+	end
+	alias_method :day, :days
+
+	### Return the number of seconds in <receiver> weeks
+	def weeks
+		return self * 7.days
+	end
+	alias_method :week, :weeks
+
+	### Returns the number of seconds in <receiver> fortnights
+	def fortnights
+		return self * 2.weeks
+	end
+	alias_method :fortnight, :fortnights
+
+	### Returns the number of seconds in <receiver> months (approximate)
+	def months
+		return self * 30.days
+	end
+	alias_method :month, :months
+
+	### Returns the number of seconds in <receiver> years (approximate)
+	def years
+		return (self * 365.25.days).to_i
+	end
+	alias_method :year, :years
+
+
+	### Returns the Time <receiver> number of seconds before the 
+	### specified +time+. E.g., 2.hours.before( header.expiration )
+	def before( time )
+		return time - self
+	end
+	
+
+	### Returns the Time <receiver> number of seconds ago. (e.g., 
+	### expiration > 2.hours.ago )
+	def ago
+		return self.before( ::Time.now )
+	end
+
+
+	### Returns the Time <receiver> number of seconds after the given +time+.
+	### E.g., 10.minutes.after( header.expiration )
+	def after( time )
+		return time + self
+	end
+
+	# Reads best without arguments:  10.minutes.from_now
+	def from_now
+		return self.after( ::Time.now )
+	end
+end # module TimeConstantMethods
+
+
+# Extend Numeric with time constants
+class Numeric
+	include TimeConstantMethods
+end
+
 

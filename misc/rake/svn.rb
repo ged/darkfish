@@ -202,7 +202,7 @@ namespace :svn do
 
 
 	desc "Check in all the changes in your current working copy"
-	task :checkin => ['svn:update', 'coverage:verify', COMMIT_MSG_FILE] do
+	task :checkin => ['svn:update', COMMIT_MSG_FILE] do
 		$deferr.puts File.read( COMMIT_MSG_FILE )
 		ask_for_confirmation( "Continue with checkin?" ) do
 			run 'svn', 'ci', '-F', COMMIT_MSG_FILE

@@ -1,11 +1,11 @@
 #!rake
 #
-# BlueCloth Rakefile
+# Darkfish Rdoc Rakefile
 #
 # Copyright (c) 2008, The FaerieMUD Consortium
 #
 # Authors:
-#  * Michael Granger <mgranger@laika.com>
+#  * Michael Granger <ged@FaerieMUD.org>
 #
 
 BEGIN {
@@ -21,9 +21,13 @@ BEGIN {
 
 require 'rubygems'
 require 'rake'
+require 'rake/rdoctask'
 require 'rake/packagetask'
 require 'rake/gempackagetask'
 require 'pathname'
+require 'rbconfig'
+
+include Config
 
 $dryrun = false
 
@@ -33,13 +37,15 @@ LIBDIR        = BASEDIR + 'lib'
 MISCDIR       = BASEDIR + 'misc'
 PKGDIR        = BASEDIR + 'pkg'
 
-TEXT_FILES    = %w( Rakefile README LICENSE ).
+TEXT_FILES    = %w( Rakefile README ).
 	collect {|filename| BASEDIR + filename }
 
 LIB_FILES     = Pathname.glob( LIBDIR + '**/*.rb').
 	delete_if {|item| item =~ /\.svn/ }
+SUPPORT_FILES = Pathname.glob( LIBDIR + '**/*.{css,png,js,rhtml}').
+	delete_if {|item| item =~ /\.svn/ }
 
-RELEASE_FILES = TEXT_FILES + LIB_FILES + SPEC_FILES
+RELEASE_FILES = TEXT_FILES + LIB_FILES + SUPPORT_FILES
 
 require MISCDIR + 'rake/helpers'
 
@@ -82,6 +88,26 @@ task :clean => [ :clobber_package ] do
 end
 
 
+
+### Task: rdoc
+Rake::RDocTask.new do |rdoc|
+	rdoc.rdoc_dir = 'rdoc'
+	rdoc.title    = "Darkfish Rdoc"
+
+	rdoc.options += [
+		'-w', '4',
+		'-SHN',
+		'-i', 'docs',
+		'-f', 'darkfish',
+		'-m', 'README',
+		'-W', 'http://deveiate.org/projects/Darkfish-Rdoc/browse/trunk/'
+	  ]
+	
+	rdoc.rdoc_files.include 'README'
+	rdoc.rdoc_files.include LIB_FILES.collect {|f| f.relative_path_from(BASEDIR).to_s }
+end
+
+
 ### Task: gem
 gemspec = Gem::Specification.new do |gem|
 	pkg_build = get_svn_rev( BASEDIR ) || 0
@@ -114,10 +140,10 @@ end
 ### Task: install
 desc "Install Darkfish as a conventional library"
 task :install do
-	log "Installing Darkfish as a convention library"
+	log "Installing Darkfish as a conventional library"
 	sitelib = Pathname.new( CONFIG['sitelibdir'] )
 	Dir.chdir( LIBDIR ) do
-		LIB_FILES.each do |libfile|
+		(LIB_FILES + SUPPORT_FILES).each do |libfile|
 			relpath = libfile.relative_path_from( LIBDIR )
 			target = sitelib + relpath
 			FileUtils.mkpath target.dirname,

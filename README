@@ -1,0 +1,94 @@
+= Darkfish Rdoc Generator =
+
+This is a complete replacement for the default HTML generator for Rdoc. 
+
+I created it with a few goals in mind:
+
+ * Replace the four-frame layout with three different indexes with a single-page, 
+   class/module-focused view.
+ * Clean up the default look a bit. I wrote what became the default look and feel for Rdoc, and I
+   wanted to update it to be a little more rounded, with some updated CSS and Javascript for modern
+   browsers.
+ * Add some of the nifty searching and index-on-the-side stuff I liked from the
+   modified Allison template (<URL:http://www.superalloy.nl/blog/?p=7>) Eloy Duran came up with.
+ * Implemented using ERB templates instead of Rdoc's constants-in-a-module style templating.
+ * Merge the stuff contained in the files view with the stuff in the class view. I never really
+   understood why Dave chose to separate the two.
+
+I think I mostly succeeded, and it's nice enough that I wanted to use it for all my documentation,
+and I thought you might want to, too. Or at least be able to tweak it to generate your own spiffy
+docs.
+
+It looks like this:
+
+  http://deveiate.org/darkfish_preview.png
+
+== Getting Started
+
+If you haven't installed it yet, you can install it via RubyGems:
+
+ $ sudo gem install darkfish-rdoc
+
+Or download the source and do:
+	
+ $ sudo rake install
+
+== Usage
+
+To use it, just specify that you want 'darkfish' output instead of the default when you run Rdoc:
+
+ $ rdoc -w 4 -SHN -f *darkfish* -m README README lib
+
+Or from a Rakefile:
+
+  ### Task: rdoc
+  require 'rake/rdoctask'
+  Rake::RDocTask.new do |rdoc|
+    rdoc.title    = "My Awesome SnoCone Library"
+  
+    rdoc.options += [
+        '-w', '4',
+        '-SHN',
+        '-f', 'darkfish',
+        '-m', 'README',
+      ]
+    
+    rdoc.rdoc_files.include 'README'
+    rdoc.rdoc_files.include 'lib/snocone.rb'
+  end
+  
+  
+That's it.
+
+== Feedback
+
+I'd be happy to have feedback via email <URL: mailto:ged at FaerieMUD dot org> or a ticket on 
+the project's Trac:
+
+  http://deveiate.org/projects/Darkfish-Rdoc/
+
+== License
+
+ Copyright (c) 2007, 2008, The FaerieMUD Consortium
+ All rights reserved.
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ 
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+ 
+
+
