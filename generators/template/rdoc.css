@@ -1,4 +1,7 @@
-/* @override http://localhost:3474/api/rdoc.css */
+/* @override 
+	http://localhost:3474/api/rdoc.css
+	http://gont.ljc.laika.com/arrow/rdoc.css
+*/
 
 /*
  * "Darkfish" Rdoc CSS
@@ -36,23 +39,13 @@ h1 {
 }
 h2,h3,h4 { margin-top: 1.5em; }
 
-a { color: #6C8C22; text-decoration: none; }
+a {
+	color: #6C8C22;
+	text-decoration: none;
+}
 a:hover {
  	border-bottom: 1px dotted #6C8C22;
 }
-
-p {
-	margin: 0.5em 0;
-}
-
-dt {
-	font-weight: bold;
-}
-dd + dt {
-	margin-top: 0.7em;
-}
-
-
 
 /* @group Generic Classes */
 
@@ -173,6 +166,18 @@ dl.svninfo {
 	margin: 0;
 }
 
+ul.link-list li {
+	white-space: nowrap;
+}
+ul.link-list .type {
+	font-size: 8px;
+	text-transform: uppercase;
+	color: white;
+	background: #969696;
+	padding: 2px 4px;
+	-webkit-border-radius: 5px;
+}
+
 /* @end */
 
 
@@ -227,10 +232,14 @@ dl.svninfo {
 
 #description dt {
 	padding: 2px 4px;
+	font-weight: bold;
 	background: #ddd;
 }
 #description dd {
 	padding: 2px 12px;
+}
+#description dd + dt {
+	margin-top: 0.7em;
 }
 
 
@@ -467,7 +476,7 @@ div.method-source-code pre { color: white; overflow: hidden; }
 	width:100%;
 }
 
-.TB_overlayMacFFBGHack {background: url(images/macFFBgHack.png) repeat;}
+.TB_overlayMacFFBGHack {background: url(macFFBgHack.png) repeat;}
 .TB_overlayBG {
 	background-color:#000;
 	filter:alpha(opacity=75);

@@ -130,10 +130,21 @@ end
 class Generators::DarkfishGenerator < Generators::XMLGenerator
 	include ERB::Util
 
+	# Subversion rev
+	SVNRev = %$Rev$
+	
+	# Subversion ID
+	SVNId = %$Id$
+
+	# Path to this file's parent directory. Used to find templates and other
+	# resources.
 	GENERATOR_DIR = Pathname.new( __FILE__ ).expand_path.dirname
+
+	# Darkfish Version
+	VERSION = '1.0.0'
 	
 
-	# Standard generator factory
+	### Standard generator factory method
 	def self::for( options )
 		new( options )
 	end
