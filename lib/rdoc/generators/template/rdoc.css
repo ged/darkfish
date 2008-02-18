@@ -1,6 +1,5 @@
 /* @override 
-	http://localhost:3474/api/rdoc.css
-	http://gont.ljc.laika.com/arrow/rdoc.css
+	http://localhost/darkfish/rdoc.css
 */
 
 /*
@@ -82,7 +81,10 @@ a:hover {
 body.indexpage {
 	margin: 1em 3em;
 }
-
+body.indexpage p,
+body.indexpage div {
+	margin: 1em 0;
+}
 
 .indexpage ul {
 	line-height: 160%;
@@ -94,10 +96,13 @@ body.indexpage {
 
 .indexpage li {
 	padding-left: 20px;
-	background: url(images/page_code.png) no-repeat left 4px;
+	background: url(images/bullet_black.png) no-repeat left 4px;
 }
 .indexpage li.module {
 	background: url(images/package.png) no-repeat left 4px;
+}
+.indexpage li.class {
+	background: url(images/ruby.png) no-repeat left 4px;
 }
 
 

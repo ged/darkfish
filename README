@@ -4,16 +4,13 @@ This is a complete replacement for the default HTML generator for Rdoc.
 
 I created it with a few goals in mind:
 
- * Replace the four-frame layout with three different indexes with a single-page, 
-   class/module-focused view.
- * Clean up the default look a bit. I wrote what became the default look and feel for Rdoc, and I
-   wanted to update it to be a little more rounded, with some updated CSS and Javascript for modern
-   browsers.
- * Add some of the nifty searching and index-on-the-side stuff I liked from the
-   modified Allison template (<URL:http://www.superalloy.nl/blog/?p=7>) Eloy Duran came up with.
- * Implemented using ERB templates instead of Rdoc's constants-in-a-module style templating.
- * Merge the stuff contained in the files view with the stuff in the class view. I never really
-   understood why Dave chose to separate the two.
+* Replace the four-frame layout with three different indexes with a single-page, 
+  class/module-focused view.
+* I helped write what became the default look and feel for Rdoc, but it's starting to show its age.
+  I wanted to update it with new CSS and Javascript for modern browsers.
+* Add some of the nifty searching and index-on-the-side stuff I liked from the
+  modified Allison template (<URL:http://www.superalloy.nl/blog/?p=7>) Eloy Duran came up with.
+* Implemented using ERB templates instead of Rdoc's constants-in-a-module style templating.
 
 I think I mostly succeeded, and it's nice enough that I wanted to use it for all my documentation,
 and I thought you might want to, too. Or at least be able to tweak it to generate your own spiffy
