@@ -108,6 +108,7 @@
 				<h3 class="section-header">Namespace</h3>
 				<ul class="link-list">
 					<% classinfo['sections'].first['classlist'].each do |desc| %>
+					<!-- Desc is: <%= desc.inspect %> -->
 					<li><%= desc.sub(/^(\w+)/, %Q{<span class="type">\\1</span>}) %></li>
 					<% end %>
 				</ul>

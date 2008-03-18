@@ -128,8 +128,8 @@ namespace :svn do
 	task :tag do
 		svninfo   = get_svn_info()
 		tag       = make_new_tag()
-		svntrunk  = svninfo['Repository Root'] + '/thingfish/trunk'
-		svntagdir = svninfo['Repository Root'] + '/thingfish/tags'
+		svntrunk  = svninfo['Repository Root'] + '/trunk'
+		svntagdir = svninfo['Repository Root'] + '/tags'
 		svntag    = svntagdir + '/' + tag
 
 		desc = "Tagging trunk as #{svntag}"
@@ -145,7 +145,7 @@ namespace :svn do
 		last_tag    = get_latest_svn_timestamp_tag()
 		svninfo     = get_svn_info()
 		release     = PKG_VERSION
-		svnrel      = svninfo['Repository Root'] + '/thingfish/releases'
+		svnrel      = svninfo['Repository Root'] + '/releases'
 		svnrelease  = svnrel + '/' + release
 
 		if last_tag.nil?

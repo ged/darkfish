@@ -68,7 +68,7 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 	### Initialize a few instance variables before we start
 	def initialize( *args )
 		@template = nil
-		@template_dir = GENERATOR_DIR + 'template'
+		@template_dir = GENERATOR_DIR + 'template/darkfish'
 		
 		@files      = []
 		@classes    = []
@@ -77,6 +77,13 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 		@basedir = Pathname.pwd.expand_path
 
 		super
+	end
+	
+	
+	### Output progress information if debugging is enabled
+	def debug_msg( *msg )
+		return unless $DEBUG
+		$stderr.puts( *msg )
 	end
 	
 	
@@ -90,10 +97,10 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 	### Copy over the stylesheet into the appropriate place in the
 	### output directory.
 	def write_style_sheet
-		$stderr.puts "Copying over static files"
+		debug_msg "Copying over static files"
 		staticfiles = %w[rdoc.css js images]
 		staticfiles.each do |path|
-			FileUtils.cp_r( @template_dir + path, '.', :verbose => true )
+			FileUtils.cp_r( @template_dir + path, '.', :verbose => $DEBUG )
 		end
 	end
 	
@@ -119,7 +126,7 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 		generate_xhtml( @options, @files, @classes )
 
 	rescue StandardError => err
-		$stderr.puts "%s: %s\n  %s" % [ err.class.name, err.message, err.backtrace.join("\n  ") ]
+		debug_msg "%s: %s\n  %s" % [ err.class.name, err.message, err.backtrace.join("\n  ") ]
 	end
 
 
@@ -197,7 +204,7 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 	### Generate an index page which lists all the classes which
 	### are documented.
 	def generate_index( options, files, classes )
-		$stderr.puts "Rendering the index page..."
+		debug_msg "Rendering the index page..."
 
 		templatefile = @template_dir + 'index.rhtml'
 		template_src = templatefile.read
@@ -219,12 +226,12 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 
 		outfile = @basedir + @options.op_dir + 'index.html'
 		unless $dryrun
-			$stderr.puts "Outputting to %s" % [outfile.expand_path]
+			debug_msg "Outputting to %s" % [outfile.expand_path]
 			outfile.open( 'w', 0644 ) do |fh|
 				fh.print( output )
 			end
 		else
-			$stderr.puts "Would have output to %s" % [outfile.expand_path]
+			debug_msg "Would have output to %s" % [outfile.expand_path]
 		end
 	end
 
@@ -233,14 +240,14 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 	### Generate a documentation file for each class present in the
 	### given hash of +classes+.
 	def generate_class_files( options, files, classes )
-		$stderr.puts "Generating class documentation"
+		debug_msg "Generating class documentation"
 		templatefile = @template_dir + 'classpage.rhtml'
 		outputdir = @outputdir
 
 		modsort = self.get_sorted_module_list( classes )
 
 		classes.sort_by {|k,v| k }.each do |classname, classinfo|
-			$stderr.puts "  working on %s (%s)" % [ classname, classinfo[:outfile] ]
+			debug_msg "  working on %s (%s)" % [ classname, classinfo[:outfile] ]
 			outfile    = outputdir + classinfo[:outfile]
 			rel_prefix = outputdir.relative_path_from( outfile.dirname )
 			svninfo    = self.get_svninfo( classinfo )
@@ -253,11 +260,11 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 	### Generate a documentation file for each file present in the
 	### given hash of +files+.
 	def generate_file_files( options, files, classes )
-		$stderr.puts "Generating file documentation"
+		debug_msg "Generating file documentation"
 		templatefile = @template_dir + 'filepage.rhtml'
 
 		files.sort_by {|k,v| k }.each do |path, fileinfo|
-			$stderr.puts "  working on %s (%s)" % [ path, fileinfo[:outfile] ]
+			debug_msg "  working on %s (%s)" % [ path, fileinfo[:outfile] ]
 			outfile     = @outputdir + fileinfo[:outfile]
 			rel_prefix  = @outputdir.relative_path_from( outfile.dirname )
 			context     = binding()
@@ -340,7 +347,7 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 				ofh.print( output )
 			end
 		else
-			$stderr.puts "  would have written %d bytes to %s" %
+			debug_msg "  would have written %d bytes to %s" %
 			[ output.length, outfile ]
 		end
 	end
