@@ -240,7 +240,7 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 	### Generate a documentation file for each class present in the
 	### given hash of +classes+.
 	def generate_class_files( options, files, classes )
-		debug_msg "Generating class documentation"
+		debug_msg "Generating class documentation in #@outputdir"
 		templatefile = @template_dir + 'classpage.rhtml'
 		outputdir = @outputdir
 
@@ -260,15 +260,16 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 	### Generate a documentation file for each file present in the
 	### given hash of +files+.
 	def generate_file_files( options, files, classes )
-		debug_msg "Generating file documentation"
+		debug_msg "Generating file documentation in #@outputdir"
 		templatefile = @template_dir + 'filepage.rhtml'
 
 		files.sort_by {|k,v| k }.each do |path, fileinfo|
-			debug_msg "  working on %s (%s)" % [ path, fileinfo[:outfile] ]
 			outfile     = @outputdir + fileinfo[:outfile]
+			debug_msg "  working on %s (%s)" % [ path, outfile ]
 			rel_prefix  = @outputdir.relative_path_from( outfile.dirname )
 			context     = binding()
 
+			debug_msg "  rending #{outfile}"
 			self.render_template( templatefile, binding(), outfile )
 		end
 	end
