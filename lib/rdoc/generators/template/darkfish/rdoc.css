@@ -1,5 +1,6 @@
 /* @override 
 	http://localhost/darkfish/rdoc.css
+	http://gont.ljc.laika.com:3474/manual/api/rdoc.css
 */
 
 /*
@@ -46,6 +47,12 @@ a:hover {
  	border-bottom: 1px dotted #6C8C22;
 }
 
+pre {
+	background: #ddd;
+	padding: 0.5em 0;
+}
+
+
 /* @group Generic Classes */
 
 .quicksearch-field {
@@ -61,10 +68,10 @@ a:hover {
 
 .missing-docs {
 	font-size: 120%;
-	background: #d00 url(images/wrench_orange.png) no-repeat 4px center;
-	color: white;
+	background: white url(images/wrench_orange.png) no-repeat 4px center;
+	color: #ccc;
 	line-height: 2em;
-	text-shadow: #151515 2px 2px 1px;
+	border: 1px solid #d00;
 	opacity: 1;
 	padding-left: 20px;
 	text-indent: 24px;
@@ -72,6 +79,13 @@ a:hover {
 	font-weight: bold;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+}
+
+.target-section {
+	border: 2px solid #dcce90;
+	border-left-width: 8px;
+	padding: 0 1em;
+	background: #fff3c2;
 }
 
 /* @end */
@@ -225,8 +239,19 @@ ul.link-list .type {
 
 /* @group Documentation Section */
 #description {
-	font-size: 115%;
+	font-size: 100%;
 	color: #333;
+}
+
+#description p {
+	margin: 1em 0.4em;
+}
+
+#description ul {
+	margin-left: 2em;
+}
+#description ul li {
+	line-height: 1.4em;
 }
 
 #description dl {
@@ -377,7 +402,12 @@ div.method-source-code {
     overflow: hidden;
 }
 
-div.method-source-code pre { color: white; overflow: hidden; }
+div.method-source-code pre {
+	background: inherit;
+	padding: 0;
+	color: white;
+	overflow: hidden;
+}
 
 /* @group Ruby keyword styles */
 

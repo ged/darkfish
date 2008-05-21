@@ -26,6 +26,8 @@ require 'rake/packagetask'
 require 'rake/gempackagetask'
 require 'pathname'
 require 'rbconfig'
+require 'rdoc/generators/darkfish_generator'
+
 
 include Config
 
@@ -57,8 +59,6 @@ RELEASE_NAME  = "REL #{PKG_VERSION}"
 RDOC_OPTIONS = [
 	'-w', '4',
 	'-SHN',
-	'-i', 'docs',
-	'-f', 'darkfish',
 	'-m', 'README',
 	'-W', 'http://deveiate.org/projects/Darkfish-Rdoc/browser/trunk/'
   ]
@@ -97,13 +97,13 @@ end
 
 ### Task: rdoc
 Rake::RDocTask.new do |rdoc|
-	rdoc.rdoc_dir = 'rdoc'
-	rdoc.title    = "Darkfish Rdoc"
+	rdoc.title    = "%s - %s" % [ PKG_NAME, PKG_VERSION ]
 
 	rdoc.options += RDOC_OPTIONS
+	rdoc.options += [ '-f', 'darkfish' ]
 	
 	rdoc.rdoc_files.include 'README'
-	rdoc.rdoc_files.include LIB_FILES
+	rdoc.rdoc_files.include LIB_FILES.collect {|path| path.to_s }
 end
 
 

@@ -45,9 +45,19 @@
 			});
 		};
 
+		function highlightTarget() {
+			if ( ! window.location.hash || window.location.hash.length == 0 ) return;
+			
+			var anchor = window.location.hash.substring(1);
+			$("a[name=" + anchor + "]").each( function() {
+				$(this).parent().wrap( '<div class="target-section"></div>' );
+			});
+		};
+
 		$(document).ready( function() {
 			hookSourceViews();
 			hookQuickSearch();
+			highlightTarget();
 		});
 	</script>
 
@@ -121,7 +131,8 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					<% classinfo['methods'].each do |meth| %>
-					<li><a href="<%= meth['aref'] %>"><%= meth['name'] %></a></li>
+					<li><a href="#<%= meth['name'] %>"><%= meth['name']
+					 	%></a></li>
 					<% end %>
 				</ul>
 			</div>
@@ -184,7 +195,7 @@
 			<h3 class="section-header">Constants</h3>
 			<dl>
 			<% classinfo['sections'].first['constants'].each do |const| %>
-				<dt><%= const['name'] %></dt>
+				<dt><a name="<%= const['name'] %>"><%= const['name'] %></a></dt>
 				<% if const['desc'] %>
 				<dd class="description"><%= const['desc'].strip %></dd>
 				<% else %>
@@ -202,6 +213,10 @@
 
 			<% classinfo['sections'].first['attributes'].each do |attrib| %>
 			<div id="<%= attrib['name'].downcase.gsub(/[^a-z]+/, '-') %>-attribute-method" class="method-detail">
+				<a name="<%= attrib['name'] %>"></a>
+				<% if attrib['rw'] =~ /w/i %>
+				<a name="<%= attrib['name'] %>="></a>
+				<% end %>
 				<div class="method-heading attribute-method-heading">
 					<span class="method-name"><%= h attrib['name'] %></span><span 
 						class="attribute-access-type">[<%= attrib['rw'] %>]</span>
@@ -227,11 +242,11 @@
 
 			<% methodlist['methods'].each do |methodinfo| %>
 			<% if methodinfo['m_desc'] =~ /Alias for/ %>
-			<div id="method-<%= methodinfo['aref'] %>" class="method-detail method-alias">
+			<div id="<%= methodinfo['name'].gsub( /[^a-z]+/, '-' ) %>-method" class="method-detail method-alias">
 			<% else %>
-			<div id="method-<%= methodinfo['aref'] %>" class="method-detail">
+			<div id="<%= methodinfo['name'].gsub( /[^a-z]+/, '-' ) %>-method" class="method-detail">
 			<% end %>
-				<a name="<%= methodinfo['aref'] %>"></a>
+				<a name="<%= methodinfo['name'] %>"></a>
 
 				<div class="method-heading">
 					<span class="method-name"><%= methodinfo['name'] %></span><span 
@@ -247,7 +262,8 @@
 					<% end %>
 					
 					<% if methodinfo['sourcecode'] %>
-	          		<div class="method-source-code" id="<%= methodinfo['aref'] %>-source">
+	          		<div class="method-source-code" 
+						id="<%= methodinfo['name'].gsub( /[^a-z]+/, '-' ) %>-source">
 <pre>
 <%= methodinfo['sourcecode'] %>
 </pre>

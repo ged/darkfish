@@ -36,9 +36,7 @@ require 'fileutils'
 require 'erb'
 require 'yaml'
 
-require 'rdoc/options'
-require 'rdoc/markup/simple_markup'
-require 'rdoc/markup/simple_markup/to_html'
+require 'rdoc/rdoc'
 require 'rdoc/generators/xml_generator'
 
 ### A erb-based RDoc HTML generator
