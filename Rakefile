@@ -26,7 +26,7 @@ require 'rake/packagetask'
 require 'rake/gempackagetask'
 require 'pathname'
 require 'rbconfig'
-require 'rdoc/generators/darkfish_generator'
+require 'rdoc/generator/darkfish_generator'
 
 
 include Config
@@ -50,7 +50,7 @@ require MISCDIR + 'rake/helpers'
 ### Package constants
 PKG_NAME      = 'darkfish-rdoc'
 PKG_VERSION   = find_pattern_in_file( /VERSION = '(\d+\.\d+\.\d+)'/, 
-	LIBDIR + 'rdoc/generators/darkfish_generator.rb' ).first
+	LIBDIR + 'rdoc/generator/darkfish_generator.rb' ).first
 PKG_FILE_NAME = "#{PKG_NAME}-#{PKG_VERSION}"
 
 RELEASE_NAME  = "REL #{PKG_VERSION}"

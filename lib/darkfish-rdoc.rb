@@ -14,7 +14,7 @@ begin
 		:DarkfishGenerator,
 		'darkfish'
 	  )
-	RDoc::RDoc::GENERATORS[ 'darkfish' ] = GENERATOR
+	RDoc::RDoc::GENERATORS[ 'darkfish' ] = generator
 end
 
 
