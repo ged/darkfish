@@ -6,7 +6,7 @@ require 'pathname'
 require 'rdoc/rdoc'
 
 begin
-	generator_dir = Pathname.new( __FILE__ ).dirname + 'rdoc/generators'
+	generator_dir = Pathname.new( __FILE__ ).dirname + 'rdoc/generator'
 
 	# Add the darkfish generator to the ones RDoc knows about
 	generator = RDoc::RDoc::Generator.new(
