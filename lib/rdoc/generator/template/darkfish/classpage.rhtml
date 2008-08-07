@@ -15,49 +15,15 @@
 		charset="utf-8"></script>
 	<script src="<%= rel_prefix %>/js/quicksearch.js" type="text/javascript" 
 		charset="utf-8"></script>
+	<script src="<%= rel_prefix %>/js/darkfish.js" type="text/javascript" 
+		charset="utf-8"></script>
 
 	<script type="text/javascript" charset="utf-8">
-		var timeout = null;
-	
-		function showSource( e ) {
-			var target = e.target;
-			var codeSections = $(target).
-				parents('.method-detail').
-				find('.method-source-code');
-
-			$(target).
-				parents('.method-detail').
-				find('.method-source-code').
-				slideToggle();
-		};
-
-		function hookSourceViews() {
-			$('.method-description,.method-heading').click( showSource );
-		};
-
-		function hookQuickSearch() {
-			$('.quicksearch-field').each( function() {
-				var searchElems = $(this).parents('.section').find( 'li' );
-				$(this).quicksearch( this, searchElems, {
-					noSearchResultsIndicator: 'no-class-search-results',
-					focusOnLoad: false
-				});
-			});
-		};
-
-		function highlightTarget() {
-			if ( ! window.location.hash || window.location.hash.length == 0 ) return;
-			
-			var anchor = window.location.hash.substring(1);
-			$("a[name=" + anchor + "]").each( function() {
-				$(this).parent().wrap( '<div class="target-section"></div>' );
-			});
-		};
-
 		$(document).ready( function() {
 			hookSourceViews();
 			hookQuickSearch();
 			highlightTarget();
+			$(document).bind("scroll", highlightTarget );
 		});
 	</script>
 
@@ -298,11 +264,11 @@
 	<% end %>
 	</div>
 
-<div id="validator-badges">
-  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-  <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish 
-	Rdoc Generator</a></small>.</p>
-</div>
+	<div id="validator-badges">
+	  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+	  <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish 
+		Rdoc Generator</a></small>.</p>
+	</div>
 
 </body>
 </html>

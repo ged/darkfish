@@ -1,0 +1,4 @@
+
+task :coverage do
+	 trace "No coverage generated"
+end

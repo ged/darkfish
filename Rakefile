@@ -1,8 +1,10 @@
 #!rake
 #
-# Darkfish Rdoc Rakefile
+# Darkfish-Rdoc rakefile
 #
-# Copyright (c) 2008, The FaerieMUD Consortium
+# Based on various other Rakefiles, especially one by Ben Bleything
+#
+# Copyright (c) 2008 The FaerieMUD Consortium
 #
 # Authors:
 #  * Michael Granger <ged@FaerieMUD.org>
@@ -11,203 +13,217 @@
 BEGIN {
 	require 'pathname'
 	basedir = Pathname.new( __FILE__ ).dirname
-	libdir = basedir + 'lib'
-	docsdir = basedir + 'docs'
+
+	libdir = basedir + "lib"
+	extdir = basedir + "ext"
 
 	$LOAD_PATH.unshift( libdir.to_s ) unless $LOAD_PATH.include?( libdir.to_s )
-	$LOAD_PATH.unshift( docsdir.to_s ) unless $LOAD_PATH.include?( docsdir.to_s )
+	$LOAD_PATH.unshift( extdir.to_s ) unless $LOAD_PATH.include?( extdir.to_s )
 }
 
 
+require 'rbconfig'
 require 'rubygems'
 require 'rake'
 require 'rake/rdoctask'
+require 'rake/testtask'
 require 'rake/packagetask'
-require 'rake/gempackagetask'
-require 'pathname'
-require 'rbconfig'
-require 'rdoc/generator/darkfish_generator'
-
-
-include Config
+require 'rake/clean'
 
 $dryrun = false
 
-# Pathname constants
-BASEDIR       = Pathname.new( __FILE__ ).dirname.relative_path_from( Pathname.pwd )
+### Config constants
+BASEDIR       = Pathname.new( __FILE__ ).dirname.relative_path_from( Pathname.getwd )
 LIBDIR        = BASEDIR + 'lib'
-MISCDIR       = BASEDIR + 'misc'
+EXTDIR        = BASEDIR + 'ext'
+DOCSDIR       = BASEDIR + 'docs'
 PKGDIR        = BASEDIR + 'pkg'
+RAKE_TASKDIR  = BASEDIR + 'rake'
 
-TEXT_FILES    = Pathname.glob( BASEDIR + '{Rakefile,README}' )
-LIB_FILES     = Pathname.glob( LIBDIR + '**/*.rb' )
-SUPPORT_FILES = Pathname.glob( LIBDIR + '**/*.{css,png,js,rhtml}' )
+TASKLIBS      = Pathname.glob( RAKE_TASKDIR + '*.rb' )
 
-RELEASE_FILES = TEXT_FILES + LIB_FILES + SUPPORT_FILES
-
-require MISCDIR + 'rake/helpers'
-
-### Package constants
 PKG_NAME      = 'darkfish-rdoc'
-PKG_VERSION   = find_pattern_in_file( /VERSION = '(\d+\.\d+\.\d+)'/, 
-	LIBDIR + 'rdoc/generator/darkfish_generator.rb' ).first
-PKG_FILE_NAME = "#{PKG_NAME}-#{PKG_VERSION}"
+PKG_SUMMARY   = 'A pretty (different) Rdoc HTML generator'
+VERSION_FILE  = LIBDIR + 'darkfish-rdoc.rb'
+PKG_VERSION   = VERSION_FILE.read[ /VERSION = '(\d+\.\d+\.\d+)'/, 1 ]
+PKG_FILE_NAME = "#{PKG_NAME.downcase}-#{PKG_VERSION}"
+GEM_FILE_NAME = "#{PKG_FILE_NAME}.gem"
 
-RELEASE_NAME  = "REL #{PKG_VERSION}"
+RELEASE_NAME  = "RELEASE_#{PKG_VERSION.gsub(/\./, '_')}"
+
+ARTIFACTS_DIR = Pathname.new( ENV['CC_BUILD_ARTIFACTS'] || 'artifacts' )
+
+TEXT_FILES    = %w( Rakefile ChangeLog README LICENSE ).collect {|filename| BASEDIR + filename }
+LIB_FILES     = Pathname.glob( LIBDIR + '**/*.rb' ).delete_if {|item| item =~ /\.svn/ }
+EXT_FILES     = Pathname.glob( EXTDIR + '**/*.{c,h,rb}' ).delete_if {|item| item =~ /\.svn/ }
+
+SPECDIR       = BASEDIR + 'spec'
+SPEC_FILES    = Pathname.glob( SPECDIR + '**/*_spec.rb' ).delete_if {|item| item =~ /\.svn/ }
+
+TESTDIR       = BASEDIR + 'tests'
+TEST_FILES    = Pathname.glob( TESTDIR + '**/*.tests.rb' ).delete_if {|item| item =~ /\.svn/ }
+
+RELEASE_FILES = TEXT_FILES + SPEC_FILES + TEST_FILES + LIB_FILES + EXT_FILES
+
+COVERAGE_MINIMUM = ENV['COVERAGE_MINIMUM'] ? Float( ENV['COVERAGE_MINIMUM'] ) : 85.0
+RCOV_EXCLUDES = 'spec,tests,/Library/Ruby,/var/lib,/usr/local/lib'
+RCOV_OPTS = [
+	'--exclude', RCOV_EXCLUDES,
+	'--xrefs',
+	'--save',
+	'--callsites',
+	#'--aggregate', 'coverage.data' # <- doesn't work as of 0.8.1.2.0
+  ]
 
 
+# Subversion constants -- directory names for releases and tags
+SVN_TRUNK_DIR    = 'trunk'
+SVN_RELEASES_DIR = 'releases'
+SVN_BRANCHES_DIR = 'branches'
+SVN_TAGS_DIR     = 'tags'
+
+SVN_DOTDIR       = BASEDIR + '.svn'
+SVN_ENTRIES      = SVN_DOTDIR + 'entries'
+
+
+### Load some task libraries that need to be loaded early
+require RAKE_TASKDIR + 'helpers.rb'
+require RAKE_TASKDIR + 'svn.rb'
+require RAKE_TASKDIR + 'verifytask.rb'
+
+# Define some constants that depend on the 'svn' tasklib
+PKG_BUILD = get_svn_rev( BASEDIR ) || 0
+SNAPSHOT_PKG_NAME = "#{PKG_FILE_NAME}.#{PKG_BUILD}"
+SNAPSHOT_GEM_NAME = "#{SNAPSHOT_PKG_NAME}.gem"
+
+# Documentation constants
 RDOC_OPTIONS = [
 	'-w', '4',
 	'-SHN',
+	'-i', '.',
 	'-m', 'README',
-	'-W', 'http://deveiate.org/projects/Darkfish-Rdoc/browser/trunk/'
+	'-W', 'http://deveiate.org/projects/Darkfish-Rdoc//browser/trunk/'
   ]
 
-# Load task plugins
-RAKE_TASKDIR = MISCDIR + 'rake'
-Pathname.glob( RAKE_TASKDIR + '*.rb' ).each do |tasklib|
-	next if tasklib =~ %r{/helpers.rb$}
-	require tasklib
+# Release constants
+SMTP_HOST = 'mail.faeriemud.org'
+SMTP_PORT = 465 # SMTP + SSL
+
+# Project constants
+PROJECT_HOST = 'deveiate.org'
+PROJECT_PUBDIR = "/usr/local/www/public/code"
+PROJECT_DOCDIR = "#{PROJECT_PUBDIR}/#{PKG_NAME}"
+PROJECT_SCPURL = "#{PROJECT_HOST}:#{PROJECT_DOCDIR}"
+
+# Gem dependencies: gemname => version
+DEPENDENCIES = {
+	'rdoc: >= 2.1.0' => '',
+}
+
+# Non-gem requirements: packagename => version
+REQUIREMENTS = {
+}
+
+# RubyGem specification
+GEMSPEC   = Gem::Specification.new do |gem|
+	gem.name              = PKG_NAME.downcase
+	gem.version           = PKG_VERSION
+
+	gem.summary           = PKG_SUMMARY
+	gem.description       = <<-EOD
+	A complete replacement for the default HTML generator for Rdoc, the
+	API documentation-extraction system for Ruby. 
+	EOD
+
+	gem.authors           = 'Michael Granger'
+	gem.email             = 'ged@FaerieMUD.org'
+	gem.homepage          = 'http://deveiate.org/projects/Darkfish-Rdoc/'
+	gem.rubyforge_project = 'deveiate'
+
+	gem.has_rdoc          = true
+	gem.rdoc_options      = RDOC_OPTIONS
+
+	DEPENDENCIES.each do |name, version|
+		version = '>= 0' if version.length.zero?
+		gem.add_dependency( name, version )
+	end
+	
+	REQUIREMENTS.each do |name, version|
+		gem.requirements << [ name, version ].compact.join(' ')
+	end
 end
 
-if Rake.application.options.trace
-	$trace = true
-	log "$trace is enabled"
+$trace = Rake.application.options.trace ? true : false
+$dryrun = Rake.application.options.dryrun ? true : false
+
+# Load any remaining task libraries
+TASKLIBS.each do |tasklib|
+	RELEASE_FILES << tasklib
+
+	next if tasklib =~ %r{/(helpers|svn|verifytask|packaging)\.rb$}
+	begin
+		require tasklib
+	rescue ScriptError => err
+		fail "Task library '%s' failed to load: %s: %s" %
+			[ tasklib, err.class.name, err.message ]
+		trace "Backtrace: \n  " + err.backtrace.join( "\n  " )
+	rescue => err
+		log "Task library '%s' failed to load: %s: %s. Some tasks may not be available." %
+			[ tasklib, err.class.name, err.message ]
+		trace "Backtrace: \n  " + err.backtrace.join( "\n  " )
+	end
 end
 
-if Rake.application.options.dryrun
-	$dryrun = true
-	log "$dryrun is enabled"
-	Rake.application.options.dryrun = false
+# Load any project-specific rules defined in 'Rakefile.local' if it exists
+LOCAL_RAKEFILE = BASEDIR + 'Rakefile.local'
+if LOCAL_RAKEFILE.exist?
+	import LOCAL_RAKEFILE 
+	RELEASE_FILES << LOCAL_RAKEFILE
 end
+
+
+# Now load the packaging task now that all the files are 
+require RAKE_TASKDIR + 'packaging.rb'
+
+
+#####################################################################
+###	T A S K S 	
+#####################################################################
 
 ### Default task
-task :default  => [:clean, :package]
+task :default  => [:clean, :spec, :rdoc, :package]
 
 
 ### Task: clean
-desc "Clean pkg, coverage, and rdoc; remove .bak files"
-task :clean => [ :clobber_package ] do
-	files = FileList['**/*.bak']
-	files.clear_exclude
-	File.rm( files ) unless files.empty?
-end
+CLEAN.include 'coverage'
+CLOBBER.include 'artifacts', 'coverage.info', PKGDIR
 
+# Target to hinge on ChangeLog updates
+file SVN_ENTRIES
 
+### Task: changelog
+file 'ChangeLog' => SVN_ENTRIES.to_s do |task|
+	log "Updating #{task.name}"
 
-### Task: rdoc
-Rake::RDocTask.new do |rdoc|
-	rdoc.title    = "%s - %s" % [ PKG_NAME, PKG_VERSION ]
-
-	rdoc.options += RDOC_OPTIONS
-	rdoc.options += [ '-f', 'darkfish' ]
-	
-	rdoc.rdoc_files.include 'README'
-	rdoc.rdoc_files.include LIB_FILES.collect {|path| path.to_s }
-end
-
-
-### Task: gem
-GEMSPEC = Gem::Specification.new do |gem|
-	pkg_build = get_svn_rev( BASEDIR ) || 0
-	
-	gem.name    	= PKG_NAME
-	gem.version 	= PKG_VERSION
-
-	gem.summary     = "an alternative Ruby documentation look and feel"
-	gem.description = <<-EOD
-	This an alternative HTML generator library for RDoc that generates a single-frame,
-	javascript-enhanced view of your Ruby classes, with an emphasis on clean lines
-	and customizability via CSS. 
-	EOD
-
-	gem.authors  	= "Michael Granger"
-	gem.email  	    = "ged@FaerieMUD.org"
-	gem.homepage 	= "http://deveiate.org/projects/Darkfish-Rdoc/"
-
-	gem.has_rdoc 	= true
-	gem.extra_rdoc_files << 'README'
-	gem.rdoc_options += RDOC_OPTIONS
-	
-	gem.rubyforge_project = 'deveiate'
-
-	gem.files      	= RELEASE_FILES.
-		collect {|f| f.relative_path_from(BASEDIR).to_s }
-end
-
-GEMFILE = PKGDIR + "#{PKG_NAME}-#{PKG_VERSION}.gem"
-
-directory PKGDIR.to_s
-file GEMFILE.to_s => [PKGDIR.to_s] + GEMSPEC.files do
-	when_writing( "Creating GEM" ) do
-		gem_file = Gem::Builder.new( GEMSPEC ).build
-		verbose(true) do
-			mv gem_file, GEMFILE
-		end
-	end
-end
-
-task :gem => GEMFILE.to_s
-
-
-### Task: package
-Rake::PackageTask.new( PKG_NAME, PKG_VERSION ) do |task|
-	task.package_files = RELEASE_FILES
-	task.need_tar = false
-	task.need_tar_gz = true
-	task.need_tar_bz2 = true
-	task.need_zip = true
-end
-task :package => [ :gem ]
-
-
-### Task: install
-desc "Install Darkfish as a conventional library"
-task :install do
-	sitelib = Pathname.new( CONFIG['sitelibdir'] )
-	log "Installing Darkfish in #{sitelib}"
-	Dir.chdir( LIBDIR ) do
-		(LIB_FILES + SUPPORT_FILES).each do |libfile|
-			relpath = libfile.relative_path_from( LIBDIR )
-			target = sitelib + relpath
-			when_writing( "Copying..." ) do
-				FileUtils.mkpath target.dirname,
-					:mode => 0755, :verbose => true, :noop => $dryrun unless target.dirname.directory?
-				FileUtils.install relpath, target,
-					:mode => 0644, :verbose => true, :noop => $dryrun
-			end
-		end
-	end
-end
-
-desc "Uninstall Darkfish installed as a conventional library"
-task :uninstall do
-	sitelib = Pathname.new( CONFIG['sitelibdir'] )
-	log "Uninstalling Darkfish from #{sitelib}"
-	generator_dir = sitelib + 'rdoc/generators'
-	generator     = generator_dir + 'darkfish_generator.rb'
-	generator_lib = generator_dir + 'template/darkfish'
-
-	when_writing( "Uninstalling" ) do
-		verbose( true ) do
-			FileUtils.rm_f( generator )
-			FileUtils.rm_rf( generator_lib )
-		end
+	changelog = make_svn_changelog()
+	File.open( task.name, 'w' ) do |fh|
+		fh.print( changelog )
 	end
 end
 
 
-### Task: install
-task :install_gem => [:package] do
-	$stderr.puts 
-	installer = Gem::Installer.new( %{pkg/#{PKG_FILE_NAME}.gem} )
-	installer.install
-end
-
-### Task: uninstall
-task :uninstall_gem => [:clean] do
-	uninstaller = Gem::Uninstaller.new( PKG_FILE_NAME )
-	uninstaller.uninstall
+### Task: cruise (Cruisecontrol task)
+desc "Cruisecontrol build"
+task :cruise => [:clean, :spec, :package] do |task|
+	raise "Artifacts dir not set." if ARTIFACTS_DIR.to_s.empty?
+	artifact_dir = ARTIFACTS_DIR.cleanpath
+	artifact_dir.mkpath
+	
+	$stderr.puts "Copying coverage stats..."
+	FileUtils.cp_r( 'coverage', artifact_dir )
+	
+	$stderr.puts "Copying packages..."
+	FileUtils.cp_r( FileList['pkg/*'].to_a, artifact_dir )
 end
 
 

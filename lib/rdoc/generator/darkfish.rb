@@ -1,6 +1,6 @@
 #!ruby
 #
-#  Darkfish Rdoc HTML Generator
+#  Darkfish RDoc HTML Generator
 #  $Id$
 #
 #  Author: Michael Granger <ged@FaerieMUD.org>
@@ -30,6 +30,9 @@
 #  
 
 
+require 'rubygems'
+gem 'rdoc', '>= 2.0.0'
+
 require 'pp'
 require 'pathname'
 require 'fileutils'
@@ -37,10 +40,11 @@ require 'erb'
 require 'yaml'
 
 require 'rdoc/rdoc'
-require 'rdoc/generators/xml_generator'
+require 'rdoc/generator/xml'
+require 'rdoc/generator/html'
 
 ### A erb-based RDoc HTML generator
-class Generators::DarkfishGenerator < Generators::XMLGenerator
+class RDoc::Generator::Darkfish < RDoc::Generator::XML
 	include ERB::Util
 
 	# Subversion rev
@@ -53,8 +57,8 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 	# resources.
 	GENERATOR_DIR = Pathname.new( __FILE__ ).expand_path.dirname
 
-	# Darkfish Version
-	VERSION = '1.0.0'
+	# Darkfish Version (update this in )
+	VERSION = '1.1.1'
 	
 
 	### Standard generator factory method
@@ -109,32 +113,13 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 	### the extracted information. 
 	def generate( toplevels )
 		@outputdir = Pathname.new( @options.op_dir ).expand_path( @basedir )
-
-		# Build file documentation
-		toplevels.each do |toplevel|
-			@files << Generators::HtmlFile.new( toplevel, @options, Generators::FILE_DIR )
-		end
-
-		# Build class documentation
-		RDoc::TopLevel.all_classes_and_modules.each do |cls|
-			self.build_class_list( cls, @files[0], @outputdir.to_s )
-		end
+	    @files, @classes = RDoc::Generator::Context.build_indicies( toplevels, @options )
 
 		# Now actually write the output
 		generate_xhtml( @options, @files, @classes )
 
 	rescue StandardError => err
 		debug_msg "%s: %s\n  %s" % [ err.class.name, err.message, err.backtrace.join("\n  ") ]
-	end
-
-
-	### Build pages for each class by traversing the class hierarchy. Append each new 
-	### generated class page to the array of class pages. 
-	def build_class_list( cls, html_file, class_dir )
-		@classes << Generators::HtmlClass.new( cls, html_file, class_dir, @options )
-		cls.each_classmodule do |mod|
-			build_class_list( mod, html_file, class_dir )
-		end
 	end
 
 
@@ -351,10 +336,10 @@ class Generators::DarkfishGenerator < Generators::XMLGenerator
 		end
 	end
 
-end # Generators::DarkfishGenerator
+end # Roc::Generator::Darkfish
 
-# Make an alias for Rdoc's silly generator lookup (which is probably my fault)
-Generators::DARKFISHGenerator = Generators::DarkfishGenerator
+# Silly alias for RDoc's silly upcased 'class_name'
+RDoc::Generator::DARKFISH = RDoc::Generator::Darkfish
 
 
 # :stopdoc:
@@ -439,8 +424,33 @@ end # module TimeConstantMethods
 
 
 # Extend Numeric with time constants
-class Numeric
+class Numeric # :nodoc:
 	include TimeConstantMethods
 end
 
+
+### Monkeypatch RDoc::Generator::Method so it works with line numbers
+### turned on and $DEBUG = true. Also make it use a conditional instead
+### of a side-effect to get the initial blank line.
+class RDoc::Generator::Method # :nodoc:
+	def add_line_numbers(src)
+		if src =~ /\A.*, line (\d+)/
+			first = $1.to_i - 1
+			last  = first + src.count("\n")
+			size = last.to_s.length
+
+			line = first
+			src.gsub!(/^/) do
+				if line == first
+					res = " " * ( size + 2 )
+				else
+					res = sprintf( "%#{size}d: ", line )
+				end
+
+				line += 1
+				res
+			end
+		end
+	end
+end
 
