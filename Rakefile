@@ -116,6 +116,10 @@ PROJECT_PUBDIR = "/usr/local/www/public/code"
 PROJECT_DOCDIR = "#{PROJECT_PUBDIR}/#{PKG_NAME}"
 PROJECT_SCPURL = "#{PROJECT_HOST}:#{PROJECT_DOCDIR}"
 
+# Rubyforge stuff
+RUBYFORGE_GROUP = 'deveiate'
+RUBYFORGE_PROJECT = 'darkfish-rdoc'
+
 # Gem dependencies: gemname => version
 DEPENDENCIES = {
 	'rdoc: >= 2.1.0' => '',
@@ -139,7 +143,7 @@ GEMSPEC   = Gem::Specification.new do |gem|
 	gem.authors           = 'Michael Granger'
 	gem.email             = 'ged@FaerieMUD.org'
 	gem.homepage          = 'http://deveiate.org/projects/Darkfish-Rdoc/'
-	gem.rubyforge_project = 'deveiate'
+	gem.rubyforge_project = RUBYFORGE_PROJECT
 
 	gem.has_rdoc          = true
 	gem.rdoc_options      = RDOC_OPTIONS

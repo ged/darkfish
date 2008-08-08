@@ -1,9 +1,11 @@
 --- 
+rubyforge_project: darkfish-rdoc
 project_requirements: []
 
 project_description: 
 - A complete replacement for the default HTML generator for Rdoc, the
 - "API documentation-extraction system for Ruby. "
+rubyforge_group: deveiate
 author_name: Michael Granger
 project_homepage: http://deveiate.org/projects/Darkfish-Rdoc/
 project_dependencies: 
