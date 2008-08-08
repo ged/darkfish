@@ -22,8 +22,9 @@
 		$(document).ready( function() {
 			hookSourceViews();
 			hookQuickSearch();
-			highlightTarget();
-			$(document).bind("scroll", highlightTarget );
+			highlightLocationTarget();
+
+			$('ul.link-list a').bind( "click", highlightClickTarget );
 		});
 	</script>
 

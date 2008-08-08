@@ -38,9 +38,6 @@ LIBDIR        = BASEDIR + 'lib'
 EXTDIR        = BASEDIR + 'ext'
 DOCSDIR       = BASEDIR + 'docs'
 PKGDIR        = BASEDIR + 'pkg'
-RAKE_TASKDIR  = BASEDIR + 'rake'
-
-TASKLIBS      = Pathname.glob( RAKE_TASKDIR + '*.rb' )
 
 PKG_NAME      = 'darkfish-rdoc'
 PKG_SUMMARY   = 'A pretty (different) Rdoc HTML generator'
@@ -48,8 +45,6 @@ VERSION_FILE  = LIBDIR + 'darkfish-rdoc.rb'
 PKG_VERSION   = VERSION_FILE.read[ /VERSION = '(\d+\.\d+\.\d+)'/, 1 ]
 PKG_FILE_NAME = "#{PKG_NAME.downcase}-#{PKG_VERSION}"
 GEM_FILE_NAME = "#{PKG_FILE_NAME}.gem"
-
-RELEASE_NAME  = "RELEASE_#{PKG_VERSION.gsub(/\./, '_')}"
 
 ARTIFACTS_DIR = Pathname.new( ENV['CC_BUILD_ARTIFACTS'] || 'artifacts' )
 
@@ -63,7 +58,13 @@ SPEC_FILES    = Pathname.glob( SPECDIR + '**/*_spec.rb' ).delete_if {|item| item
 TESTDIR       = BASEDIR + 'tests'
 TEST_FILES    = Pathname.glob( TESTDIR + '**/*.tests.rb' ).delete_if {|item| item =~ /\.svn/ }
 
-RELEASE_FILES = TEXT_FILES + SPEC_FILES + TEST_FILES + LIB_FILES + EXT_FILES
+RAKE_TASKDIR  = BASEDIR + 'rake'
+RAKE_TASKLIBS = Pathname.glob( RAKE_TASKDIR + '*.rb' )
+
+LOCAL_RAKEFILE = BASEDIR + 'Rakefile.local'
+
+RELEASE_FILES = TEXT_FILES + SPEC_FILES + TEST_FILES + LIB_FILES + EXT_FILES + RAKE_TASKLIBS
+RELEASE_FILES << LOCAL_RAKEFILE if LOCAL_RAKEFILE.exist?
 
 COVERAGE_MINIMUM = ENV['COVERAGE_MINIMUM'] ? Float( ENV['COVERAGE_MINIMUM'] ) : 85.0
 RCOV_EXCLUDES = 'spec,tests,/Library/Ruby,/var/lib,/usr/local/lib'
@@ -143,6 +144,11 @@ GEMSPEC   = Gem::Specification.new do |gem|
 	gem.has_rdoc          = true
 	gem.rdoc_options      = RDOC_OPTIONS
 
+	gem.files             = RELEASE_FILES.
+		collect {|f| f.relative_path_from(BASEDIR).to_s }
+	gem.test_files        = SPEC_FILES.
+		collect {|f| f.relative_path_from(BASEDIR).to_s }
+		
 	DEPENDENCIES.each do |name, version|
 		version = '>= 0' if version.length.zero?
 		gem.add_dependency( name, version )
@@ -156,11 +162,10 @@ end
 $trace = Rake.application.options.trace ? true : false
 $dryrun = Rake.application.options.dryrun ? true : false
 
-# Load any remaining task libraries
-TASKLIBS.each do |tasklib|
-	RELEASE_FILES << tasklib
 
-	next if tasklib =~ %r{/(helpers|svn|verifytask|packaging)\.rb$}
+# Load any remaining task libraries
+RAKE_TASKLIBS.each do |tasklib|
+	next if tasklib =~ %r{/(helpers|svn|verifytask)\.rb$}
 	begin
 		require tasklib
 	rescue ScriptError => err
@@ -175,15 +180,7 @@ TASKLIBS.each do |tasklib|
 end
 
 # Load any project-specific rules defined in 'Rakefile.local' if it exists
-LOCAL_RAKEFILE = BASEDIR + 'Rakefile.local'
-if LOCAL_RAKEFILE.exist?
-	import LOCAL_RAKEFILE 
-	RELEASE_FILES << LOCAL_RAKEFILE
-end
-
-
-# Now load the packaging task now that all the files are 
-require RAKE_TASKDIR + 'packaging.rb'
+import LOCAL_RAKEFILE if LOCAL_RAKEFILE.exist?
 
 
 #####################################################################
@@ -226,4 +223,12 @@ task :cruise => [:clean, :spec, :package] do |task|
 	FileUtils.cp_r( FileList['pkg/*'].to_a, artifact_dir )
 end
 
+
+desc "Update the build system to the latest version"
+task :update_build do
+	log "Updating the build system"
+	sh 'svn', 'up', RAKE_TASKDIR
+	log "Updating the Rakefile"
+	sh 'rake', '-f', RAKE_TASKDIR + 'Metarakefile'
+end
 

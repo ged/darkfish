@@ -15,8 +15,8 @@ I created it with a few goals in mind:
   modified Allison template (<URL:http://www.superalloy.nl/blog/?p=7>) Eloy 
   Duran came up with.
 
-* Implemented using ERB templates instead of Rdoc's constants-in-a-module style 
-  templating.
+* Implemented using separate ERB template files instead of Rdoc's 
+  constants-in-a-module style templating.
 
 I think I mostly succeeded, and it's nice enough that I wanted to use it for all
 my documentation, and I thought you might want to, too. Or at least be able to
@@ -38,16 +38,22 @@ Or download the source and do:
 
 == Usage
 
-To use it, just specify that you want 'darkfish' output instead of the default
-when you run Rdoc:
+Because of the way Rdoc and Rubygems work, there's currently no way to make the
+Darkfish generator available to Rdoc from the command line 'rdoc' tool if you 
+have it installed as a gem, but if you install it as a regular Ruby library 
+(via 'rake install'), you can do this:
 
  $ rdoc -w 4 -SHN -f darkfish -m README README lib
 
-Or from a Rakefile:
+I'm trying to figure out how to resolve this for the gem. Suggestions welcomed.
+
+You can, however, load the formatter as a gem from a Rakefile before you define 
+the RDocTask:
 
   ### Task: rdoc
   require 'rake/rdoctask'
-  gem 'darkfish-rdoc'
+  gem 'darkfish-rdoc' # Omit this if it's installed as a regular library
+  require 'darkfish-rdoc'
 
   Rake::RDocTask.new do |rdoc|
     rdoc.title    = "My Awesome SnoCone Library"
@@ -68,8 +74,8 @@ That's it.
 
 == Feedback
 
-I'd be happy to have feedback via email <URL: mailto:ged at FaerieMUD dot org> or a ticket on 
-the project's Trac:
+I'd be happy to have feedback via email <URL: mailto:ged at FaerieMUD dot org> 
+or a ticket on the project's Trac:
 
   http://deveiate.org/projects/Darkfish-Rdoc/
 
