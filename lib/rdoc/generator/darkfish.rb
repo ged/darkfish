@@ -59,13 +59,21 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 
 	# Darkfish Version (update this in )
 	VERSION = '1.1.1'
-	
+
+
+	#################################################################
+	###	C L A S S   M E T H O D S
+	#################################################################
 
 	### Standard generator factory method
 	def self::for( options )
 		new( options )
 	end
 
+
+	#################################################################
+	###	I N S T A N C E   M E T H O D S
+	#################################################################
 
 	### Initialize a few instance variables before we start
 	def initialize( *args )
@@ -80,6 +88,14 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 
 		super
 	end
+	
+	
+	######
+	public
+	######
+
+	# The output directory
+	attr_reader :outputdir
 	
 	
 	### Output progress information if debugging is enabled
@@ -120,6 +136,7 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 
 	rescue StandardError => err
 		debug_msg "%s: %s\n  %s" % [ err.class.name, err.message, err.backtrace.join("\n  ") ]
+		raise
 	end
 
 

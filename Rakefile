@@ -63,7 +63,17 @@ RAKE_TASKLIBS = Pathname.glob( RAKE_TASKDIR + '*.rb' )
 
 LOCAL_RAKEFILE = BASEDIR + 'Rakefile.local'
 
-RELEASE_FILES = TEXT_FILES + SPEC_FILES + TEST_FILES + LIB_FILES + EXT_FILES + RAKE_TASKLIBS
+EXTRA_PKGFILES = []
+EXTRA_PKGFILES += Pathname.glob( BASEDIR + 'lib/rdoc/generator/**/*.{css,rhtml,png,js}' ).delete_if {|item| item =~ /\.svn/ } 
+
+RELEASE_FILES = TEXT_FILES + 
+	SPEC_FILES + 
+	TEST_FILES + 
+	LIB_FILES + 
+	EXT_FILES + 
+	RAKE_TASKLIBS +
+	EXTRA_PKGFILES
+
 RELEASE_FILES << LOCAL_RAKEFILE if LOCAL_RAKEFILE.exist?
 
 COVERAGE_MINIMUM = ENV['COVERAGE_MINIMUM'] ? Float( ENV['COVERAGE_MINIMUM'] ) : 85.0
@@ -122,7 +132,7 @@ RUBYFORGE_PROJECT = 'darkfish-rdoc'
 
 # Gem dependencies: gemname => version
 DEPENDENCIES = {
-	'rdoc: >= 2.1.0' => '',
+	'rdoc' => '>= 2.1.0',
 }
 
 # Non-gem requirements: packagename => version
@@ -137,6 +147,7 @@ GEMSPEC   = Gem::Specification.new do |gem|
 	gem.summary           = PKG_SUMMARY
 	gem.description       = <<-EOD
 	A complete replacement for the default HTML generator for Rdoc, the
+
 	API documentation-extraction system for Ruby. 
 	EOD
 
