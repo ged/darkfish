@@ -8,7 +8,7 @@ require 'pathname'
 require 'rdoc/rdoc' unless defined?( RDoc ) && defined?( RDoc::RDoc )
 
 ### Version for the Rakefile (update this in rdoc/generator/darkfish.rb too)
-# VERSION = '1.1.1'
+# VERSION = '1.1.2'
 
 begin
 	generator_dir = Pathname.new( __FILE__ ).dirname + 'rdoc/generator'

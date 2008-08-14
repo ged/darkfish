@@ -64,7 +64,7 @@ RAKE_TASKLIBS = Pathname.glob( RAKE_TASKDIR + '*.rb' )
 LOCAL_RAKEFILE = BASEDIR + 'Rakefile.local'
 
 EXTRA_PKGFILES = []
-EXTRA_PKGFILES += Pathname.glob( BASEDIR + 'lib/rdoc/generator/**/*.{css,rhtml,png,js}' ).delete_if {|item| item =~ /\.svn/ } 
+EXTRA_PKGFILES.concat Pathname.glob( BASEDIR + 'lib/rdoc/generator/**/*.{css,rhtml,png,js}' ).delete_if {|item| item =~ /\.svn/ } 
 
 RELEASE_FILES = TEXT_FILES + 
 	SPEC_FILES + 
@@ -124,7 +124,8 @@ SMTP_PORT = 465 # SMTP + SSL
 PROJECT_HOST = 'deveiate.org'
 PROJECT_PUBDIR = "/usr/local/www/public/code"
 PROJECT_DOCDIR = "#{PROJECT_PUBDIR}/#{PKG_NAME}"
-PROJECT_SCPURL = "#{PROJECT_HOST}:#{PROJECT_DOCDIR}"
+PROJECT_SCPPUBURL = "#{PROJECT_HOST}:#{PROJECT_PUBDIR}"
+PROJECT_SCPDOCURL = "#{PROJECT_HOST}:#{PROJECT_DOCDIR}"
 
 # Rubyforge stuff
 RUBYFORGE_GROUP = 'deveiate'
@@ -147,7 +148,6 @@ GEMSPEC   = Gem::Specification.new do |gem|
 	gem.summary           = PKG_SUMMARY
 	gem.description       = <<-EOD
 	A complete replacement for the default HTML generator for Rdoc, the
-
 	API documentation-extraction system for Ruby. 
 	EOD
 
@@ -203,7 +203,10 @@ import LOCAL_RAKEFILE if LOCAL_RAKEFILE.exist?
 #####################################################################
 
 ### Default task
-task :default  => [:clean, :spec, :rdoc, :package]
+task :default  => [:clean, :local, :spec, :rdoc, :package]
+
+### Task the local Rakefile can append to -- no-op by default
+task :local
 
 
 ### Task: clean
