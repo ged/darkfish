@@ -207,7 +207,16 @@
 		<div id="<%= methodlist['type'].downcase %>-<%= methodlist['category'].downcase %>-method-details" class="method-section section">
 			<h3 class="section-header"><%= methodlist['type'] %> <%= methodlist['category'] %> Methods</h3>
 
-			<% methodlist['methods'].each do |methodinfo| %>
+		<% methodlist['methods'].each do |methodinfo| %>
+
+		<%
+		# If the method doesn't have a 'name' attribute, it's defined in C, so make one out of the
+		# first method name in the callseq.
+		unless methodinfo['name'] 
+			methodinfo['name'] = methodinfo['callseq'][/^.*?\.(\w+)/, 1] or
+				raise "No method name nor callseq!" 
+		end
+		%>
 			<% if methodinfo['m_desc'] =~ /Alias for/ %>
 			<div id="<%= methodinfo['name'].gsub( /[^a-z]+/, '-' ) %>-method" class="method-detail method-alias">
 			<% else %>
@@ -216,9 +225,14 @@
 				<a name="<%= methodinfo['name'] %>"></a>
 
 				<div class="method-heading">
+				<% if methodinfo['callseq'] %>
+					<span class="method-callseq"><%= methodinfo['callseq'].strip.gsub( /^\w.*?\./m, '') %></span>
+					<span class="method-click-advice">click to toggle source</span>
+				<% else %>
 					<span class="method-name"><%= methodinfo['name'] %></span><span 
 						class="method-args"><%= methodinfo['params'] %></span>
 					<span class="method-click-advice">click to toggle source</span>
+				<% end %>
 				</div>
 
 				<div class="method-description">
@@ -246,10 +260,11 @@
 				</div>
 				<% end %>
 			</div>
-			<% end %>
+
+		<% end %>
 		</div>
-		<% end %>
-		<% end %>
+	<% end %>
+	<% end %>
 
 	  </div>
 	</div>

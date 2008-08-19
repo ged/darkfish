@@ -1,3 +1,36 @@
+-- Thu, 14 Aug 2008 00:59:07 -0000 by deveiant (r24) -----
+   Changed: /trunk
+            lib/rdoc/generator/darkfish.rb
+            Rakefile
+            lib/darkfish-rdoc.rb
+
+    * Updated build system
+
+
+-- Sat, 09 Aug 2008 01:14:22 -0000 by deveiant (r23) -----
+   Added:   spec/rdoc/generator (new)
+            spec/rdoc/generator/darkfish_spec.rb (new)
+            spec/rdoc (new)
+            spec (new)
+   Changed: project.yml
+            lib/rdoc/generator/template/darkfish/rdoc.css
+            lib/rdoc/generator/darkfish.rb
+            Rakefile
+            ChangeLog
+   Deleted: lib/rdoc/generator/template/darkfish/images/bullet_go.png
+            lib/rdoc/generator/template/darkfish/images/lightbulb.png
+            lib/rdoc/generator/template/darkfish/images/page_white_ruby.png
+            lib/rdoc/generator/template/darkfish/images/tag_blue.png
+            lib/rdoc/generator/template/darkfish/images/tag_blue_edit.png
+            lib/rdoc/generator/template/darkfish/images/bullet_toggle_plus.png (and 12 other/s)
+
+    * Updated build system.
+    * Fixed distributions, which didn't have the static files included with them.
+    * Removed a bunch of unused static files
+    * Fixed the path to the bg hack for Thickbox on Macs
+    * Added the beginnings of a test suite. Don't know yet how to test the generator in isolation.
+
+
 -- Fri, 08 Aug 2008 13:15:20 -0000 by deveiant (r22) -----
    Changed: /trunk
             Rakefile

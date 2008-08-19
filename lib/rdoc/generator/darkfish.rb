@@ -58,7 +58,7 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 	GENERATOR_DIR = Pathname.new( __FILE__ ).expand_path.dirname
 
 	# Darkfish Version (update this in )
-	VERSION = '1.1.2'
+	VERSION = '1.1.3'
 
 
 	#################################################################
@@ -158,7 +158,7 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 			hash
 		}
 
-		# Make a hash of 
+		# Make a hash of file info keyed by path
 		files_by_path = files.inject({}) {|hash, fileinfo|
 			hash[ fileinfo['full_path'] ] = fileinfo
 			hash[ fileinfo['full_path'] ][:outfile] = 
