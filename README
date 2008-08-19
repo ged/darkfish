@@ -1,6 +1,6 @@
 = Darkfish Rdoc Generator
 
-This is a complete replacement for the default HTML generator for Rdoc. 
+This is a complete replacement for the default HTML generator for Rdoc 2. 
 
 I created it with a few goals in mind:
 
@@ -12,7 +12,7 @@ I created it with a few goals in mind:
   for modern browsers.
 
 * Add some of the nifty searching and index-on-the-side stuff I liked from the
-  modified Allison template (<URL:http://www.superalloy.nl/blog/?p=7>) Eloy 
+  modified Allison template (http://www.superalloy.nl/blog/?p=7) Eloy 
   Duran came up with.
 
 * Implemented using separate ERB template files instead of Rdoc's 
@@ -74,7 +74,7 @@ That's it.
 
 == Feedback
 
-I'd be happy to have feedback via email <URL: mailto:ged at FaerieMUD dot org> 
+I'd be happy to have feedback via email (ged at FaerieMUD dot org)
 or a ticket on the project's Trac:
 
   http://deveiate.org/projects/Darkfish-Rdoc/

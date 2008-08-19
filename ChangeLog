@@ -1,3 +1,24 @@
+-- Tue, 19 Aug 2008 02:12:27 -0000 by deveiant (r27) -----
+   Changed: lib/rdoc/generator/darkfish.rb
+            lib/darkfish-rdoc.rb
+
+   Oops. Forgot I need to change the version string in two places. Should really figure out some better
+   way to do this.
+
+
+-- Tue, 19 Aug 2008 02:10:53 -0000 by deveiant (r26) -----
+   Changed: README
+            lib/rdoc/generator/darkfish.rb
+            lib/rdoc/generator/template/darkfish/classpage.rhtml
+            Rakefile
+            lib/rdoc/generator/template/darkfish/rdoc.css
+            ChangeLog (and 2 other/s)
+
+    * Bumped version to 1.1.3
+    * Updated build system
+    * Fixed output for C source
+
+
 -- Thu, 14 Aug 2008 00:59:07 -0000 by deveiant (r24) -----
    Changed: /trunk
             lib/rdoc/generator/darkfish.rb

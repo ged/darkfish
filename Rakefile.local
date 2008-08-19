@@ -1,4 +1,21 @@
 
+task :debug do
+	$DEBUG = true
+end
+
 task :coverage do
 	 trace "No coverage generated"
 end
+
+namespace :release do
+	task :project => [ :cleanup_rdoc_output ]
+	
+	# Need to clean up .svn directories under the Rdoc output before publishing
+	task :cleanup_rdoc_output do
+		outputdir = DOCSDIR + 'html'
+		Pathname.glob( outputdir + '**/.svn' ).each do |pn|
+			rm_rf pn, :verbose => true, :noop => $DEBUG
+		end
+	end
+end
+
