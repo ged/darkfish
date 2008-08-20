@@ -1,3 +1,23 @@
+-- Wed, 20 Aug 2008 01:28:01 -0000 by deveiant (r30) -----
+   Changed: Rakefile
+            project.yml
+            lib/rdoc/generator/template/darkfish/rdoc.css
+            lib/rdoc/generator/template/darkfish/js/darkfish.js
+
+    * Updated build system
+    * Added a fix for javascript 'console is not defined' bug in the darkfish.js file.
+    * Fixed the mushed-together method description when it has multiple paragraphs and/or definition 
+    lists.
+
+
+-- Tue, 19 Aug 2008 02:37:00 -0000 by deveiant (r29) -----
+   Changed: README
+            ChangeLog
+            Rakefile.local
+
+   Added some local tasks to clean up .svn directories before publication.
+
+
 -- Tue, 19 Aug 2008 02:12:27 -0000 by deveiant (r27) -----
    Changed: lib/rdoc/generator/darkfish.rb
             lib/darkfish-rdoc.rb
