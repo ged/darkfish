@@ -11,6 +11,7 @@ project_dependencies:
   rdoc: ">= 2.1.0"
 project_summary: A pretty (different) Rdoc HTML generator
 project_name: Darkfish-Rdoc
+version_file: rdoc/generator/darkfish.rb
 additional_pkgfiles: 
 - lib/rdoc/generator/**/*.{css,rhtml,png,js}
 author_email: ged@FaerieMUD.org

@@ -41,7 +41,7 @@ PKGDIR        = BASEDIR + 'pkg'
 
 PKG_NAME      = 'darkfish-rdoc'
 PKG_SUMMARY   = 'A pretty (different) Rdoc HTML generator'
-VERSION_FILE  = LIBDIR + 'darkfish-rdoc.rb'
+VERSION_FILE  = LIBDIR + 'rdoc/generator/darkfish.rb'
 PKG_VERSION   = VERSION_FILE.read[ /VERSION = '(\d+\.\d+\.\d+)'/, 1 ]
 PKG_FILE_NAME = "#{PKG_NAME.downcase}-#{PKG_VERSION}"
 GEM_FILE_NAME = "#{PKG_FILE_NAME}.gem"

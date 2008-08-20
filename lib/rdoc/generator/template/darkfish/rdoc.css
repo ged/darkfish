@@ -254,24 +254,29 @@ ul.link-list .type {
 	line-height: 1.4em;
 }
 
-#description dl {
+#description dl,
+#documentation dl {
 	margin: 8px 1.5em;
 	border: 1px solid #ccc;
+}
+#description dl {
 	font-size: 14px;
 }
 
-#description dt {
+#description dt,
+#documentation dt {
 	padding: 2px 4px;
 	font-weight: bold;
 	background: #ddd;
 }
-#description dd {
+#description dd,
+#documentation dd  {
 	padding: 2px 12px;
 }
-#description dd + dt {
+#description dd + dt,
+#documentation dd + dt {
 	margin-top: 0.7em;
 }
-
 
 #documentation .section {
 	font-size: 90%;
@@ -363,6 +368,9 @@ ul.link-list .type {
 }
 #documentation .method-description p {
 	padding: 0;
+}
+#documentation .method-description p + p {
+	margin-bottom: 0.5em;
 }
 
 #documentation .attribute-method-heading {
