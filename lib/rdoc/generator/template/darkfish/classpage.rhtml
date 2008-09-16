@@ -213,8 +213,7 @@
 		# If the method doesn't have a 'name' attribute, it's defined in C, so make one out of the
 		# first method name in the callseq.
 		unless methodinfo['name'] 
-			methodinfo['name'] = methodinfo['callseq'][/^.*?\.(\w+)/, 1] or
-				raise "No method name nor callseq!" 
+			methodinfo['name'] = methodinfo['callseq'][/^.*?\.(\w+)/, 1] || methodinfo['callseq']
 		end
 		%>
 			<% if methodinfo['m_desc'] =~ /Alias for/ %>

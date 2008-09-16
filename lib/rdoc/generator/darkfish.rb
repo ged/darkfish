@@ -58,7 +58,7 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 	GENERATOR_DIR = Pathname.new( __FILE__ ).expand_path.dirname
 
 	# Release Version
-	VERSION = '1.1.4'
+	VERSION = '1.1.5'
 
 
 	#################################################################
