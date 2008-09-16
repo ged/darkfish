@@ -14,4 +14,6 @@ project_name: Darkfish-Rdoc
 version_file: rdoc/generator/darkfish.rb
 additional_pkgfiles: 
 - lib/rdoc/generator/**/*.{css,rhtml,png,js}
+dev_dependencies: {}
+
 author_email: ged@FaerieMUD.org

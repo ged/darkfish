@@ -34,12 +34,14 @@ $dryrun = false
 
 ### Config constants
 BASEDIR       = Pathname.new( __FILE__ ).dirname.relative_path_from( Pathname.getwd )
+BINDIR        = BASEDIR + 'bin'
 LIBDIR        = BASEDIR + 'lib'
 EXTDIR        = BASEDIR + 'ext'
 DOCSDIR       = BASEDIR + 'docs'
 PKGDIR        = BASEDIR + 'pkg'
 
-PKG_NAME      = 'darkfish-rdoc'
+PROJECT_NAME  = 'Darkfish-Rdoc'
+PKG_NAME      = PROJECT_NAME.downcase
 PKG_SUMMARY   = 'A pretty (different) Rdoc HTML generator'
 VERSION_FILE  = LIBDIR + 'rdoc/generator/darkfish.rb'
 PKG_VERSION   = VERSION_FILE.read[ /VERSION = '(\d+\.\d+\.\d+)'/, 1 ]
@@ -49,11 +51,14 @@ GEM_FILE_NAME = "#{PKG_FILE_NAME}.gem"
 ARTIFACTS_DIR = Pathname.new( ENV['CC_BUILD_ARTIFACTS'] || 'artifacts' )
 
 TEXT_FILES    = %w( Rakefile ChangeLog README LICENSE ).collect {|filename| BASEDIR + filename }
+BIN_FILES     = Pathname.glob( BINDIR + '*' ).delete_if {|item| item =~ /\.svn/ }
 LIB_FILES     = Pathname.glob( LIBDIR + '**/*.rb' ).delete_if {|item| item =~ /\.svn/ }
 EXT_FILES     = Pathname.glob( EXTDIR + '**/*.{c,h,rb}' ).delete_if {|item| item =~ /\.svn/ }
 
 SPECDIR       = BASEDIR + 'spec'
-SPEC_FILES    = Pathname.glob( SPECDIR + '**/*_spec.rb' ).delete_if {|item| item =~ /\.svn/ }
+SPECLIBDIR    = SPECDIR + 'lib'
+SPEC_FILES    = Pathname.glob( SPECDIR + '**/*_spec.rb' ).delete_if {|item| item =~ /\.svn/ } +
+                Pathname.glob( SPECLIBDIR + '**/*.rb' ).delete_if {|item| item =~ /\.svn/ }
 
 TESTDIR       = BASEDIR + 'tests'
 TEST_FILES    = Pathname.glob( TESTDIR + '**/*.tests.rb' ).delete_if {|item| item =~ /\.svn/ }
@@ -69,6 +74,7 @@ EXTRA_PKGFILES.concat Pathname.glob( BASEDIR + 'lib/rdoc/generator/**/*.{css,rht
 RELEASE_FILES = TEXT_FILES + 
 	SPEC_FILES + 
 	TEST_FILES + 
+	BIN_FILES +
 	LIB_FILES + 
 	EXT_FILES + 
 	RAKE_TASKLIBS +
@@ -108,6 +114,7 @@ SNAPSHOT_PKG_NAME = "#{PKG_FILE_NAME}.#{PKG_BUILD}"
 SNAPSHOT_GEM_NAME = "#{SNAPSHOT_PKG_NAME}.gem"
 
 # Documentation constants
+RDOCDIR = DOCSDIR + 'api'
 RDOC_OPTIONS = [
 	'-w', '4',
 	'-SHN',
@@ -136,6 +143,22 @@ DEPENDENCIES = {
 	'rdoc' => '>= 2.1.0',
 }
 
+# Developer Gem dependencies: gemname => version
+DEVELOPMENT_DEPENDENCIES = {
+	'amatch'      => '>= 0.2.3',
+	'rake'        => '>= 0.8.1',
+	'rcodetools'  => '>= 0.7.0.0',
+	'rcov'        => '>= 0',
+	'RedCloth'    => '>= 4.0.3',
+	'rspec'       => '>= 0',
+	'rubyforge'   => '>= 0',
+	'termios'     => '>= 0',
+	'text-format' => '>= 1.0.0',
+	'tmail'       => '>= 1.2.3.1',
+	'ultraviolet' => '>= 0.10.2',
+	'libxml-ruby' => '>= 0.8.3',
+}
+
 # Non-gem requirements: packagename => version
 REQUIREMENTS = {
 }
@@ -159,6 +182,9 @@ GEMSPEC   = Gem::Specification.new do |gem|
 	gem.has_rdoc          = true
 	gem.rdoc_options      = RDOC_OPTIONS
 
+	gem.bindir            = BINDIR.relative_path_from(BASEDIR).to_s
+	
+
 	gem.files             = RELEASE_FILES.
 		collect {|f| f.relative_path_from(BASEDIR).to_s }
 	gem.test_files        = SPEC_FILES.
@@ -166,13 +192,21 @@ GEMSPEC   = Gem::Specification.new do |gem|
 		
 	DEPENDENCIES.each do |name, version|
 		version = '>= 0' if version.length.zero?
-		gem.add_dependency( name, version )
+		gem.add_runtime_dependency( name, version )
+	end
+	
+	DEVELOPMENT_DEPENDENCIES.each do |name, version|
+		version = '>= 0' if version.length.zero?
+		gem.add_development_dependency( name, version )
 	end
 	
 	REQUIREMENTS.each do |name, version|
 		gem.requirements << [ name, version ].compact.join(' ')
 	end
 end
+
+# Manual-generation config
+MANUALDIR = DOCSDIR + 'manual'
 
 $trace = Rake.application.options.trace ? true : false
 $dryrun = Rake.application.options.dryrun ? true : false
