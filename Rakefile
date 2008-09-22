@@ -195,9 +195,12 @@ GEMSPEC   = Gem::Specification.new do |gem|
 		gem.add_runtime_dependency( name, version )
 	end
 	
-	DEVELOPMENT_DEPENDENCIES.each do |name, version|
-		version = '>= 0' if version.length.zero?
-		gem.add_development_dependency( name, version )
+	# Developmental dependencies don't work as of RubyGems 1.2.0
+	unless Gem::Version.new( Gem::RubyGemsVersion ) <= Gem::Version.new( "1.2.0" )
+		DEVELOPMENT_DEPENDENCIES.each do |name, version|
+			version = '>= 0' if version.length.zero?
+			gem.add_development_dependency( name, version )
+		end
 	end
 	
 	REQUIREMENTS.each do |name, version|

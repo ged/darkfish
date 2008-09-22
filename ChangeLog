@@ -1,3 +1,33 @@
+-- Mon, 22 Sep 2008 15:14:43 -0000 by deveiant (r35) -----
+   Changed: spec/rdoc/generator/darkfish_spec.rb
+            lib/rdoc/generator/darkfish.rb
+
+   Updated to work under RDoc 2.2.0 (fixes #2).
+
+
+-- Tue, 16 Sep 2008 14:22:21 -0000 by deveiant (r34) -----
+   Changed: Rakefile
+            project.yml
+
+   Updated the build system.
+
+
+-- Tue, 16 Sep 2008 14:21:23 -0000 by deveiant (r33) -----
+   Changed: lib/rdoc/generator/darkfish.rb
+            lib/rdoc/generator/template/darkfish/classpage.rhtml
+
+    * Fixed method name extraction for non \w+ methods (e.g., operators)
+    * Bumped version to 1.1.5.
+
+
+-- Wed, 20 Aug 2008 01:45:44 -0000 by deveiant (r32) -----
+   Changed: lib/rdoc/generator/darkfish.rb
+            ChangeLog
+            lib/darkfish-rdoc.rb
+
+   Updated build system.
+
+
 -- Wed, 20 Aug 2008 01:28:01 -0000 by deveiant (r30) -----
    Changed: Rakefile
             project.yml
