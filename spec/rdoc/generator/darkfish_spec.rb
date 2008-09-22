@@ -32,7 +32,9 @@ describe RDoc::Generator::Darkfish do
 	describe "an instance" do
 		
 		before( :each ) do
-			@generator = RDoc::Generator::Darkfish.for( 'darkfish' )
+			$dryrun = true
+			@options = RDoc::Options.new( RDoc::RDoc::GENERATORS )
+			@generator = RDoc::Generator::Darkfish.for( @options )
 		end
 		
 		
@@ -44,9 +46,18 @@ describe RDoc::Generator::Darkfish do
 		
 		it "copies static files over during #write_style_sheet" do
 			FileUtils.should_receive( :cp_r ).
-				with( an_instance_of(Pathname), '.', :verbose => $DEBUG ).
+				with( an_instance_of(Pathname), '.', :verbose => $DEBUG, :noop => $dryrun ).
 				exactly( 3 ).times
 			@generator.write_style_sheet
+		end
+		
+		it "adjusts to changes in RDoc 2.2.0 (::build_indices vs. ::build_indicies)" do
+			RDoc::Generator::Context.should_receive( :respond_to? ).with( :build_indicies ).
+				and_return( false )
+			RDoc::Generator::Context.should_receive( :build_indices ).with( :toplevels, @options ).
+				and_return([ {}, {} ])
+
+			@generator.generate( :toplevels )
 		end
 		
 	end

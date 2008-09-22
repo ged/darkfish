@@ -118,7 +118,7 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 		debug_msg "Copying over static files"
 		staticfiles = %w[rdoc.css js images]
 		staticfiles.each do |path|
-			FileUtils.cp_r( @template_dir + path, '.', :verbose => $DEBUG )
+			FileUtils.cp_r( @template_dir + path, '.', :verbose => $DEBUG, :noop => $dryrun )
 		end
 	end
 	
@@ -129,7 +129,11 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 	### the extracted information. 
 	def generate( toplevels )
 		@outputdir = Pathname.new( @options.op_dir ).expand_path( @basedir )
-	    @files, @classes = RDoc::Generator::Context.build_indicies( toplevels, @options )
+		if RDoc::Generator::Context.respond_to?( :build_indicies)
+	    	@files, @classes = RDoc::Generator::Context.build_indicies( toplevels, @options )
+		else
+	    	@files, @classes = RDoc::Generator::Context.build_indices( toplevels, @options )
+		end
 
 		# Now actually write the output
 		generate_xhtml( @options, @files, @classes )
