@@ -19,3 +19,19 @@ namespace :release do
 	end
 end
 
+task :install do
+	log "Installing template files"
+	sitelib = Pathname.new( CONFIG['sitelibdir'] )
+	sitearch = Pathname.new( CONFIG['sitearchdir'] )
+
+	Dir.chdir( LIBDIR ) do
+		EXTRA_PKGFILES.each do |templatefile|
+			relpath = templatefile.relative_path_from( LIBDIR )
+			target = sitelib + relpath
+			FileUtils.mkpath target.dirname,
+				:mode => 0755, :verbose => true, :noop => $dryrun unless target.dirname.directory?
+			FileUtils.install relpath, target,
+				:mode => 0644, :verbose => true, :noop => $dryrun
+		end
+	end
+end
