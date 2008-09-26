@@ -1,8 +1,3 @@
-/* @override 
-	http://localhost/darkfish/rdoc.css
-	http://gont.ljc.laika.com:3474/manual/api/rdoc.css
-*/
-
 /*
  * "Darkfish" Rdoc CSS
  * $Id$
@@ -294,8 +289,11 @@ ul.link-list .type {
 
 #constants-list dl,
 #attributes-list dl {
+	margin: 1em 1em 2em;
 	margin-bottom: 2em;
 	margin-top: 1em;
+	
+	border: 0;
 }
 #constants-list dl dt,
 #attributes-list dl dt {

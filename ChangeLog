@@ -1,3 +1,21 @@
+-- Thu, 25 Sep 2008 16:50:52 -0000 by deveiant (r38) -----
+   Changed: lib/rdoc/generator/template/darkfish/js/jquery.js
+            lib/rdoc/generator/template/darkfish/js/quicksearch.js
+            Rakefile.local
+
+    * Updated jquery to 1.2.6
+    * Focus the results of a quicksearch when it is off screen
+    * Fixed the 'install' Rake task -- it now installs the templates and resources in 
+    addition to the ruby code.
+
+
+-- Mon, 22 Sep 2008 15:57:32 -0000 by deveiant (r36) -----
+   Changed: Rakefile
+            ChangeLog
+
+   Updated build system to add the workaround for broken developmental dependencies under RubyGems 1.2.0.
+
+
 -- Mon, 22 Sep 2008 15:14:43 -0000 by deveiant (r35) -----
    Changed: spec/rdoc/generator/darkfish_spec.rb
             lib/rdoc/generator/darkfish.rb
