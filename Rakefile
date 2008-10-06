@@ -21,9 +21,10 @@ BEGIN {
 	$LOAD_PATH.unshift( extdir.to_s ) unless $LOAD_PATH.include?( extdir.to_s )
 }
 
+require 'rubygems'
+gem 'rake', '>= 0.8.3'
 
 require 'rbconfig'
-require 'rubygems'
 require 'rake'
 require 'rake/rdoctask'
 require 'rake/testtask'
@@ -266,7 +267,7 @@ end
 
 ### Task: cruise (Cruisecontrol task)
 desc "Cruisecontrol build"
-task :cruise => [:clean, :spec, :package] do |task|
+task :cruise => [:clean, 'spec:quiet', :package] do |task|
 	raise "Artifacts dir not set." if ARTIFACTS_DIR.to_s.empty?
 	artifact_dir = ARTIFACTS_DIR.cleanpath
 	artifact_dir.mkpath
