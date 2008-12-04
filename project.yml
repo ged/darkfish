@@ -8,7 +8,7 @@ rubyforge_group: deveiate
 author_name: Michael Granger
 project_homepage: http://deveiate.org/projects/Darkfish-Rdoc/
 project_dependencies: 
-  rdoc: ">= 2.1.0"
+  rdoc: ">= 2.2.2"
 project_summary: A pretty (different) Rdoc HTML generator
 project_name: Darkfish-Rdoc
 version_file: rdoc/generator/darkfish.rb
@@ -17,3 +17,4 @@ additional_pkgfiles:
 dev_dependencies: {}
 
 author_email: ged@FaerieMUD.org
+post_install_message: ""

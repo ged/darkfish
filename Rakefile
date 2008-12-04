@@ -40,14 +40,25 @@ LIBDIR        = BASEDIR + 'lib'
 EXTDIR        = BASEDIR + 'ext'
 DOCSDIR       = BASEDIR + 'docs'
 PKGDIR        = BASEDIR + 'pkg'
+DATADIR       = BASEDIR + 'data'
 
 PROJECT_NAME  = 'Darkfish-Rdoc'
 PKG_NAME      = PROJECT_NAME.downcase
 PKG_SUMMARY   = 'A pretty (different) Rdoc HTML generator'
+
 VERSION_FILE  = LIBDIR + 'rdoc/generator/darkfish.rb'
-PKG_VERSION   = VERSION_FILE.read[ /VERSION = '(\d+\.\d+\.\d+)'/, 1 ]
+if VERSION_FILE.exist? && buildrev = ENV['CC_BUILD_LABEL']
+	PKG_VERSION = VERSION_FILE.read[ /VERSION\s*=\s*['"](\d+\.\d+\.\d+)['"]/, 1 ] + '.' + buildrev
+elsif VERSION_FILE.exist?
+	PKG_VERSION = VERSION_FILE.read[ /VERSION\s*=\s*['"](\d+\.\d+\.\d+)['"]/, 1 ]
+else
+	PKG_VERSION = '0.0.0'
+end
+
 PKG_FILE_NAME = "#{PKG_NAME.downcase}-#{PKG_VERSION}"
 GEM_FILE_NAME = "#{PKG_FILE_NAME}.gem"
+
+EXTCONF       = EXTDIR + 'extconf.rb'
 
 ARTIFACTS_DIR = Pathname.new( ENV['CC_BUILD_ARTIFACTS'] || 'artifacts' )
 
@@ -55,6 +66,7 @@ TEXT_FILES    = %w( Rakefile ChangeLog README LICENSE ).collect {|filename| BASE
 BIN_FILES     = Pathname.glob( BINDIR + '*' ).delete_if {|item| item =~ /\.svn/ }
 LIB_FILES     = Pathname.glob( LIBDIR + '**/*.rb' ).delete_if {|item| item =~ /\.svn/ }
 EXT_FILES     = Pathname.glob( EXTDIR + '**/*.{c,h,rb}' ).delete_if {|item| item =~ /\.svn/ }
+DATA_FILES    = Pathname.glob( DATADIR + '**/*' ).delete_if {|item| item =~ /\.svn/ }
 
 SPECDIR       = BASEDIR + 'spec'
 SPECLIBDIR    = SPECDIR + 'lib'
@@ -78,6 +90,7 @@ RELEASE_FILES = TEXT_FILES +
 	BIN_FILES +
 	LIB_FILES + 
 	EXT_FILES + 
+	DATA_FILES + 
 	RAKE_TASKLIBS +
 	EXTRA_PKGFILES
 
@@ -141,7 +154,7 @@ RUBYFORGE_PROJECT = 'darkfish-rdoc'
 
 # Gem dependencies: gemname => version
 DEPENDENCIES = {
-	'rdoc' => '>= 2.1.0',
+	'rdoc' => '>= 2.2.2',
 }
 
 # Developer Gem dependencies: gemname => version
@@ -184,7 +197,10 @@ GEMSPEC   = Gem::Specification.new do |gem|
 	gem.rdoc_options      = RDOC_OPTIONS
 
 	gem.bindir            = BINDIR.relative_path_from(BASEDIR).to_s
-	
+
+	if EXTCONF.exist?
+		gem.extensions << EXTCONF.relative_path_from( BASEDIR ).to_s
+	end
 
 	gem.files             = RELEASE_FILES.
 		collect {|f| f.relative_path_from(BASEDIR).to_s }
@@ -269,7 +285,7 @@ end
 desc "Cruisecontrol build"
 task :cruise => [:clean, 'spec:quiet', :package] do |task|
 	raise "Artifacts dir not set." if ARTIFACTS_DIR.to_s.empty?
-	artifact_dir = ARTIFACTS_DIR.cleanpath
+	artifact_dir = ARTIFACTS_DIR.cleanpath + ENV['CC_BUILD_LABEL']
 	artifact_dir.mkpath
 	
 	coverage = BASEDIR + 'coverage'
