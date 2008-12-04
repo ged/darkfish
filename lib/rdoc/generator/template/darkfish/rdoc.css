@@ -287,21 +287,21 @@ ul.link-list .type {
 	-webkit-border-radius: 3px;
 }
 
-#constants-list dl,
-#attributes-list dl {
+#constants-list > dl,
+#attributes-list > dl {
 	margin: 1em 1em 2em;
 	margin-bottom: 2em;
 	margin-top: 1em;
 	
 	border: 0;
 }
-#constants-list dl dt,
-#attributes-list dl dt {
+#constants-list > dl dt,
+#attributes-list > dl dt {
 	font-weight: bold;
 	font-family: Monaco, "Andale Mono";
 }
-#constants-list dl dd,
-#attributes-list dl dd {
+#constants-list > dl dd,
+#attributes-list > dl dd {
 	margin: 0 0 1em 0;
 }
 
