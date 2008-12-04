@@ -39,7 +39,10 @@ describe RDoc::Generator::Darkfish do
 		
 		
 		it "generates the required subdirectories" do
-			@generator.outputdir.should_receive( :mkpath )
+			outputdir = mock( "mock outputdir" )
+			outputdir.should_receive( :mkpath )
+			
+			@generator.instance_variable_set( :@outputdir, outputdir )
 			@generator.gen_sub_directories
 		end
 		
