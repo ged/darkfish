@@ -24,7 +24,8 @@ end
 describe RDoc::Generator::Darkfish do
 
 	it "can create an instance via the generator factory method" do
-		RDoc::Generator::Darkfish.for( 'darkfish' ).
+		options = RDoc::Options.new
+		RDoc::Generator::Darkfish.for( options ).
 			should be_an_instance_of( RDoc::Generator::Darkfish )
 	end
 	
@@ -33,7 +34,7 @@ describe RDoc::Generator::Darkfish do
 		
 		before( :each ) do
 			$dryrun = true
-			@options = RDoc::Options.new( RDoc::RDoc::GENERATORS )
+			@options = RDoc::Options.new
 			@generator = RDoc::Generator::Darkfish.for( @options )
 		end
 		

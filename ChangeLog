@@ -1,7 +1,138 @@
--- Thu, 25 Sep 2008 16:50:52 -0000 by deveiant (r38) -----
-   Changed: lib/rdoc/generator/template/darkfish/js/jquery.js
+-- Wed, 07 Jan 2009 02:52:03 -0000 by deveiant (r53) -----
+   Added:   lib/rdoc/generator/template/darkfish/images/find.png (new)
+            lib/rdoc/generator/template/darkfish/images/bullet_toggle_minus.png (new)
+            lib/rdoc/generator/template/darkfish/images/bullet_toggle_plus.png (new)
+   Changed: lib/rdoc/generator/template/darkfish/classpage.rhtml
             lib/rdoc/generator/template/darkfish/js/quicksearch.js
-            Rakefile.local
+            ChangeLog
+            lib/rdoc/generator/template/darkfish/rdoc.css
+            lib/rdoc/generator/template/darkfish/js/darkfish.js
+
+   Some changes suggested by Eric Hodel (refs #5)
+   * Moved quicksearch up to the top of the class index; still needs
+   CSS fixing.
+   * Fixed mistakenly-applied roundbox to DLs in simple file pages
+
+
+-- Wed, 07 Jan 2009 02:08:11 -0000 by deveiant (r52) -----
+   Changed: lib/rdoc/generator/darkfish.rb
+            lib/rdoc/generator/template/darkfish/classpage.rhtml
+            lib/rdoc/generator/template/darkfish/index.rhtml
+            lib/rdoc/generator/template/darkfish/rdoc.css
+            lib/rdoc/generator/template/darkfish/filepage.rhtml
+
+   Merged patches from Eric Hodel (drbrain at segment7.net). Refs #5.
+
+
+-- Sat, 20 Dec 2008 21:04:57 -0000 by deveiant (r51) -----
+   Added:   lib/rdoc/generator/template/darkfish/images/bug.png (new)
+   Changed: lib/rdoc/generator/darkfish.rb
+            lib/rdoc/generator/template/darkfish/classpage.rhtml
+            lib/rdoc/generator/template/darkfish/index.rhtml
+            ChangeLog
+            lib/rdoc/generator/template/darkfish/rdoc.css
+            lib/rdoc/generator/template/darkfish/filepage.rhtml (and 3 other/s)
+
+    * Make the javascript headers all load the same thing.
+    * Moved the dom-ready handler into darkfish.js instead of a script section in the head.
+    * Insert RDoc debugging output when $DEBUG is true.
+    * Change the email addresses in darkfish.rb from <address>-style to (address) as a workaround so
+    RDoc output is valid.
+    * Updated the instructions for use in the README.
+
+
+-- Thu, 18 Dec 2008 16:39:30 -0000 by deveiant (r50) -----
+   Changed: lib/rdoc/generator/darkfish.rb
+            LICENSE
+            ChangeLog
+            lib/rdoc/generator/template/darkfish/rdoc.css
+            README
+
+    * CSS fix: Use the same formatting as the index page for content in file pages.
+    * Merged license statements.
+    * Added Mahlon to the contributors section.
+
+
+-- Thu, 18 Dec 2008 00:59:26 -0000 by deveiant (r49) -----
+   Changed: lib/rdoc/generator/darkfish.rb
+
+   Bumping release version to 1.1.6.
+
+
+-- Thu, 18 Dec 2008 00:58:30 -0000 by deveiant (r48) -----
+   Added:   lib/rdoc/generator/template/darkfish/images/page_white_text.png (new)
+   Changed: spec/rdoc/generator/darkfish_spec.rb
+            lib/rdoc/generator/darkfish.rb
+            lib/rdoc/generator/template/darkfish/classpage.rhtml
+            LICENSE
+            Rakefile
+            lib/rdoc/generator/template/darkfish/index.rhtml (and 6 other/s)
+
+    * Merged patches from Eric Hodel for Rdoc 2.3 changes + improvements (closes #4)
+    - Symbol keys -> strings
+    - Added a Files list to the index page
+    - Support Rubygems auto-discovery
+    * Reworked the file page template so it renders differently for 'SimpleParser' pages.
+    * Cleaned up the DL-related classes so constants don't look so weird.
+    * Removed the box around H1s. -ETOOMANYBOXES
+
+
+-- Wed, 17 Dec 2008 22:26:58 -0000 by deveiant (r47) -----
+   Added:   /branches/rdoc-2.3-changes
+            -> renamed from /trunk@r46
+
+   Making a branch for RDoc 2.3 changes so I don't break the build
+
+
+-- Thu, 04 Dec 2008 22:31:39 -0000 by deveiant (r46) -----
+   Changed: /trunk/Rakefile
+            /trunk/project.yml
+
+   Updated build system.
+
+
+-- Thu, 04 Dec 2008 19:12:13 -0000 by deveiant (r45) -----
+   Changed: /trunk/spec/rdoc/generator/darkfish_spec.rb
+
+   Fixed broken expectation setup.
+
+
+-- Thu, 04 Dec 2008 19:07:12 -0000 by deveiant (r44) -----
+   Changed: /trunk
+            /trunk/lib/rdoc/generator/template/darkfish/rdoc.css
+
+   Cleaned up display of constant and attribute lists.
+
+
+-- Thu, 04 Dec 2008 06:50:02 -0000 by deveiant (r43) -----
+   Added:   /trunk/lib/rdoc/discover.rb
+            -> renamed from /trunk/lib/darkfish-rdoc.rb@r42
+   Changed: /trunk/Rakefile
+            /trunk/project.yml
+   Deleted: /trunk/lib/darkfish-rdoc.rb
+
+    * Integrated patch from Eric Hodel (drbrain at segment7.net) for RDoc 2.2.2 autodiscovery. Thanks
+    Eric!
+    * Updated build system
+
+
+-- Mon, 06 Oct 2008 21:33:22 -0000 by deveiant (r42) -----
+   Changed: /trunk/Rakefile
+
+   Updated build system.
+
+
+-- Fri, 26 Sep 2008 06:08:54 -0000 by deveiant (r40) -----
+   Changed: /trunk/ChangeLog
+            /trunk/lib/rdoc/generator/template/darkfish/rdoc.css
+
+   Fixed the margin/border on constants and attributes
+
+
+-- Thu, 25 Sep 2008 16:50:52 -0000 by deveiant (r38) -----
+   Changed: /trunk/lib/rdoc/generator/template/darkfish/js/jquery.js
+            /trunk/lib/rdoc/generator/template/darkfish/js/quicksearch.js
+            /trunk/Rakefile.local
 
     * Updated jquery to 1.2.6
     * Focus the results of a quicksearch when it is off screen
@@ -10,47 +141,47 @@
 
 
 -- Mon, 22 Sep 2008 15:57:32 -0000 by deveiant (r36) -----
-   Changed: Rakefile
-            ChangeLog
+   Changed: /trunk/Rakefile
+            /trunk/ChangeLog
 
    Updated build system to add the workaround for broken developmental dependencies under RubyGems 1.2.0.
 
 
 -- Mon, 22 Sep 2008 15:14:43 -0000 by deveiant (r35) -----
-   Changed: spec/rdoc/generator/darkfish_spec.rb
-            lib/rdoc/generator/darkfish.rb
+   Changed: /trunk/spec/rdoc/generator/darkfish_spec.rb
+            /trunk/lib/rdoc/generator/darkfish.rb
 
    Updated to work under RDoc 2.2.0 (fixes #2).
 
 
 -- Tue, 16 Sep 2008 14:22:21 -0000 by deveiant (r34) -----
-   Changed: Rakefile
-            project.yml
+   Changed: /trunk/Rakefile
+            /trunk/project.yml
 
    Updated the build system.
 
 
 -- Tue, 16 Sep 2008 14:21:23 -0000 by deveiant (r33) -----
-   Changed: lib/rdoc/generator/darkfish.rb
-            lib/rdoc/generator/template/darkfish/classpage.rhtml
+   Changed: /trunk/lib/rdoc/generator/darkfish.rb
+            /trunk/lib/rdoc/generator/template/darkfish/classpage.rhtml
 
     * Fixed method name extraction for non \w+ methods (e.g., operators)
     * Bumped version to 1.1.5.
 
 
 -- Wed, 20 Aug 2008 01:45:44 -0000 by deveiant (r32) -----
-   Changed: lib/rdoc/generator/darkfish.rb
-            ChangeLog
-            lib/darkfish-rdoc.rb
+   Changed: /trunk/lib/rdoc/generator/darkfish.rb
+            /trunk/ChangeLog
+            /trunk/lib/darkfish-rdoc.rb
 
    Updated build system.
 
 
 -- Wed, 20 Aug 2008 01:28:01 -0000 by deveiant (r30) -----
-   Changed: Rakefile
-            project.yml
-            lib/rdoc/generator/template/darkfish/rdoc.css
-            lib/rdoc/generator/template/darkfish/js/darkfish.js
+   Changed: /trunk/Rakefile
+            /trunk/project.yml
+            /trunk/lib/rdoc/generator/template/darkfish/rdoc.css
+            /trunk/lib/rdoc/generator/template/darkfish/js/darkfish.js
 
     * Updated build system
     * Added a fix for javascript 'console is not defined' bug in the darkfish.js file.
@@ -59,28 +190,28 @@
 
 
 -- Tue, 19 Aug 2008 02:37:00 -0000 by deveiant (r29) -----
-   Changed: README
-            ChangeLog
-            Rakefile.local
+   Changed: /trunk/README
+            /trunk/ChangeLog
+            /trunk/Rakefile.local
 
    Added some local tasks to clean up .svn directories before publication.
 
 
 -- Tue, 19 Aug 2008 02:12:27 -0000 by deveiant (r27) -----
-   Changed: lib/rdoc/generator/darkfish.rb
-            lib/darkfish-rdoc.rb
+   Changed: /trunk/lib/rdoc/generator/darkfish.rb
+            /trunk/lib/darkfish-rdoc.rb
 
    Oops. Forgot I need to change the version string in two places. Should really figure out some better
    way to do this.
 
 
 -- Tue, 19 Aug 2008 02:10:53 -0000 by deveiant (r26) -----
-   Changed: README
-            lib/rdoc/generator/darkfish.rb
-            lib/rdoc/generator/template/darkfish/classpage.rhtml
-            Rakefile
-            lib/rdoc/generator/template/darkfish/rdoc.css
-            ChangeLog (and 2 other/s)
+   Changed: /trunk/README
+            /trunk/lib/rdoc/generator/darkfish.rb
+            /trunk/lib/rdoc/generator/template/darkfish/classpage.rhtml
+            /trunk/Rakefile
+            /trunk/lib/rdoc/generator/template/darkfish/rdoc.css
+            /trunk/ChangeLog (and 2 other/s)
 
     * Bumped version to 1.1.3
     * Updated build system
@@ -89,29 +220,29 @@
 
 -- Thu, 14 Aug 2008 00:59:07 -0000 by deveiant (r24) -----
    Changed: /trunk
-            lib/rdoc/generator/darkfish.rb
-            Rakefile
-            lib/darkfish-rdoc.rb
+            /trunk/lib/rdoc/generator/darkfish.rb
+            /trunk/Rakefile
+            /trunk/lib/darkfish-rdoc.rb
 
     * Updated build system
 
 
 -- Sat, 09 Aug 2008 01:14:22 -0000 by deveiant (r23) -----
-   Added:   spec/rdoc/generator (new)
-            spec/rdoc/generator/darkfish_spec.rb (new)
-            spec/rdoc (new)
-            spec (new)
-   Changed: project.yml
-            lib/rdoc/generator/template/darkfish/rdoc.css
-            lib/rdoc/generator/darkfish.rb
-            Rakefile
-            ChangeLog
-   Deleted: lib/rdoc/generator/template/darkfish/images/bullet_go.png
-            lib/rdoc/generator/template/darkfish/images/lightbulb.png
-            lib/rdoc/generator/template/darkfish/images/page_white_ruby.png
-            lib/rdoc/generator/template/darkfish/images/tag_blue.png
-            lib/rdoc/generator/template/darkfish/images/tag_blue_edit.png
-            lib/rdoc/generator/template/darkfish/images/bullet_toggle_plus.png (and 12 other/s)
+   Added:   /trunk/spec/rdoc/generator (new)
+            /trunk/spec/rdoc/generator/darkfish_spec.rb (new)
+            /trunk/spec/rdoc (new)
+            /trunk/spec (new)
+   Changed: /trunk/project.yml
+            /trunk/lib/rdoc/generator/template/darkfish/rdoc.css
+            /trunk/lib/rdoc/generator/darkfish.rb
+            /trunk/Rakefile
+            /trunk/ChangeLog
+   Deleted: /trunk/lib/rdoc/generator/template/darkfish/images/bullet_go.png
+            /trunk/lib/rdoc/generator/template/darkfish/images/lightbulb.png
+            /trunk/lib/rdoc/generator/template/darkfish/images/page_white_ruby.png
+            /trunk/lib/rdoc/generator/template/darkfish/images/tag_blue.png
+            /trunk/lib/rdoc/generator/template/darkfish/images/tag_blue_edit.png
+            /trunk/lib/rdoc/generator/template/darkfish/images/bullet_toggle_plus.png (and 12 other/s)
 
     * Updated build system.
     * Fixed distributions, which didn't have the static files included with them.
@@ -122,66 +253,66 @@
 
 -- Fri, 08 Aug 2008 13:15:20 -0000 by deveiant (r22) -----
    Changed: /trunk
-            Rakefile
-            project.yml
-   Deleted: misc/rake
+            /trunk/Rakefile
+            /trunk/project.yml
+   Deleted: /trunk/misc/rake
 
    Checkpoint commit
 
 
 -- Fri, 08 Aug 2008 02:47:22 -0000 by deveiant (r21) -----
-   Changed: README
-            lib/rdoc/generator/template/darkfish/classpage.rhtml
-            Rakefile
-            ChangeLog
-            lib/rdoc/generator/template/darkfish/js/darkfish.js
+   Changed: /trunk/README
+            /trunk/lib/rdoc/generator/template/darkfish/classpage.rhtml
+            /trunk/Rakefile
+            /trunk/ChangeLog
+            /trunk/lib/rdoc/generator/template/darkfish/js/darkfish.js
 
    Checkpoint commit
 
 
 -- Thu, 07 Aug 2008 06:56:40 -0000 by deveiant (r18) -----
-   Added:   lib/rdoc/generator/darkfish.rb
+   Added:   /trunk/lib/rdoc/generator/darkfish.rb
             -> renamed from /trunk/lib/rdoc/generator/darkfish_generator.rb@r16
-            LICENSE (new)
-            project.yml (new)
-            ChangeLog (new)
-            Rakefile.local (new)
-            lib/rdoc/generator/template/darkfish/js/darkfish.js (new) (and 1 other/s)
+            /trunk/LICENSE (new)
+            /trunk/project.yml (new)
+            /trunk/ChangeLog (new)
+            /trunk/Rakefile.local (new)
+            /trunk/lib/rdoc/generator/template/darkfish/js/darkfish.js (new) (and 1 other/s)
    Changed: /trunk
-            lib/rdoc/generator/template/darkfish/classpage.rhtml
-            Rakefile
-            lib/darkfish-rdoc.rb
-   Deleted: lib/rdoc/generator/darkfish_generator.rb
+            /trunk/lib/rdoc/generator/template/darkfish/classpage.rhtml
+            /trunk/Rakefile
+            /trunk/lib/darkfish-rdoc.rb
+   Deleted: /trunk/lib/rdoc/generator/darkfish_generator.rb
 
    Integrated new Rake build system.
 
 
 -- Tue, 29 Jul 2008 14:52:26 -0000 by deveiant (r17) -----
-   Changed: lib/darkfish-rdoc.rb
+   Changed: /trunk/lib/darkfish-rdoc.rb
 
    Fixed bug in darkfish-rdoc: 'generators' -> 'generator'
 
 
 -- Mon, 30 Jun 2008 19:06:36 -0000 by deveiant (r16) -----
-   Added:   lib/rdoc/generator
+   Added:   /trunk/lib/rdoc/generator
             -> renamed from /trunk/lib/rdoc/generators@r14
-   Changed: Rakefile
-            lib/darkfish-rdoc.rb
-   Deleted: lib/rdoc/generators
+   Changed: /trunk/Rakefile
+            /trunk/lib/darkfish-rdoc.rb
+   Deleted: /trunk/lib/rdoc/generators
 
    Beginning conversion to Rdoc 2.0. Broken for now; see tags/RDOC_1 for a working
    RDoc 1.x version.
 
 
 -- Wed, 21 May 2008 17:08:10 -0000 by deveiant (r14) -----
-   Added:   darkfish_preview.png (new)
-            lib/darkfish-rdoc.rb (new)
-   Changed: README
+   Added:   /trunk/darkfish_preview.png (new)
+            /trunk/lib/darkfish-rdoc.rb (new)
+   Changed: /trunk/README
             /trunk
-            Rakefile
-            lib/rdoc/generators/template/darkfish/js/jquery.js
-            lib/rdoc/generators/template/darkfish/classpage.rhtml
-            lib/rdoc/generators/darkfish_generator.rb (and 2 other/s)
+            /trunk/Rakefile
+            /trunk/lib/rdoc/generators/template/darkfish/js/jquery.js
+            /trunk/lib/rdoc/generators/template/darkfish/classpage.rhtml
+            /trunk/lib/rdoc/generators/darkfish_generator.rb (and 2 other/s)
 
     * Added a `require`-able library that injects the generator into RDoc's known
     generator hash.
@@ -192,32 +323,32 @@
 
 
 -- Sat, 03 May 2008 02:56:54 -0000 by deveiant (r13) -----
-   Changed: lib/rdoc/generators/darkfish_generator.rb
+   Changed: /trunk/lib/rdoc/generators/darkfish_generator.rb
 
    Added some more output path debugging
 
 
 -- Tue, 18 Mar 2008 15:52:57 -0000 by deveiant (r12) -----
-   Added:   lib/rdoc/generators/template/darkfish/classpage.rhtml
+   Added:   /trunk/lib/rdoc/generators/template/darkfish/classpage.rhtml
             -> renamed from /trunk/lib/rdoc/generators/template/classpage.rhtml@r10
-            lib/rdoc/generators/template/darkfish/index.rhtml
+            /trunk/lib/rdoc/generators/template/darkfish/index.rhtml
             -> renamed from /trunk/lib/rdoc/generators/template/index.rhtml@r10
-            lib/rdoc/generators/template/darkfish (new)
-            lib/rdoc/generators/template/darkfish/filepage.rhtml
+            /trunk/lib/rdoc/generators/template/darkfish (new)
+            /trunk/lib/rdoc/generators/template/darkfish/filepage.rhtml
             -> renamed from /trunk/lib/rdoc/generators/template/filepage.rhtml@r10
-            lib/rdoc/generators/template/darkfish/images
+            /trunk/lib/rdoc/generators/template/darkfish/images
             -> renamed from /trunk/lib/rdoc/generators/template/images@r10
-            lib/rdoc/generators/template/darkfish/js
+            /trunk/lib/rdoc/generators/template/darkfish/js
             -> renamed from /trunk/lib/rdoc/generators/template/js@r10 (and 2 other/s)
-   Changed: lib/rdoc/generators/darkfish_generator.rb
-            Rakefile
-            misc/rake/svn.rb
-   Deleted: lib/rdoc/generators/template/js
-            lib/rdoc/generators/template/rdoc.css
-            lib/rdoc/generators/template/classpage.rhtml
-            lib/rdoc/generators/template/index.rhtml
-            lib/rdoc/generators/template/filepage.rhtml
-            lib/rdoc/generators/template/images (and 1 other/s)
+   Changed: /trunk/lib/rdoc/generators/darkfish_generator.rb
+            /trunk/Rakefile
+            /trunk/misc/rake/svn.rb
+   Deleted: /trunk/lib/rdoc/generators/template/js
+            /trunk/lib/rdoc/generators/template/rdoc.css
+            /trunk/lib/rdoc/generators/template/classpage.rhtml
+            /trunk/lib/rdoc/generators/template/index.rhtml
+            /trunk/lib/rdoc/generators/template/filepage.rhtml
+            /trunk/lib/rdoc/generators/template/images (and 1 other/s)
 
     * Set up rdoc options to use itself for docs.
     * Set up sensible package tasks
@@ -227,30 +358,30 @@
 
 
 -- Mon, 18 Feb 2008 14:33:06 -0000 by deveiant (r11) -----
-   Changed: README
-            lib/rdoc/generators/template/rdoc.css
+   Changed: /trunk/README
+            /trunk/lib/rdoc/generators/template/rdoc.css
 
     * Updated README
     * Fixed up CSS for the index page.
 
 
 -- Sat, 16 Feb 2008 08:11:47 -0000 by deveiant (r10) -----
-   Added:   README (new)
-            lib/rdoc (new)
-            lib/rdoc/generators/template
+   Added:   /trunk/README (new)
+            /trunk/lib/rdoc (new)
+            /trunk/lib/rdoc/generators/template
             -> copied from /trunk/generators/template@r9
-            misc/prototype.html
+            /trunk/misc/prototype.html
             -> renamed from /trunk/prototype.html@r8
-            lib (new)
-            lib/rdoc/generators
+            /trunk/lib (new)
+            /trunk/lib/rdoc/generators
             -> renamed from /trunk/generators@r8 (and 3 other/s)
    Changed: /trunk
-            Rakefile
-            misc/rake/svn.rb
-   Deleted: index-prototype.html
-            misc/rake/verifytask.rb
-            prototype.html
-            generators
+            /trunk/Rakefile
+            /trunk/misc/rake/svn.rb
+   Deleted: /trunk/index-prototype.html
+            /trunk/misc/rake/verifytask.rb
+            /trunk/prototype.html
+            /trunk/generators
 
     * Added README
     * Rakefile
@@ -261,66 +392,66 @@
 
 
 -- Sat, 16 Feb 2008 06:19:51 -0000 by deveiant (r9) -----
-   Added:   misc/rake (new)
-            misc/rake/helpers.rb (new)
-            Rakefile (new)
-            misc/rake/svn.rb (new)
-            misc/rake/verifytask.rb (new)
-            misc (new) (and 1 other/s)
-   Changed: generators/template/rdoc.css
-            generators/template/classpage.rhtml
-            generators/darkfish_generator.rb
+   Added:   /trunk/misc/rake (new)
+            /trunk/misc/rake/helpers.rb (new)
+            /trunk/Rakefile (new)
+            /trunk/misc/rake/svn.rb (new)
+            /trunk/misc/rake/verifytask.rb (new)
+            /trunk/misc (new) (and 1 other/s)
+   Changed: /trunk/generators/template/rdoc.css
+            /trunk/generators/template/classpage.rhtml
+            /trunk/generators/darkfish_generator.rb
 
    Reorganizing for release.
 
 
 -- Thu, 03 Jan 2008 19:40:24 -0000 by deveiant (r8) -----
-   Changed: generators/template/index.rhtml
+   Changed: /trunk/generators/template/index.rhtml
 
    Removed the description bit from the index page -- there's just no way to make it work gracefully.
 
 
 -- Fri, 19 Oct 2007 01:04:31 -0000 by deveiant (r7) -----
-   Changed: generators/template/rdoc.css
-            generators/template/classpage.rhtml
+   Changed: /trunk/generators/template/rdoc.css
+            /trunk/generators/template/classpage.rhtml
 
    Fixes for C source documentation, a few CSS tweaks
 
 
 -- Thu, 18 Oct 2007 15:15:47 -0000 by deveiant (r6) -----
-   Added:   generators/template/images/macFFBgHack.png (new)
-   Changed: generators/template/rdoc.css
+   Added:   /trunk/generators/template/images/macFFBgHack.png (new)
+   Changed: /trunk/generators/template/rdoc.css
 
    Fixed missing piece of ThickBox for FF on the Mac
 
 
 -- Fri, 12 Oct 2007 00:20:02 -0000 by deveiant (r5) -----
-   Changed: generators/darkfish_generator.rb
+   Changed: /trunk/generators/darkfish_generator.rb
 
    Add time constants for the time-detla calculations
 
 
 -- Thu, 11 Oct 2007 21:05:25 -0000 by deveiant (r4) -----
-   Changed: generators/template/rdoc.css
-            generators/darkfish_generator.rb
+   Changed: /trunk/generators/template/rdoc.css
+            /trunk/generators/darkfish_generator.rb
 
     * Updated definition lists in the description to not look like ass.
     * Documentation touchups.
 
 
 -- Wed, 10 Oct 2007 20:40:20 -0000 by deveiant (r3) -----
-   Changed: generators/darkfish_generator.rb
+   Changed: /trunk/generators/darkfish_generator.rb
 
    Added a Generators::DARKFISHGenerators alias to work around Rdoc's assumption that all formats are acronyms.
 
 
 -- Wed, 10 Oct 2007 19:33:33 -0000 by deveiant (r2) -----
-   Added:   generators/template/images/wrench_orange.png (new)
-            generators/template/images/zoom.png (new)
-            generators/template/js (new)
-            generators/template/images/wrench.png (new)
-            generators/template/rdoc.css (new)
-            generators/template/images/tag_green.png (new) (and 40 other/s)
+   Added:   /trunk/generators/template/images/wrench_orange.png (new)
+            /trunk/generators/template/images/zoom.png (new)
+            /trunk/generators/template/js (new)
+            /trunk/generators/template/images/wrench.png (new)
+            /trunk/generators/template/rdoc.css (new)
+            /trunk/generators/template/images/tag_green.png (new) (and 40 other/s)
 
    Initial commit
 

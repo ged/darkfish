@@ -134,7 +134,8 @@ RDOC_OPTIONS = [
 	'-SHN',
 	'-i', '.',
 	'-m', 'README',
-	'-W', 'http://deveiate.org/projects/Darkfish-Rdoc//browser/trunk/'
+	'-t', "#{PKG_NAME} - #{PKG_SUMMARY}",
+	'-W', 'http://deveiate.org/projects/Darkfish-Rdoc/browser/trunk/'
   ]
 
 # Release constants

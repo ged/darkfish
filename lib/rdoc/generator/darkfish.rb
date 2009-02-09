@@ -1,37 +1,7 @@
 #!ruby
-#
-#  Darkfish RDoc HTML Generator
-#  $Id$
-#
-#  Author: Michael Granger <ged@FaerieMUD.org>
-#  
-#  == License
-#  
-#  Copyright (c) 2007, 2008, The FaerieMUD Consortium
-#  All rights reserved.
-#  
-#  Permission is hereby granted, free of charge, to any person obtaining a copy
-#  of this software and associated documentation files (the "Software"), to deal
-#  in the Software without restriction, including without limitation the rights
-#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#  copies of the Software, and to permit persons to whom the Software is
-#  furnished to do so, subject to the following conditions:
-#  
-#  The above copyright notice and this permission notice shall be included in
-#  all copies or substantial portions of the Software.
-#  
-#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-#  THE SOFTWARE.
-#  
-
 
 require 'rubygems'
-gem 'rdoc', '>= 2.0.0'
+gem 'rdoc', '>= 2.3'
 
 require 'pp'
 require 'pathname'
@@ -43,8 +13,26 @@ require 'rdoc/rdoc'
 require 'rdoc/generator/xml'
 require 'rdoc/generator/html'
 
-### A erb-based RDoc HTML generator
+#
+#  Darkfish RDoc HTML Generator
+#  
+#  $Id$
+#
+#  == Author/s
+#  * Michael Granger (ged@FaerieMUD.org)
+#  
+#  == Contributors
+#  * Mahlon E. Smith (mahlon@martini.nu)
+#  * Eric Hodel (drbrain@segment7.net)
+#  
+#  == License
+#  
+#  :include: LICENSE
+#  
 class RDoc::Generator::Darkfish < RDoc::Generator::XML
+
+	RDoc::RDoc.add_generator( self )
+
 	include ERB::Util
 
 	# Subversion rev
@@ -58,7 +46,13 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 	GENERATOR_DIR = Pathname.new( __FILE__ ).expand_path.dirname
 
 	# Release Version
-	VERSION = '1.1.5'
+	VERSION = '1.1.6'
+
+	# Directory where generated classes live relative to the root
+	CLASS_DIR = nil
+
+	# Directory where generated files live relative to the root
+	FILE_DIR = nil
 
 
 	#################################################################
@@ -76,7 +70,7 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 	#################################################################
 
 	### Initialize a few instance variables before we start
-	def initialize( *args )
+	def initialize( options )
 		@template = nil
 		@template_dir = GENERATOR_DIR + 'template/darkfish'
 		
@@ -85,6 +79,9 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 		@hyperlinks = {}
 
 		@basedir = Pathname.pwd.expand_path
+
+		options.inline_source = true
+		options.diagram = false
 
 		super
 	end
@@ -156,20 +153,19 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 
 		# Make a hash of class info keyed by class name
 		classes_by_classname = classes.inject({}) {|hash, classinfo|
-			hash[ classinfo['full_name'] ] = classinfo
-			hash[ classinfo['full_name'] ][:outfile] =
-				classinfo['full_name'].gsub( /::/, '/' ) + '.html'
+			hash[ classinfo[:full_name] ] = classinfo
+			hash[ classinfo[:full_name] ][:outfile] =
+				classinfo[:full_name].gsub( /::/, '/' ) + '.html'
 			hash
 		}
 
 		# Make a hash of file info keyed by path
 		files_by_path = files.inject({}) {|hash, fileinfo|
-			hash[ fileinfo['full_path'] ] = fileinfo
-			hash[ fileinfo['full_path'] ][:outfile] = 
-				fileinfo['full_path'] + '.html'
+			hash[ fileinfo[:full_path] ] = fileinfo
+			hash[ fileinfo[:full_path] ][:outfile] = fileinfo[:full_path] + '.html'
 			hash
 		}
-		
+
 		self.write_style_sheet
 		self.generate_index( options, files_by_path, classes_by_classname )
 		self.generate_class_files( options, files_by_path, classes_by_classname )
@@ -256,6 +252,7 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 			rel_prefix = outputdir.relative_path_from( outfile.dirname )
 			svninfo    = self.get_svninfo( classinfo )
 
+			debug_msg "  rendering #{outfile}"
 			self.render_template( templatefile, binding(), outfile )
 		end
 	end
@@ -267,13 +264,15 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 		debug_msg "Generating file documentation in #@outputdir"
 		templatefile = @template_dir + 'filepage.rhtml'
 
+		modsort = self.get_sorted_module_list( classes )
+
 		files.sort_by {|k,v| k }.each do |path, fileinfo|
 			outfile     = @outputdir + fileinfo[:outfile]
 			debug_msg "  working on %s (%s)" % [ path, outfile ]
 			rel_prefix  = @outputdir.relative_path_from( outfile.dirname )
 			context     = binding()
 
-			debug_msg "  rending #{outfile}"
+			debug_msg "  rendering #{outfile}"
 			self.render_template( templatefile, binding(), outfile )
 		end
 	end
@@ -310,10 +309,10 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 	### Try to extract Subversion information out of the first constant whose value looks like
 	### a subversion Id tag. If no matching constant is found, and empty hash is returned.
 	def get_svninfo( classinfo )
-		return {} unless classinfo['sections']
-		constants = classinfo['sections'].first['constants'] or return {}
+		return {} unless classinfo[:sections]
+		constants = classinfo[:sections].first[:constants] or return {}
 	
-		constants.find {|c| c['value'] =~ SVNID_PATTERN } or return {}
+		constants.find {|c| c[:value] =~ SVNID_PATTERN } or return {}
 
 		filename, rev, date, time, committer = $~.captures
 		commitdate = Time.parse( date + ' ' + time )
@@ -358,10 +357,6 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 	end
 
 end # Roc::Generator::Darkfish
-
-# Silly alias for RDoc's silly upcased 'class_name'
-RDoc::Generator::DARKFISH = RDoc::Generator::Darkfish
-
 
 # :stopdoc:
 
@@ -447,31 +442,5 @@ end # module TimeConstantMethods
 # Extend Numeric with time constants
 class Numeric # :nodoc:
 	include TimeConstantMethods
-end
-
-
-### Monkeypatch RDoc::Generator::Method so it works with line numbers
-### turned on and $DEBUG = true. Also make it use a conditional instead
-### of a side-effect to get the initial blank line.
-class RDoc::Generator::Method # :nodoc:
-	def add_line_numbers(src)
-		if src =~ /\A.*, line (\d+)/
-			first = $1.to_i - 1
-			last  = first + src.count("\n")
-			size = last.to_s.length
-
-			line = first
-			src.gsub!(/^/) do
-				if line == first
-					res = " " * ( size + 2 )
-				else
-					res = sprintf( "%#{size}d: ", line )
-				end
-
-				line += 1
-				res
-			end
-		end
-	end
 end
 

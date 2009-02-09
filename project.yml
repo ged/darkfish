@@ -10,7 +10,7 @@ author_name: Michael Granger
 project_pubhost: deveiate
 project_homepage: http://deveiate.org/projects/Darkfish-Rdoc/
 project_dependencies: 
-  rdoc: ">= 2.2.2"
+  rdoc: ">= 2.3"
 project_summary: A pretty (different) Rdoc HTML generator
 project_name: Darkfish-Rdoc
 version_file: rdoc/generator/darkfish.rb

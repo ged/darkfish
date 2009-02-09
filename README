@@ -38,22 +38,16 @@ Or download the source and do:
 
 == Usage
 
-Because of the way Rdoc and Rubygems work, there's currently no way to make the
-Darkfish generator available to Rdoc from the command line 'rdoc' tool if you 
-have it installed as a gem, but if you install it as a regular Ruby library 
-(via 'rake install'), you can do this:
+If you're using RDoc 2.3 or later, the Darkfish formatter will be automatically discovered when RDoc
+is loaded, so you only have to specify that you want the 'darkfish' formatter:
 
  $ rdoc -w 4 -SHN -f darkfish -m README README lib
 
-I'm trying to figure out how to resolve this for the gem. Suggestions welcomed.
-
-You can, however, load the formatter as a gem from a Rakefile before you define 
-the RDocTask:
+It's equally easy to specify from a Rakefile in an RDocTask:
 
   ### Task: rdoc
   require 'rake/rdoctask'
   gem 'darkfish-rdoc' # Omit this if it's installed as a regular library
-  require 'darkfish-rdoc'
 
   Rake::RDocTask.new do |rdoc|
     rdoc.title    = "My Awesome SnoCone Library"
@@ -81,26 +75,5 @@ or a ticket on the project's Trac:
 
 == License
 
- Copyright (c) 2007, 2008, The FaerieMUD Consortium
- All rights reserved.
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- 
-
+See the LICENSE file included with the distribution for copyright and licensing details.
 
