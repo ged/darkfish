@@ -1,3 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title><%= fileinfo[:title] %></title>
+
+	<link type="text/css" media="screen" href="<%= rel_prefix %>/rdoc.css" rel="stylesheet" />
+
+	<script src="<%= rel_prefix %>/js/jquery.js" type="text/javascript" 
+		charset="utf-8"></script>
+	<script src="<%= rel_prefix %>/js/thickbox-compressed.js" type="text/javascript" 
+		charset="utf-8"></script>
+	<script src="<%= rel_prefix %>/js/quicksearch.js" type="text/javascript" 
+		charset="utf-8"></script>
+	<script src="<%= rel_prefix %>/js/darkfish.js" type="text/javascript" 
+		charset="utf-8"></script>
+</head>
+	
 <% if fileinfo[:parser] == RDoc::Parser::Simple %>
 <body class="file">
   <div id="metadata">
@@ -88,3 +110,4 @@
 	</div>
 </body>
 <% end %>
+</html>
