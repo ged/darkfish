@@ -4,7 +4,7 @@
 #
 # Based on various other Rakefiles, especially one by Ben Bleything
 #
-# Copyright (c) 2008 The FaerieMUD Consortium
+# Copyright (c) 2007-2009 The FaerieMUD Consortium
 #
 # Authors:
 #  * Michael Granger <ged@FaerieMUD.org>
@@ -21,15 +21,13 @@ BEGIN {
 	$LOAD_PATH.unshift( extdir.to_s ) unless $LOAD_PATH.include?( extdir.to_s )
 }
 
-require 'rubygems'
-gem 'rake', '>= 0.8.3'
-
 require 'rbconfig'
 require 'rake'
 require 'rake/rdoctask'
 require 'rake/testtask'
 require 'rake/packagetask'
 require 'rake/clean'
+require 'rake/191_compat.rb'
 
 $dryrun = false
 
@@ -134,7 +132,7 @@ RDOC_OPTIONS = [
 	'-SHN',
 	'-i', '.',
 	'-m', 'README',
-	'-t', "#{PKG_NAME} - #{PKG_SUMMARY}",
+	'-t', PKG_NAME,
 	'-W', 'http://deveiate.org/projects/Darkfish-Rdoc/browser/trunk/'
   ]
 
@@ -155,7 +153,7 @@ RUBYFORGE_PROJECT = 'darkfish-rdoc'
 
 # Gem dependencies: gemname => version
 DEPENDENCIES = {
-	'rdoc' => '>= 2.2.2',
+	'rdoc' => '>= 2.3',
 }
 
 # Developer Gem dependencies: gemname => version
@@ -184,13 +182,13 @@ GEMSPEC   = Gem::Specification.new do |gem|
 	gem.version           = PKG_VERSION
 
 	gem.summary           = PKG_SUMMARY
-	gem.description       = <<-EOD
-	A complete replacement for the default HTML generator for Rdoc, the
-	API documentation-extraction system for Ruby. 
-	EOD
-	gem.post_install_message = <<-EOD
-	To use the Darkfish formatter, just add '-f darkfish' to your rdoc command of choice.
-	EOD
+	gem.description       = [
+		"A complete replacement for the default HTML generator for Rdoc, the",
+		"API documentation-extraction system for Ruby. ",
+  	  ].join( "\n" )
+	gem.post_install_message = [
+		"To use the Darkfish formatter, just add '-f darkfish' to your rdoc command of choice.",
+	  ].join( "\n" )
 
 	gem.authors           = 'Michael Granger'
 	gem.email             = 'ged@FaerieMUD.org'

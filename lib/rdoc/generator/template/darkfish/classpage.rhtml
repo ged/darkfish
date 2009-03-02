@@ -87,8 +87,7 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					<% classinfo[:methods].each do |meth| %>
-					<li><a href="#<%= meth[:name] %>"><%= meth[:name]
-					 	%></a></li>
+					<li><a href="#<%= meth[:name] %>"><%= meth[:name] %></a></li>
 					<% end %>
 				</ul>
 			</div>
@@ -224,6 +223,7 @@
 		unless methodinfo[:name] 
 			methodinfo[:name] = methodinfo[:callseq][/^.*?\.(\w+)/, 1] || methodinfo[:callseq]
 		end
+		
 		%>
 			<% if methodinfo[:m_desc] =~ /Alias for/ %>
 			<div id="<%= methodinfo[:name].gsub( /[^a-z]+/, '-' ) %>-method" class="method-detail method-alias">
@@ -245,7 +245,10 @@
 
 				<div class="method-description">
 					<% if methodinfo[:m_desc] %>
-					<%= methodinfo[:m_desc].strip %>
+					<%= methodinfo[:m_desc].strip.gsub(%r{<a href="(.*?)#\w+">(.*?)</a>}) do |m|
+						%{<a class="xref" href="#$1#$2">#$2</a>}
+					end
+					%>
 					<% else %>
 					<p class="missing-docs">(Not documented)</p>
 					<% end %>
@@ -263,7 +266,7 @@
 				<% if methodinfo[:aka] %>
 				<div class="aliases">
 					Also aliased as: <%= methodinfo[:aka].collect do |aliasinfo|
-						%{<a href="#{aliasinfo[:aref]}">#{aliasinfo[:name]}</a>}
+						%{<a class="xref alias" href="##{aliasinfo[:name]}">##{aliasinfo[:name]}</a>}
 					end.join(", ") %>
 				</div>
 				<% end %>
