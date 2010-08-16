@@ -9,16 +9,9 @@ BEGIN {
 	$LOAD_PATH.unshift( libdir ) unless $LOAD_PATH.include?( libdir )
 }
 
-begin
-	require 'spec/runner'
-	require 'rdoc/generator/darkfish'
-rescue LoadError
-	unless Object.const_defined?( :Gem )
-		require 'rubygems'
-		retry
-	end
-	raise
-end
+require 'spec'
+require 'rdoc'
+require 'rdoc/generator/darkfish'
 
 
 describe RDoc::Generator::Darkfish do

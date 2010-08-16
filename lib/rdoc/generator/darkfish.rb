@@ -1,17 +1,15 @@
 #!ruby
 
-require 'rubygems'
-gem 'rdoc', '>= 2.3'
-
 require 'pp'
 require 'pathname'
 require 'fileutils'
 require 'erb'
 require 'yaml'
+require 'enumerator'
 
 require 'rdoc/rdoc'
-require 'rdoc/generator/xml'
-require 'rdoc/generator/html'
+
+DarkfishSuperclass = RDoc::Generator.const_defined?( "XML" ) ? RDoc::Generator::XML : Object
 
 #
 #  Darkfish RDoc HTML Generator
@@ -29,7 +27,7 @@ require 'rdoc/generator/html'
 #  
 #  :include: LICENSE
 #  
-class RDoc::Generator::Darkfish < RDoc::Generator::XML
+class RDoc::Generator::Darkfish < DarkfishSuperclass
 
 	RDoc::RDoc.add_generator( self )
 
@@ -46,13 +44,48 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 	GENERATOR_DIR = Pathname.new( __FILE__ ).expand_path.dirname
 
 	# Release Version
-	VERSION = '1.1.6'
+	VERSION = '1.1.7'
 
 	# Directory where generated classes live relative to the root
 	CLASS_DIR = nil
 
 	# Directory where generated files live relative to the root
 	FILE_DIR = nil
+
+	# An array of transforms to run on a method name to derive a suitable
+	# anchor name. The pairs are used in pairs as arguments to gsub.
+	ANAME_TRANSFORMS = [
+		/\?$/,   '_p',
+		/\!$/,   '_bang',
+		/=$/,    '_eq',
+		/^<<$/,  '_lshift',
+		/^>>$/,  '_rshift',
+		/\[\]=/, '_aset',
+		/\[\]/,  '_aref',
+		/\*\*/,  '_pow',
+		/^~$/,   '_complement',
+		/^!$/,   '_bang',
+		/^\+@$/, '_uplus',
+		/^-@$/,  '_uminus',
+		/^\+$/,  '_add',
+		/^-$/,   '_sub',
+		/^\*$/,  '_mult',
+		%r{^/$}, '_div',
+		/^%$/,   '_mod',
+		/^<=>$/, '_comp',
+		/^==$/,  '_equal',
+		/^!=$/,  '_nequal',
+		/^===$/, '_eqq',
+		/^>$/,   '_gt',
+		/^>=$/,  '_ge',
+		/^<$/,   '_lt',
+		/^<=$/,  '_le',
+		/^&$/,   '_and',
+		/^|$/,   '_or',
+		/^\^$/,  '_xor',
+		/^=~$/,  '_match',
+		/^!~$/,  '_notmatch',
+	]
 
 
 	#################################################################
@@ -71,19 +104,26 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 
 	### Initialize a few instance variables before we start
 	def initialize( options )
+		@options = options
 		@template = nil
-		@template_dir = GENERATOR_DIR + 'template/darkfish'
+		
+		template = options.template || 'darkfish'
+		@template_dir = (template =~ /\A\//) ? 
+			Pathname.new( template ) :
+			GENERATOR_DIR + 'template/' + template
+		
+		configfile = @template_dir + 'config.yml'
+		@config = (configfile.file?) ? YAML.load_file( configfile.to_s ) : {}
 		
 		@files      = []
 		@classes    = []
 		@hyperlinks = {}
-
+		
 		@basedir = Pathname.pwd.expand_path
-
-		options.inline_source = true
+		
 		options.diagram = false
-
-		super
+		
+		super()
 	end
 	
 	
@@ -93,6 +133,20 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 
 	# The output directory
 	attr_reader :outputdir
+	
+	
+	### Read the spcified To be called from ERB template to import (embed) 
+	### another template
+	def import( erbfile )
+		erb = File.open( erbfile ) {|fp| ERb.new(fp.read) }
+		return erb.run( binding() )
+	end
+
+
+	### Return the data section from the config file (if any)
+	def data
+		return @config['data']
+	end
 	
 	
 	### Output progress information if debugging is enabled
@@ -113,7 +167,8 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 	### output directory.
 	def write_style_sheet
 		debug_msg "Copying over static files"
-		staticfiles = %w[rdoc.css js images]
+		staticfiles = @config['static'] || %w[rdoc.css js images]
+		staticfiles = staticfiles.split( /\s+/ ) if staticfiles.is_a?( String )
 		staticfiles.each do |path|
 			FileUtils.cp_r( @template_dir + path, '.', :verbose => $DEBUG, :noop => $dryrun )
 		end
@@ -207,34 +262,11 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 		debug_msg "Rendering the index page..."
 
 		templatefile = @template_dir + 'index.rhtml'
-		template_src = templatefile.read
-		template = ERB.new( template_src, nil, '<>' )
-		template.filename = templatefile.to_s
-		context = binding()
-
 		modsort = self.get_sorted_module_list( classes )
-		output = nil
-		begin
-			output = template.result( context )
-		rescue NoMethodError => err
-			raise "Error while evaluating %s: %s (at %p)" % [
-				templatefile,
-				err.message,
-				eval( "_erbout[-50,50]", context )
-			]
-		end
-
 		outfile = @basedir + @options.op_dir + 'index.html'
-		unless $dryrun
-			debug_msg "Outputting to %s" % [outfile.expand_path]
-			outfile.open( 'w', 0644 ) do |fh|
-				fh.print( output )
-			end
-		else
-			debug_msg "Would have output to %s" % [outfile.expand_path]
-		end
+		
+		self.render_template( templatefile, binding(), outfile )
 	end
-
 
 
 	### Generate a documentation file for each class present in the
@@ -281,7 +313,7 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 	### Return a string describing the amount of time in the given number of
 	### seconds in terms a human can understand easily.
 	def time_delta_string( seconds )
-		return 'less than a minute' if seconds < 1.minute 
+		return 'less than a minute' if seconds < 1.minute
 		return (seconds / 1.minute).to_s + ' minute' + (seconds/60 == 1 ? '' : 's') if seconds < 50.minutes
 		return 'about one hour' if seconds < 90.minutes
 		return (seconds / 1.hour).to_s + ' hours' if seconds < 18.hours
@@ -345,6 +377,8 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 			]
 		end
 
+		output = self.wrap_content( output, context )
+
 		unless $dryrun
 			outfile.dirname.mkpath
 			outfile.open( 'w', 0644 ) do |ofh|
@@ -356,13 +390,56 @@ class RDoc::Generator::Darkfish < RDoc::Generator::XML
 		end
 	end
 
+
+	### Load the configured wrapper file and wrap it around the given +content+.
+	def wrap_content( output, context )
+		wrapper = @options.wrapper || @config['wrapper'] || 'wrapper.rhtml'
+		wrapperfile = (wrapper =~ /\A\//) ? 
+			Pathname.new( wrapper ) :
+			@template_dir + wrapper
+		
+		if wrapperfile.file?
+			# Add 'content' to the context binding for the wrapper template
+			eval( "content = %p" % [output], context )
+
+			template_src = wrapperfile.read
+			template = ERB.new( template_src, nil, '<>' )
+			template.filename = templatefile.to_s
+
+			begin
+				return template.result( context )
+			rescue NoMethodError => err
+				raise "Error while evaluating %s: %s (at %p)" % [
+					templatefile.to_s,
+					err.message,
+					eval( "_erbout[-50,50]", context )
+				]
+			end
+		end
+
+	end
+	
+
+	#######
+	private
+	#######
+
+	### Given the name of a Ruby method, return a name suitable for use as target names in
+	### A tags.
+	def aname_from_method( methodname )
+		return ANAME_TRANSFORMS.enum_slice( 2 ).inject( methodname.to_s ) do |name, xform|
+			name.gsub( *xform )
+		end
+	end
+	
+
 end # Roc::Generator::Darkfish
 
 # :stopdoc:
 
 ### Time constants
 module TimeConstantMethods # :nodoc:
-	
+
 	### Number of seconds (returns receiver unmodified)
 	def seconds
 		return self
@@ -373,7 +450,7 @@ module TimeConstantMethods # :nodoc:
 	def minutes
 		return self * 60
 	end
-	alias_method :minute, :minutes  
+	alias_method :minute, :minutes
 
 	### Returns the number of seconds in <receiver> hours
 	def hours
@@ -412,14 +489,14 @@ module TimeConstantMethods # :nodoc:
 	alias_method :year, :years
 
 
-	### Returns the Time <receiver> number of seconds before the 
+	### Returns the Time <receiver> number of seconds before the
 	### specified +time+. E.g., 2.hours.before( header.expiration )
 	def before( time )
 		return time - self
 	end
-	
 
-	### Returns the Time <receiver> number of seconds ago. (e.g., 
+
+	### Returns the Time <receiver> number of seconds ago. (e.g.,
 	### expiration > 2.hours.ago )
 	def ago
 		return self.before( ::Time.now )

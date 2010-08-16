@@ -1,0 +1,10 @@
+wrapper: darkfish.rhtml
+static:
+    - css/
+    - js/
+    - img/
+data:
+    package: Darkfish
+    rubyforge_name: darkfish
+    url: deveiate.org/projects/Darkfish-Rdoc
+    description: a customizable RDoc generator
